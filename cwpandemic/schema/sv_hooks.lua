@@ -5,7 +5,6 @@
 
 -- Called when Clockwork has loaded all of the entities.
 function Schema:ClockworkInitPostEntity()
-	self:LoadRadios();
 	self:LoadNPCs();
 end;
 
