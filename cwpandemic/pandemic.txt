@@ -1,9 +1,0 @@
-"cwpandemic"
-{
-	"title"			"Pandemic"
-	"author"		"Songbird"
-	"description"	"A roleplaying schema created by Songbird, set in the zombie Pandemic. Set in the United States anno 2015."
-	"version"		"0.1"
-	"menusystem"	"1"
-	"workshopid"	"880936669"
-}

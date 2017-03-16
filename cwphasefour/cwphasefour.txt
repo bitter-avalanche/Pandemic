@@ -1,0 +1,9 @@
+"cwphasefour"
+{
+	"title"			"Phase Four"
+	"author"		"Songbird"
+	"description"	"A roleplaying schema created by Songbird, set in the zombie Pandemic. Taking place in the United States."
+	"version"		"0.01"
+	"menusystem"	"1"
+	"workshopid"	"880512256"
+}

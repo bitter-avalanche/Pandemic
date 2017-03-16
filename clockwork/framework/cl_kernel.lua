@@ -1408,8 +1408,7 @@ function Clockwork:MenuItemsAdd(menuItems)
 	local scoreboardName = cwOption:GetKey("name_scoreboard");
 	local directoryName = cwOption:GetKey("name_directory");
 	local inventoryName = cwOption:GetKey("name_inventory");
-	
-	menuItems:Add("Classes", "cwClasses", "Choose from a list of available classes.", cwOption:GetKey("icon_data_classes"));
+
 	menuItems:Add("Settings", "cwSettings", "Configure the way Clockwork works for you.", cwOption:GetKey("icon_data_settings"));
 	menuItems:Add("Donations", "cwDonations", "Check your donation subscriptions.", cwOption:GetKey("icon_data_donations"));
 	menuItems:Add(systemName, "cwSystem", cwOption:GetKey("description_system"), cwOption:GetKey("icon_data_system"));
