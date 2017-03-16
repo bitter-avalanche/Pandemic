@@ -19,6 +19,9 @@ But you can also help us by donating to the community, it will be used for the s
 # Credits / Team behind CW: Pandemic
 
 Songbird - Lead Developer.
+
 Alucard - Developer.
+
 Gr4sS - Freelance Developer and code Consultant.
+
 NightAngel - Code Consultant.
