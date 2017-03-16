@@ -10,16 +10,13 @@ ITEM.model = "models/props_lab/box01a.mdl";
 ITEM.plural = "Empty pill bottles";
 ITEM.weight = 0.5;
 ITEM.access = "v";
-ITEM.uniqueID = "empty_pillbottle";
+ITEM.uniqueID = "empty_pillbottle2";
 ITEM.business = true;
 ITEM.category = "Junk";
-ITEM.description = "This used to contain pills at some time...";
+ITEM.description = "This used to contain pills at some time... Upon checking the expiration date, you feel sorry for the person who ingested them...";
 ITEM.spawnType = "junk";
 
 -- Called when a player drops the item.
 function ITEM:OnDrop(player, position) end;
-
--- A function to determine bodygroup.
-function Entity:SetBodygroup(0, 1) end;
 
 ITEM:Register();

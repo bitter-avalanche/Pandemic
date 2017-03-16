@@ -39,11 +39,25 @@ function Clockwork.hint:AddCivilianHint(name, text)
 	end);
 end;
 
+-- A function to add a Military hint.
+function Clockwork.hint:AddMilitaryHint(name, text)
+	Clockwork.hint:Add(name, text, function(player)
+		if (player) then
+			return !player:GetFaction() == FACTION_MILITARY;
+		end;
+	end);
+end;
+
 Clockwork.hint:AddCivilianHint("Life", "Your character is only human, refrain from jumping off high ledges.", false);
 Clockwork.hint:AddCivilianHint("Sleep", "Don't forget to sleep, your character does get tired.", false);
 Clockwork.hint:AddCivilianHint("Eating", "Just because you don't have to eat, it doesn't mean your character isn't hungry.", false);
 Clockwork.hint:AddCivilianHint("Friends", "Friends. What do those mean to you, if anything?", false);
 
+
+Clockwork.hint:AddHumanHint("Frenemies", "Those who aim at each other during the day, often trade with each other at night.");
+Clockwork.hint:AddHumanHint("Money", "Money stopped serving its use after breakdown of society. Try and use items to trade.");
+Clockwork.hint:AddHumanHint("Military", "The Military used to protect the population at large. Now they protect those that are worth it.");
+Clockwork.hint:AddHumanHint("Military2", "It takes two to tango. That statement does not apply to a soldier.");
 --[[
 Clockwork.hint:AddHumanHint("Curfew", "Curfew? Bored? Ask to be assigned a roommate.");
 Clockwork.hint:AddHumanHint("Prison", "Don't do the crime if you're not prepared to do the time.");
@@ -58,10 +72,11 @@ Clockwork.hint:AddHumanHint("Combine Raids", "When the Combine come knocking, ge
 Clockwork.hint:AddHumanHint("Request Device", "Need to reach Civil Protection? Invest in a request device.");
 Clockwork.hint:AddHumanHint("Civil Protection", "Civil Protection, protecting civilized society, not you.");
 --]]
-Clockwork.hint:Add("Admins", "The admins are here to help you, please respect them.");
-Clockwork.hint:Add("Action", "Action. Stop looking for it, wait until it comes to you.");
+Clockwork.hint:Add("Admins", "The staff are here to help you, please respect them.");
+Clockwork.hint:Add("Action", "Action. Soon you'll wish for a calm night.");
 Clockwork.hint:Add("Grammar", "Try to speak correctly in-character, and don't use emoticons.");
 Clockwork.hint:Add("Running", "Got somewhere to go? Fancy a run? Well don't, it makes noise.");
+Clockwork.hint:Add("Lore", "Lore is important in this setting. Read up on it on our forums.");
 Clockwork.hint:Add("Healing", "You can heal players by using the Give command in your inventory.");
 Clockwork.hint:Add("F3 Hotkey", "Press F3 while looking at a character to use a zip tie.");
 Clockwork.hint:Add("F4 Hotkey", "Press F3 while looking at a tied character to search them.");
