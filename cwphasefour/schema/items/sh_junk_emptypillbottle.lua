@@ -6,7 +6,7 @@
 local ITEM = Clockwork.item:New();
 ITEM.name = "Empty pill bottle";
 ITEM.cost = 6;
-ITEM.model = "models/props_lab/box01a.mdl";
+ITEM.model = "models/bloocobalt/l4d/items/w_eq_pills.mdl";
 ITEM.plural = "Empty pill bottles";
 ITEM.weight = 0.5;
 ITEM.access = "v";
@@ -19,7 +19,7 @@ ITEM.spawnType = "junk";
 -- Called when a player drops the item.
 function ITEM:OnDrop(player, position) end;
 
--- A function to determine bodygroup.
-function Entity:SetBodygroup(0, 1) end;
+function ITEM:OnEntitySpawned(entity) entity:SetBodygroups(0, 1); end;
+
 
 ITEM:Register();
