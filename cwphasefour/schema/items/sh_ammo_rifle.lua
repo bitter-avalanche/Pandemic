@@ -4,15 +4,15 @@
 --]]
 
 local ITEM = Clockwork.item:New("ammo_base");
-	ITEM.name = "Pulse-Rifle Energy";
+	ITEM.name = "Rifle Ammo";
 	ITEM.cost = 30;
 	ITEM.classes = {CLASS_EOW};
-	ITEM.model = "models/items/combine_rifle_cartridge01.mdl";
-	ITEM.plural = "Pulse-Rifle Energy";
+	ITEM.model = "models/Items/BoxMRounds.mdl";
+	ITEM.plural = "Rifle bullets";
 	ITEM.weight = 1;
-	ITEM.uniqueID = "ammo_ar2";
+	ITEM.uniqueID = "m9k_ammo_ar2";
 	ITEM.business = true;
-	ITEM.ammoClass = "ar2";
+	ITEM.ammoClass = "m9k_ammo_ar2";
 	ITEM.ammoAmount = 30;
-	ITEM.description = "A cartridge with a blue glow emitting from it.";
+	ITEM.description = "A blue box full of ammo that can be used for a variety of assault rifles.";
 ITEM:Register();

@@ -2,15 +2,13 @@
 	© 2013 CloudSixteen.com do not share, re-distribute or modify
 	without permission of its author (kurozael@gmail.com).
 --]]
---[[ REMOVE THESE ONCE THE LINES ONCE THE SKINS ARE IN.
---
---
---
+
 local ITEM = Clockwork.item:New();
 ITEM.name = "Expired painkillers";
 ITEM.cost = 10;
 ITEM.useSound = "pandemic/pills_use_1.wav";
 ITEM.model = "models/bloocobalt/l4d/items/w_eq_pills.mdl";
+ITEM.skin = 1;
 ITEM.weight = 0.6;
 ITEM.useText = "Consume";
 ITEM.factions = {FACTION_MPF};
@@ -30,7 +28,5 @@ end;
 
 -- Called when a player drops the item.
 function ITEM:OnDrop(player, position) end;
-
-ITEM:Register();
 
 ITEM:Register();

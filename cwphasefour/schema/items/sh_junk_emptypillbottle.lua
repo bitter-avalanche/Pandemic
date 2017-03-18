@@ -19,7 +19,7 @@ ITEM.spawnType = "junk";
 -- Called when a player drops the item.
 function ITEM:OnDrop(player, position) end;
 
-function ITEM:OnEntitySpawned(entity) entity:SetBodygroups(0, 1); end;
+function ITEM:OnEntitySpawned(entity) entity:SetBodygroup(1, 1); end;
 
 
 ITEM:Register();
