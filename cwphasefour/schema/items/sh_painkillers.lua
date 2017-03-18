@@ -9,6 +9,7 @@ ITEM.cost = 10;
 ITEM.useSound = "pandemic/pills_use_1.wav";
 ITEM.model = "models/bloocobalt/l4d/items/w_eq_pills.mdl";
 ITEM.weight = 0.6;
+ITEM.uniqueID = "painkillers";
 ITEM.useText = "Consume";
 ITEM.factions = {FACTION_MPF};
 ITEM.category = "Medical";
@@ -24,11 +25,34 @@ end;
 -- Called when a player drops the item.
 function ITEM:OnDrop(player, position) end;
 
-ITEM:Register();
-
 -- Called when a player uses the item.
 function ITEM:OnUse(player, itemEntity)
 	player:GiveItem(Clockwork.item:CreateInstance("empty_pillbottle"));
+end;
+
+-- Called when a player uses the item.
+function ITEM:OnUse(player, itemEntity)
+	if player:GetCharacterData("diseases") == "Migraine" then
+		player:SetCharacterData( "diseases", "none" );
+	end
+end;
+
+if (SERVER) then
+	function ITEM:OnCustomFunction(player, name)
+		if (name == "Give") then
+			local lookingPly = player:GetEyeTrace().Entity
+			if lookingPly:IsPlayer() then
+				if lookingPly:GetCharacterData("diseases") == "Migraine" then
+					lookingPly:SetCharacterData( "diseases", "none" );
+					Clockwork.player:Notify(player, "You gave some painkillers to the person.");
+					player:TakeItem(player:FindItemByID("painkillers"));
+				end
+			else
+				Clockwork.player:Notify(player, "You must target a person!");
+				return false;
+			end;
+		end;
+	end;
 end;
 
 ITEM:Register();
