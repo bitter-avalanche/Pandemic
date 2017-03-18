@@ -4,24 +4,23 @@
 --]]
 
 local ITEM = Clockwork.item:New();
-ITEM.name = "Special Breen's Water";
-ITEM.cost = 15;
-ITEM.skin = 2;
-ITEM.model = "models/props_junk/popcan01a.mdl";
+ITEM.name = "Bottled Water";
+ITEM.cost = 10;
+ITEM.model = "models/props/cs_office/Water_bottle.mdl";
 ITEM.weight = 0.5;
+ITEM.access = "1";
 ITEM.useText = "Drink";
 ITEM.business = true;
-ITEM.factions = {FACTION_MPF};
 ITEM.category = "Consumables";
-ITEM.description = "A yellow aluminium can, it swishes when you shake it.";
+ITEM.description = "A bottle of water. Good thing they have a high shelf life, right?";
 
 -- Called when a player uses the item.
 function ITEM:OnUse(player, itemEntity)
-	player:SetCharacterData("stamina", 100);
-	player:SetHealth(math.Clamp(player:Health() + 8, 0, player:GetMaxHealth()));
+	player:SetCharacterData("Stamina", 100);
+	player:SetHealth(math.Clamp(player:Health() + 4, 0, player:GetMaxHealth()));
 	
-	player:BoostAttribute(self.name, ATB_AGILITY, 3, 120);
-	player:BoostAttribute(self.name, ATB_STAMINA, 3, 120);
+	player:BoostAttribute(self.name, ATB_AGILITY, 1, 120);
+	player:BoostAttribute(self.name, ATB_STAMINA, 1, 120);
 end;
 
 -- Called when a player drops the item.

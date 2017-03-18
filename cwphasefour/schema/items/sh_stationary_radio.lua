@@ -12,7 +12,7 @@ ITEM.access = "v";
 ITEM.classes = {CLASS_EMP, CLASS_EOW};
 ITEM.category = "Communication";
 ITEM.business = true;
-ITEM.description = "An antique radio, do you think this'll still work?";
+ITEM.description = "An antique ham radio. Do you think this'll still work?";
 
 -- Called when a player uses the item.
 function ITEM:OnUse(player, itemEntity)

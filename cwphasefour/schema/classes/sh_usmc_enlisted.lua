@@ -9,5 +9,5 @@ local CLASS = Clockwork.class:New("USMC - Enlisted");
 	CLASS.factions = {FACTION_MILITARY};
 	CLASS.wagesName = "Supplies";
 	CLASS.description = "A grunt of the U.S. Marine Corps.";
-	CLASS.defaultPhysDesc = "Wearing a jacket with a radio";
+	CLASS.defaultPhysDesc = "Wearing a jacket with a radio.";
 CLASS_MENL = CLASS:Register();

@@ -14,5 +14,5 @@ local ITEM = Clockwork.item:New("ammo_base");
 	ITEM.uniqueID = "ar2";
 	ITEM.ammoClass = "ar2";
 	ITEM.ammoAmount = 30;
-	ITEM.description = "An average sized blue container filled with assault rifle rounds.";
+	ITEM.description = "An average sized, blue container filled with assault rifle rounds.";
 Clockwork.item:Register(ITEM);

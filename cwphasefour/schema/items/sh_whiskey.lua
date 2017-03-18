@@ -11,6 +11,6 @@ ITEM.weight = 1.2;
 ITEM.access = "w";
 ITEM.business = true;
 ITEM.attributes = {Stamina = 2};
-ITEM.description = "A brown colored whiskey bottle, be careful!";
+ITEM.description = "A brown colored whiskey bottle. Be careful!";
 
 ITEM:Register();

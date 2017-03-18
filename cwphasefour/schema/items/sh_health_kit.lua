@@ -15,7 +15,7 @@ ITEM.category = "Medical"
 ITEM.business = true;
 ITEM.useSound = "pandemic/bandaging_1.wav";
 ITEM.blacklist = {CLASS_MPR};
-ITEM.description = "A distinctive red and white package, filled with bandages, tape, everything to patch up wounds.";
+ITEM.description = "A distinctive red and white package. It is filled with bandages, tape,  and everything else to patch up wounds.";
 ITEM.customFunctions = {"Heal Other"};
 
 -- Called when a player uses the item.

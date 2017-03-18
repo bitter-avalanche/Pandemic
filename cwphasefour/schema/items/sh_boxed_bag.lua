@@ -6,13 +6,13 @@
 local ITEM = Clockwork.item:New();
 ITEM.name = "Boxed Bag";
 ITEM.cost = 15;
-ITEM.model = "models/props_junk/cardboard_box004a.mdl";
+ITEM.model = "models/props_junk/cardboardbox04.mdl";
 ITEM.weight = 1;
 ITEM.access = "1v";
 ITEM.useText = "Open";
 ITEM.category = "Storage"
 ITEM.business = true;
-ITEM.description = "A brown box, open it to reveal its contents.";
+ITEM.description = "A brown box taped shut. Open it to reveal its contents.";
 
 -- Called when a player uses the item.
 function ITEM:OnUse(player, itemEntity)

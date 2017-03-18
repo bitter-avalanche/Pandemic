@@ -13,7 +13,7 @@ ITEM.uniqueID = "part_uspcasing";
 ITEM.access = "v";
 ITEM.business = true;
 ITEM.category = "Gunparts";
-ITEM.description = "A usable Iron Sight for a Pistol. Can be used in gun crafting.";
+ITEM.description = "A usable Iron Sight for a Pistol. It can be used in gun crafting.";
 ITEM.spawnType = "gunparts";
 
 -- Called when a player drops the item.

@@ -12,7 +12,7 @@ ITEM.access = "v";
 ITEM.useText = "Eat";
 ITEM.category = "Consumables";
 ITEM.business = true;
-ITEM.description = "A takeout carton, it's filled with cold noodles.";
+ITEM.description = "A takeout carton filled with cold noodles. It's probably best not to eat them.";
 
 -- Called when a player uses the item.
 function ITEM:OnUse(player, itemEntity)

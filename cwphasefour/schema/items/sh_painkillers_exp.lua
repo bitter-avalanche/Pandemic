@@ -14,7 +14,7 @@ ITEM.useText = "Consume";
 ITEM.factions = {FACTION_MPF};
 ITEM.category = "Medical";
 ITEM.business = true;
-ITEM.description = "A small, white plastic container filled with tylenol painkillers.";
+ITEM.description = "A small, white plastic container filled with expired painkillers.";
 
 -- Called when a player uses the item.
 function ITEM:OnUse(player, itemEntity)

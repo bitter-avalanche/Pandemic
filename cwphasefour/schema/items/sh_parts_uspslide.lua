@@ -13,7 +13,7 @@ ITEM.weight = 0.5;
 ITEM.access = "v";
 ITEM.business = true;
 ITEM.category = "Gun parts";
-ITEM.description = "A usable pistol slide. Can be used in gun crafting.";
+ITEM.description = "A usable pistol slide. It can be used in gun crafting.";
 ITEM.spawnType = "gunparts";
 
 -- Called when a player drops the item.

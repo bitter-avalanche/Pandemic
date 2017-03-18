@@ -14,5 +14,5 @@ local ITEM = Clockwork.item:New("ammo_base");
 	ITEM.business = true;
 	ITEM.ammoClass = "pistol";
 	ITEM.ammoAmount = 20;
-	ITEM.description = "A container filled with bullets and 9x19mm printed on the side.";
+	ITEM.description = "A container filled with bullets with the characters "9x19mm" printed on the side.";
 ITEM:Register();

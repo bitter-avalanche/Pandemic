@@ -5,11 +5,11 @@
 
 local ITEM = Clockwork.item:New();
 ITEM.name = "Small Bag";
-ITEM.model = "models/props_junk/garbage_bag001a.mdl";
+ITEM.model = "models/foodnhouseholditems/paperbag4.mdl";
 ITEM.weight = 1;
 ITEM.category = "Storage";
 ITEM.isRareItem = false;
-ITEM.description = "A small tattered bag, you would be lucky if it held anything.";
+ITEM.description = "A small tattered bag. You would be lucky if it held anything.";
 ITEM.addInvSpace = 4;
 
 -- Called when the item's drop entity should be created.
