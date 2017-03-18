@@ -6,7 +6,7 @@
 local ITEM = Clockwork.item:New();
 ITEM.name = "Stationary Radio";
 ITEM.cost = 30;
-ITEM.model = "models/props_lab/citizenradio.mdl";
+ITEM.model = "models/clutter/hamradio.mdl";
 ITEM.weight = 5;
 ITEM.access = "v";
 ITEM.classes = {CLASS_EMP, CLASS_EOW};
