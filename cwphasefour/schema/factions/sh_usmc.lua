@@ -1,9 +1,9 @@
 --[[
-	© 2013 CloudSixteen.com do not share, re-distribute or modify
+	ï¿½ 2013 CloudSixteen.com do not share, re-distribute or modify
 	without permission of its author (kurozael@gmail.com).
 --]]
 
-local FACTION = Clockwork.faction:New("United States Marine Forces");
+local FACTION = Clockwork.faction:New("United States Marine Corps");
 
 FACTION.useFullName = true;
 FACTION.whitelist = true;
@@ -18,10 +18,10 @@ function FACTION:OnTransferred(player, faction, name)
 	if (Schema:PlayerIsCombine(player)) then
 		if (name) then
 			local models = self.models[ string.lower( player:QueryCharacter("gender") ) ];
-			
+
 			if (models) then
 				player:SetCharacterData("model", models[ math.random(#models) ], true);
-				
+
 				Clockwork.player:SetName(player, name, true);
 			end;
 		else
