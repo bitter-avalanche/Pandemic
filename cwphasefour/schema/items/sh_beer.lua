@@ -11,5 +11,5 @@ local ITEM = Clockwork.item:New("alcohol_base");
 	ITEM.access = "w";
 	ITEM.business = true;
 	ITEM.attributes = {Strength = 2};
-	ITEM.description = "A glass bottle filled with liquid, it has a funny smell.";
+	ITEM.description = "A glass bottle filled with liquid. It has a rather funny smell.";
 ITEM:Register();

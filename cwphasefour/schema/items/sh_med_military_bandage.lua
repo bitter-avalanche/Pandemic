@@ -6,14 +6,22 @@
 local ITEM = Clockwork.item:New();
 ITEM.name = "Military-grade Bandage";
 ITEM.cost = 15;
+<<<<<<< HEAD:cwphasefour/schema/items/sh_health_vial.lua
+ITEM.model = "models/bloocobalt/l4d/items/w_eq_adrenaline.mdl";
+ITEM.weight = 0.5;
+ITEM.access = "v";
+ITEM.useText = "Inject";
+ITEM.factions = {FACTION_MPF, FACTION_OTA};
+=======
 ITEM.model = "models/kali/miscstuff/stalker/aid/bandage.mdl";
 ITEM.weight = 0.5;
 ITEM.access = "v";
 ITEM.useText = "Apply";
+>>>>>>> refs/remotes/JakeDaBoss/Development:cwphasefour/schema/items/sh_med_military_bandage.lua
 ITEM.category = "Medical"
 ITEM.business = true;
 ITEM.useSound = "items/medshot4.wav";
-ITEM.description = "A strange vial filled with green liquid, be careful.";
+ITEM.description = "A plastic tube filled with a suspended liquid. It looks like an Epipen.";
 ITEM.customFunctions = {"Give"};
 
 -- Called when a player uses the item.

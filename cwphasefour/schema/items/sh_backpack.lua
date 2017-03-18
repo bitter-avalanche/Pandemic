@@ -9,7 +9,7 @@ ITEM.model = "models/props_junk/garbage_bag001a.mdl";
 ITEM.weight = 2;
 ITEM.category = "Storage";
 ITEM.isRareItem = true;
-ITEM.description = "A tattered backpack, it doesn't look like it will hold much.";
+ITEM.description = "A tattered backpack. It doesn't look like it will hold much.";
 ITEM.addInvSpace = 8;
 
 -- Called when the item's drop entity should be created.

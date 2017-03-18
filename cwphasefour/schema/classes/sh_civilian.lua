@@ -8,6 +8,6 @@ local CLASS = Clockwork.class:New("Survivor");
 	CLASS.factions = {FACTION_CIVILIAN};
 	CLASS.isDefault = true;
 	CLASS.wagesName = "Supplies";
-	CLASS.description = "A survivor of the pandemic. For now.";
+	CLASS.description = "A survivor of the Pandemic, for now.";
 	CLASS.defaultPhysDesc = "Wearing dirty clothes.";
 CLASS_CITIZEN = CLASS:Register();

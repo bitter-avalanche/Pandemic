@@ -13,7 +13,7 @@ ITEM.access = "V";
 ITEM.useText = "Place";
 ITEM.business = true;
 ITEM.blacklist = {CLASS_MPR};
-ITEM.description = "A small device which looks similiar to a padlock.";
+ITEM.description = "A small device akin to that of a hackjob satchel charge. It won't do too much.";
 
 -- Called when a player uses the item.
 function ITEM:OnUse(player, itemEntity)

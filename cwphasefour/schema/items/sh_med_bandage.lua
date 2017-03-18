@@ -6,13 +6,13 @@
 local ITEM = Clockwork.item:New();
 ITEM.name = "Bandage";
 ITEM.cost = 8;
-ITEM.model = "models/props_wasteland/prison_toiletchunk01f.mdl";
+ITEM.model = "models/props_junk/bogroll.mdl";
 ITEM.weight = 0.5;
 ITEM.access = "1v";
 ITEM.useText = "Apply";
 ITEM.category = "Medical"
 ITEM.business = true;
-ITEM.description = "A bandage roll, there isn't much so use it wisely.";
+ITEM.description = "A roll of bandage cloth. There isn't much, so use it wisely.";
 ITEM.customFunctions = {"Give"};
 
 -- Called when a player uses the item.

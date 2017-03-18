@@ -12,7 +12,7 @@ ITEM.access = "w";
 ITEM.useText = "Drink";
 ITEM.category = "Consumables";
 ITEM.business = true;
-ITEM.description = "A plastic bottle, it's fairly big and filled with liquid.";
+ITEM.description = "A plastic bottle. It's fairly big and filled with liquid.";
 
 -- Called when a player uses the item.
 function ITEM:OnUse(player, itemEntity)

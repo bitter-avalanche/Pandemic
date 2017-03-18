@@ -10,7 +10,7 @@ ITEM.weight = 3;
 ITEM.access = "m";
 ITEM.business = true;
 ITEM.protection = 0.1;
-ITEM.description = "A resistance uniform with a medical insignia on the sleeve.";
+ITEM.description = "A tattered uniform with a red cross on the sleeve.";
 
 -- Called when a replacement is needed for a player.
 function ITEM:GetReplacement(player)

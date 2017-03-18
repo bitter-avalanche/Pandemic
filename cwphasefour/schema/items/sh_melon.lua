@@ -12,7 +12,7 @@ ITEM.access = "v";
 ITEM.useText = "Eat";
 ITEM.category = "Consumables";
 ITEM.business = true;
-ITEM.description = "A green fruit, it has a hard outer shell.";
+ITEM.description = "A green fruit with a hard outer shell.";
 
 -- Called when a player uses the item.
 function ITEM:OnUse(player, itemEntity)

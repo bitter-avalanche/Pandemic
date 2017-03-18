@@ -13,7 +13,7 @@ ITEM.access = "v";
 ITEM.useText = "Drink";
 ITEM.business = true;
 ITEM.category = "Consumables";
-ITEM.description = "A bottle of bleach, this is dangerous stuff.";
+ITEM.description = "A bottle of bleach. This is dangerous stuff.";
 
 -- Called when a player uses the item.
 function ITEM:OnUse(player, itemEntity)

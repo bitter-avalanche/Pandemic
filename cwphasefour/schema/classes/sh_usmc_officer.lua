@@ -9,5 +9,5 @@ local CLASS = Clockwork.class:New("USMC - Officers");
 	CLASS.factions = {FACTION_MILITARY};
 	CLASS.wagesName = "Supplies";
 	CLASS.description = "Greatly skilled tacticians and soldiers in charge of their men.";
-	CLASS.defaultPhysDesc = "Wearing a jacket with a radio";
+	CLASS.defaultPhysDesc = "Wearing a jacket with a radio.";
 CLASS_MOFC = CLASS:Register();
