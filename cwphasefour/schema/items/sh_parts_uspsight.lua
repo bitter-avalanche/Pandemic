@@ -4,7 +4,7 @@
 --]]
 
 local ITEM = Clockwork.item:New();
-ITEM.name = "Pistol Iron Sight";
+ITEM.name = "USP Iron Sight";
 ITEM.cost = 6;
 ITEM.model = "models/gibs/metal_gib2.mdl";
 ITEM.plural = "Pistol Iron Sights";
