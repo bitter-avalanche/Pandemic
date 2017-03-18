@@ -1,5 +1,5 @@
 --[[
-	© 2013 CloudSixteen.com do not share, re-distribute or modify
+	Â© 2013 CloudSixteen.com do not share, re-distribute or modify
 	without permission of its author (kurozael@gmail.com).
 --]]
 
@@ -235,6 +235,7 @@ function Schema:GetPlayerDefaultInventory(player, character, inventory)
 				inventory, Clockwork.item:CreateInstance("ammo_pistol")
 			);
 		end;
+ 
 	end
 	
 	elseif (character.faction == FACTION_OTA) then
@@ -254,14 +255,23 @@ function Schema:GetPlayerDefaultInventory(player, character, inventory)
 			inventory, Clockwork.item:CreateInstance("ammo_ar2")
 		);
 	end
-	
+	elseif (character.faction == FACTION_GOVT) then
+		for i = 1, 2 do
+			Clockwork.inventory:AddInstance(
+				inventory, Clockwork.item:CreateInstance("med_rags")
+			);
+	end;
+	elseif (character.faction == FACTION_CIVILIAN) then
+		for i = 1, 2 do
+			Clockwork.inventory:AddInstance(
+				inventory, Clockwork.item:CreateInstance("med_rags")
+			);
 	else
 		Clockwork.inventory:AddInstance(
-			inventory, Clockwork.item:CreateInstance("suitcase")
+			inventory, Clockwork.item:CreateInstance("med_rags")
 		);
 	end;
 end;
-
 -- Called when a player's typing display has started.
 function Schema:PlayerStartTypingDisplay(player, code)
 	if (Schema:PlayerIsCombine(player) and !player:IsNoClipping()) then
@@ -1608,25 +1618,13 @@ function Schema:PostPlayerSpawn(player, lightSpawn, changeClass, firstSpawn)
 		player.searching = nil;
 		
 		if (self:PlayerIsCombine(player) or player:GetFaction() == FACTION_ADMIN) then
-			if (player:GetFaction() == FACTION_OTA) then
+			if (player:GetFaction() == FACTION_MILITARY) then
 				player:SetMaxHealth(150);
 				player:SetMaxArmor(150);
 				player:SetHealth(150);
 				player:SetArmor(150);
-			elseif (!self:IsPlayerCombineRank(player, "RCT")) then
-				player:SetArmor(100);
-			else
-				player:SetArmor(50);
 			end;
 		end;
-		
-		if (self:PlayerIsCombine(player) and player:GetAmmoCount("pistol") == 0) then
-			if (!player:HasItemByID("ammo_pistol")) then
-				player:GiveItem(Clockwork.item:CreateInstance("ammo_pistol"), true);
-				player:GiveItem(Clockwork.item:CreateInstance("ammo_pistol"), true);
-			end;
-		end;
-	end;
 	
 	if (self:IsPlayerCombineRank(player, "SCN")) then
 		self:MakePlayerScanner(player, true, lightSpawn);

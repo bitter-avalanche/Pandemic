@@ -12,7 +12,7 @@ ITEM.weight = 1;
 ITEM.access = "v";
 ITEM.category = "Communication";
 ITEM.business = true;
-ITEM.description = "A shiny handheld radio with a frequency tuner.";
+ITEM.description = "A shiny handheld radio equipped with a frequency tuner.";
 ITEM.customFunctions = {"Frequency"};
 
 -- Called when a player drops the item.

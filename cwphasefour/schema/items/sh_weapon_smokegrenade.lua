@@ -4,14 +4,14 @@
 --]]
 
 local ITEM = Clockwork.item:New("grenade_base");
-	ITEM.name = "Smoke";
+	ITEM.name = "Smoke grenade";
 	ITEM.cost = 25;
 	ITEM.classes = {CLASS_EMP, CLASS_EOW};
-	ITEM.model = "models/items/grenadeammo.mdl";
+	ITEM.model = "models/weapons/w_eq_smokegrenade_dropped.mdl";
 	ITEM.weight = 0.8;
 	ITEM.uniqueID = "cw_smokegrenade";
 	ITEM.business = true;
-	ITEM.description = "A dirty tube of dust, is this supposed to be a grenade?";
+	ITEM.description = "A dirty tube covered in dust. Is this supposed to be a grenade?";
 	ITEM.isAttachment = true;
 	ITEM.loweredOrigin = Vector(3, 0, -4);
 	ITEM.loweredAngles = Angle(0, 45, 0);

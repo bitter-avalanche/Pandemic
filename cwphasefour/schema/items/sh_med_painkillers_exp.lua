@@ -14,7 +14,8 @@ ITEM.useText = "Consume";
 ITEM.factions = {FACTION_MPF};
 ITEM.category = "Medical";
 ITEM.business = true;
-ITEM.description = "A small, white plastic container filled with tylenol painkillers.";
+ITEM.description = "A small, white plastic container filled with expired painkillers.";
+ITEM.customFunctions = {"Empty", "Give"};
 
 -- Called when a player uses the item.
 function ITEM:OnUse(player, itemEntity)
@@ -28,5 +29,21 @@ end;
 
 -- Called when a player drops the item.
 function ITEM:OnDrop(player, position) end;
+
+if (SERVER) then
+	function ITEM:OnCustomFunction(player, name)
+		if (name == "Empty") then
+			player:GiveItem(Clockwork.item:CreateInstance("empty_pillbottle2"), true);
+		end;
+	end;
+end;
+
+if (SERVER) then
+	function ITEM:OnCustomFunction(player, name)
+		if (name == "Give") then
+			player:TakeDamage(15, player, player);
+		end;
+	end;
+end;
 
 ITEM:Register();

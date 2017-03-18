@@ -12,7 +12,7 @@ ITEM.access = "v";
 ITEM.useText = "Drink";
 ITEM.business = false;
 ITEM.category = "Consumables";
-ITEM.description = "A bottle of vegetable oil, it isn't very tasty.";
+ITEM.description = "A bottle of vegetable oil. It isn't very tasty.";
 
 -- Called when a player uses the item.
 function ITEM:OnUse(player, itemEntity)

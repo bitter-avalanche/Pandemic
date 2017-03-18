@@ -4,23 +4,26 @@
 --]]
 
 local ITEM = Clockwork.item:New();
-ITEM.name = "First Aid Kit";
-ITEM.cost = 30;
-ITEM.model = "models/bloocobalt/l4d/items/w_eq_fieldkit.mdl";
-ITEM.weight = 1;
+ITEM.name = "Military-grade Bandage";
+ITEM.cost = 15;
+ITEM.model = "models/bloocobalt/l4d/items/w_eq_adrenaline.mdl";
+ITEM.weight = 0.5;
+ITEM.access = "v";
+ITEM.useText = "Inject";
+ITEM.factions = {FACTION_MPF, FACTION_OTA};
+ITEM.model = "models/kali/miscstuff/stalker/aid/bandage.mdl";
+ITEM.weight = 0.5;
 ITEM.access = "v";
 ITEM.useText = "Apply";
-ITEM.factions = {FACTION_MPF, FACTION_OTA};
 ITEM.category = "Medical"
 ITEM.business = true;
-ITEM.useSound = "pandemic/bandaging_1.wav";
-ITEM.blacklist = {CLASS_MPR};
-ITEM.description = "A distinctive red and white package, filled with bandages, tape, everything to patch up wounds.";
-ITEM.customFunctions = {"Heal Other"};
+ITEM.useSound = "items/medshot4.wav";
+ITEM.description = "A plastic tube filled with a suspended liquid. It looks like an Epipen.";
+ITEM.customFunctions = {"Give"};
 
 -- Called when a player uses the item.
 function ITEM:OnUse(player, itemEntity)
-	player:SetHealth( math.Clamp( player:Health() + Schema:GetHealAmount(player, 2), 0, player:GetMaxHealth() ) );
+	player:SetHealth( math.Clamp( player:Health() + 20, 0, player:GetMaxHealth() ) );
 	
 	Clockwork.plugin:Call("PlayerHealed", player, player, self);
 end;
@@ -31,7 +34,7 @@ function ITEM:OnDrop(player, position) end;
 if (SERVER) then
 	function ITEM:OnCustomFunction(player, name)
 		if (name == "Give") then
-			Clockwork.player:RunClockworkCommand(player, "CharHeal", "health_kit");
+			Clockwork.player:RunClockworkCommand(player, "CharHeal", "health_vial");
 		end;
 	end;
 end;

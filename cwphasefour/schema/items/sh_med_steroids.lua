@@ -12,7 +12,7 @@ ITEM.access = "w";
 ITEM.useText = "Swallow";
 ITEM.category = "Medical";
 ITEM.business = true;
-ITEM.description = "Low caliber steroids produced by Civil Protection.";
+ITEM.description = "Low caliber steroids produced by some manufacturer.";
 
 -- Called when a player uses the item.
 function ITEM:OnUse(player, itemEntity)

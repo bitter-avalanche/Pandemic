@@ -12,7 +12,8 @@ ITEM.access = "w";
 ITEM.useText = "Swallow";
 ITEM.category = "Medical";
 ITEM.business = true;
-ITEM.description = "A tin of pills developed by the resistance.";
+ITEM.description = "A bottle of pills typically prescribed to those suffering from depression.";
+-- Find another model other than L4D2 for this ??
 
 -- Called when a player uses the item.
 function ITEM:OnUse(player, itemEntity)

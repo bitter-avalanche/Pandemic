@@ -12,6 +12,8 @@ ITEM.business = true;
 ITEM.protection = 0.1;
 ITEM.description = "A resistance uniform with a yellow symbol on the sleeve.";
 
+-- How do you want to repurpose this?
+
 -- Called when a replacement is needed for a player.
 function ITEM:GetReplacement(player)
 	if (string.lower( player:GetModel() ) == "models/humans/group01/jasona.mdl") then

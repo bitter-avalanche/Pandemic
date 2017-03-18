@@ -6,7 +6,7 @@
 local ITEM = Clockwork.item:New();
 ITEM.name = "Milk Carton";
 ITEM.cost = 6;
-ITEM.model = "models/props_junk/garbage_milkcarton002a.mdl";
+ITEM.model = "models/foodnhouseholditems/milk.mdl";
 ITEM.weight = 0.8;
 ITEM.access = "v";
 ITEM.useText = "Drink";
