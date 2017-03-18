@@ -1,5 +1,5 @@
 --[[
-	© 2013 CloudSixteen.com do not share, re-distribute or modify
+	Â© 2013 CloudSixteen.com do not share, re-distribute or modify
 	without permission of its author (kurozael@gmail.com).
 --]]
 
@@ -218,6 +218,12 @@ end;
 
 -- Called when a player's default inventory is needed.
 function Schema:GetPlayerDefaultInventory(player, character, inventory)
+	if (character.faction == FACTION_ADMIN) then
+		Clockwork.inventory:AddInstance(
+			inventory, Clockwork.item:CreateInstance("handheld_radio")
+		);
+	end
+	elseif (character.faction == FACTION_MPF) then
 		Clockwork.inventory:AddInstance(
 			inventory, Clockwork.item:CreateInstance("handheld_radio")
 		);
@@ -229,6 +235,26 @@ function Schema:GetPlayerDefaultInventory(player, character, inventory)
 				inventory, Clockwork.item:CreateInstance("ammo_pistol")
 			);
 		end;
+ 
+	end
+	
+	elseif (character.faction == FACTION_OTA) then
+		Clockwork.inventory:AddInstance(
+			inventory, Clockwork.item:CreateInstance("handheld_radio")
+		);
+		Clockwork.inventory:AddInstance(
+			inventory, Clockwork.item:CreateInstance("weapon_pistol")
+		);
+		Clockwork.inventory:AddInstance(
+			inventory, Clockwork.item:CreateInstance("ammo_pistol")
+		);
+		Clockwork.inventory:AddInstance(
+			inventory, Clockwork.item:CreateInstance("weapon_ar2")
+		);
+		Clockwork.inventory:AddInstance(
+			inventory, Clockwork.item:CreateInstance("ammo_ar2")
+		);
+	end
 	elseif (character.faction == FACTION_GOVT) then
 		for i = 1, 2 do
 			Clockwork.inventory:AddInstance(
