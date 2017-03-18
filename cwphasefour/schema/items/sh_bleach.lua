@@ -6,7 +6,7 @@
 local ITEM = Clockwork.item:New();
 ITEM.name = "Bleach";
 ITEM.cost = 6;
-ITEM.model = "models/props_junk/garbage_plasticbottle001a.mdl";
+ITEM.model = "models/foodnhouseholditems/clorox.mdl";
 ITEM.plural = "Bleaches";
 ITEM.weight = 0.8;
 ITEM.access = "v";
