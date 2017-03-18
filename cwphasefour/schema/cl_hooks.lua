@@ -3,15 +3,6 @@
 	without permission of its author (kurozael@gmail.com).
 --]]
 
--- Called when the cinematic intro info is needed.
-function Schema:GetCinematicIntroInfo()
-	return {
-		credits = "Designed and developed by "..self:GetAuthor()..".",
-		title = Clockwork.config:Get("intro_text_big"):Get(),
-		text = Clockwork.config:Get("intro_text_small"):Get()
-	};
-end;
-
 -- Called when the local player's business is rebuilt.
 function Schema:PlayerBusinessRebuilt(panel, categories)
 	local businessName = Clockwork.option:GetKey("name_business", true);
@@ -218,6 +209,9 @@ function Schema:RenderScreenspaceEffects()
 				end;
 			end;
 		end;
+		
+		if (self:PlayerIsCombine(Clockwork.Client)) then
+			render.UpdateScreenEffectTexture();
 			
 			self.combineOverlay:SetFloat("$refractamount", 0.3);
 			self.combineOverlay:SetFloat("$envmaptint", 0);
@@ -290,6 +284,13 @@ end;
 function Schema:GetPlayerCharacterScreenFaction(character)
 	if (character.customClass and character.customClass != "") then
 		return character.customClass;
+	end;
+end;
+
+-- Called when the local player attempts to zoom.
+function Schema:PlayerCanZoom()
+	if (!self:PlayerIsCombine(Clockwork.Client)) then
+		return false;
 	end;
 end;
 
@@ -505,6 +506,13 @@ function Schema:PlayerDoesHaveFlag(player, flag)
 				return false;
 			end;
 		end;
+	end;
+end;
+
+-- Called to check if a player does recognise another player.
+function Schema:PlayerDoesRecognisePlayer(player, status, isAccurate, realValue)
+	if (self:PlayerIsCombine(player) or player:GetFaction() == FACTION_ADMIN) then
+		return true;
 	end;
 end;
 
