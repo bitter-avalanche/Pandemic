@@ -4,22 +4,20 @@
 --]]
 
 local ITEM = Clockwork.item:New();
-ITEM.name = "Health Vial";
-ITEM.cost = 15;
-ITEM.model = "models/healthvial.mdl";
+ITEM.name = "Bandage";
+ITEM.cost = 8;
+ITEM.model = "models/props_wasteland/prison_toiletchunk01f.mdl";
 ITEM.weight = 0.5;
-ITEM.access = "v";
-ITEM.useText = "Drink";
-ITEM.factions = {FACTION_MPF, FACTION_OTA};
+ITEM.access = "1v";
+ITEM.useText = "Apply";
 ITEM.category = "Medical"
 ITEM.business = true;
-ITEM.useSound = "items/medshot4.wav";
-ITEM.description = "A strange vial filled with green liquid, be careful.";
+ITEM.description = "A bandage roll, there isn't much so use it wisely.";
 ITEM.customFunctions = {"Give"};
 
 -- Called when a player uses the item.
 function ITEM:OnUse(player, itemEntity)
-	player:SetHealth( math.Clamp( player:Health() + Schema:GetHealAmount(player, 1.5), 0, player:GetMaxHealth() ) );
+	player:SetHealth( math.Clamp( player:Health() + 10, 0, player:GetMaxHealth() ) );
 	
 	Clockwork.plugin:Call("PlayerHealed", player, player, self);
 end;
@@ -30,7 +28,7 @@ function ITEM:OnDrop(player, position) end;
 if (SERVER) then
 	function ITEM:OnCustomFunction(player, name)
 		if (name == "Give") then
-			Clockwork.player:RunClockworkCommand(player, "CharHeal", "health_vial");
+			Clockwork.player:RunClockworkCommand(player, "CharHeal", "bandage");
 		end;
 	end;
 end;

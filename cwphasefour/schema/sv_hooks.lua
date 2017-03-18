@@ -218,43 +218,28 @@ end;
 
 -- Called when a player's default inventory is needed.
 function Schema:GetPlayerDefaultInventory(player, character, inventory)
-	if (character.faction == FACTION_ADMIN) then
-		Clockwork.inventory:AddInstance(
-			inventory, Clockwork.item:CreateInstance("handheld_radio")
-		);
-	elseif (character.faction == FACTION_MPF) then
+	if (character.faction == FACTION_MILITARY) then
 		Clockwork.inventory:AddInstance(
 			inventory, Clockwork.item:CreateInstance("handheld_radio")
 		);
 		Clockwork.inventory:AddInstance(
-			inventory, Clockwork.item:CreateInstance("weapon_pistol")
+			inventory, Clockwork.item:CreateInstance("m9k_usp")
 		);
 		for i = 1, 2 do
 			Clockwork.inventory:AddInstance(
-				inventory, Clockwork.item:CreateInstance("ammo_pistol")
+				inventory, Clockwork.item:CreateInstance("m9k_ammo_pistol")
+			);	
+	elseif (character.faction == FACTION_CIVILIAN) then
+		for i = 1, 2 do
+			Clockwork.inventory:AddInstance(
+				inventory, Clockwork.item:CreateInstance("med_rags")
+			);
+	elseif (character.faction == FACTION_GOVT) then
+		for i = 1, 2 do
+			Clockwork.inventory:AddInstance(
+				inventory, Clockwork.item:CreateInstance("med_rags")
 			);
 		end;
-	elseif (character.faction == FACTION_OTA) then
-		Clockwork.inventory:AddInstance(
-			inventory, Clockwork.item:CreateInstance("handheld_radio")
-		);
-		Clockwork.inventory:AddInstance(
-			inventory, Clockwork.item:CreateInstance("weapon_pistol")
-		);
-		Clockwork.inventory:AddInstance(
-			inventory, Clockwork.item:CreateInstance("ammo_pistol")
-		);
-		Clockwork.inventory:AddInstance(
-			inventory, Clockwork.item:CreateInstance("weapon_ar2")
-		);
-		Clockwork.inventory:AddInstance(
-			inventory, Clockwork.item:CreateInstance("ammo_ar2")
-		);
-	else
-		Clockwork.inventory:AddInstance(
-			inventory, Clockwork.item:CreateInstance("suitcase")
-		);
-	end;
 end;
 
 -- Called when a player's typing display has started.
@@ -1603,25 +1588,13 @@ function Schema:PostPlayerSpawn(player, lightSpawn, changeClass, firstSpawn)
 		player.searching = nil;
 		
 		if (self:PlayerIsCombine(player) or player:GetFaction() == FACTION_ADMIN) then
-			if (player:GetFaction() == FACTION_OTA) then
+			if (player:GetFaction() == FACTION_MILITARY) then
 				player:SetMaxHealth(150);
 				player:SetMaxArmor(150);
 				player:SetHealth(150);
 				player:SetArmor(150);
-			elseif (!self:IsPlayerCombineRank(player, "RCT")) then
-				player:SetArmor(100);
-			else
-				player:SetArmor(50);
 			end;
 		end;
-		
-		if (self:PlayerIsCombine(player) and player:GetAmmoCount("pistol") == 0) then
-			if (!player:HasItemByID("ammo_pistol")) then
-				player:GiveItem(Clockwork.item:CreateInstance("ammo_pistol"), true);
-				player:GiveItem(Clockwork.item:CreateInstance("ammo_pistol"), true);
-			end;
-		end;
-	end;
 	
 	if (self:IsPlayerCombineRank(player, "SCN")) then
 		self:MakePlayerScanner(player, true, lightSpawn);
