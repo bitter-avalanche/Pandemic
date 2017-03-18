@@ -3,11 +3,11 @@
 	without permission of its author (kurozael@gmail.com).
 --]]
 
-local CLASS = Clockwork.class:New("USMF - Enlisted");
+local CLASS = Clockwork.class:New("USMC - Enlisted");
 	CLASS.color = Color(128, 128, 0, 255);
 	CLASS.wages = 5;
 	CLASS.factions = {FACTION_MILITARY};
 	CLASS.wagesName = "Supplies";
-	CLASS.description = "A grunt of the USMF.";
-	CLASS.defaultPhysDesc = "Wearing a metrocop jacket with a radio";
+	CLASS.description = "A grunt of the U.S. Marine Corps.";
+	CLASS.defaultPhysDesc = "Wearing a jacket with a radio";
 CLASS_MENL = CLASS:Register();
