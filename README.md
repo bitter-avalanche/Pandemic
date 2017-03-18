@@ -25,6 +25,8 @@ You can also help us by donating to the community, which would be used for the s
 
 [SharpOB](http://steamcommunity.com/id/SharpOB) - Developer
 
+[Zeus](http://steamcommunity.com/profiles/76561198095977098/) - Developer
+
 [Gr4sS](http://steamcommunity.com/id/Gr4Ss) - Freelance Developer and code Consultant.
 
 [NightAngel](http://steamcommunity.com/id/NA1455) - Code Consultant.
