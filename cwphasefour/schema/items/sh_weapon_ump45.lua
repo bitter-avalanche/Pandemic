@@ -1,17 +1,18 @@
 --[[
-	© 2013 CloudSixteen.com do not share, re-distribute or modify
+	Â© 2013 CloudSixteen.com do not share, re-distribute or modify
 	without permission of its author (kurozael@gmail.com).
 --]]
 
 local ITEM = Clockwork.item:New("weapon_base");
-	ITEM.name = "HK UMP45";
-	ITEM.cost = 200;
+	ITEM.name = "UMP45";
+	ITEM.cost = 925;
+	ITEM.classes = {CLASS_EMP, CLASS_EOW};
 	ITEM.model = "models/weapons/w_hk_ump45.mdl";
-	ITEM.weight = 2.5;
-	ITEM.access = "V";
-	ITEM.uniqueID = "m9k_ump45";
+	ITEM.weight = 4;
 	ITEM.business = true;
-	ITEM.description = "A versatile weapon that can be found both in professional combat spheres as well as commonly in Civilian circles.";
+	ITEM.access = "f";
+	ITEM.uniqueID = "m9k_ump45";
+	ITEM.description = "A sub-machine gun with a adjustable stock, and tactical iron sights.";
 	ITEM.isAttachment = true;
 	ITEM.hasFlashlight = true;
 	ITEM.loweredOrigin = Vector(3, 0, -4);
