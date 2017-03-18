@@ -17,9 +17,7 @@ You can also help us by donating to the community, which would be used for the s
 
 # Contributors
 
-[Songbird](http://steamcommunity.com/id/AlwaysANightmare) - Lead Developer.
-
-[Alucard](http://steamcommunity.com/id/Drmoistd) - Developer.
+[Songbird](http://steamcommunity.com/id/AlwaysANightmare) - Lead Developer
 
 [Ƶσяχαѕ](http://steamcommunity.com/id/Zorxas) - Developer
 
@@ -27,9 +25,11 @@ You can also help us by donating to the community, which would be used for the s
 
 [Zeus](http://steamcommunity.com/profiles/76561198095977098/) - Developer
 
-[Gr4sS](http://steamcommunity.com/id/Gr4Ss) - Freelance Developer and code Consultant.
+[Alucard](http://steamcommunity.com/id/Drmoistd) - Developer
 
-[NightAngel](http://steamcommunity.com/id/NA1455) - Code Consultant.
+[Gr4sS](http://steamcommunity.com/id/Gr4Ss) - Freelance Developer and Code Consultant
+
+[NightAngel](http://steamcommunity.com/id/NA1455) - Code Consultant
 
 # Links
 
