@@ -18,7 +18,7 @@ Clockwork.animation:AddCivilProtectionModel("models/leet_police2.mdl");
 Clockwork.animation:AddCivilProtectionModel("models/sect_police2.mdl");
 Clockwork.animation:AddCivilProtectionModel("models/policetrench.mdl");
 
-Clockwork.option:SetKey("default_date", {month = 1, year = 2016, day = 1});
+Clockwork.option:SetKey("default_date", {month = 11, year = 2014, day = 29});
 Clockwork.option:SetKey("default_time", {minute = 0, hour = 0, day = 1});
 Clockwork.option:SetKey("format_singular_cash", "%a");
 Clockwork.option:SetKey("model_shipment", "models/items/item_item_crate.mdl");
@@ -41,7 +41,7 @@ Clockwork.quiz:AddQuestion("Can you type properly, using capital letters and ful
 Clockwork.quiz:AddQuestion("You do not need weapons to roleplay, do you understand?", 1, "Yes.", "No.");
 Clockwork.quiz:AddQuestion("You do not need items to roleplay, do you understand?", 1, "Yes.", "No.");
 Clockwork.quiz:AddQuestion("What do you think serious roleplaying is about?", 2, "Collecting items and upgrades.", "Developing your character.");
-Clockwork.quiz:AddQuestion("What universe is this roleplaying game set in?", 2, "Real Life.", "Half-Life 2.");
+Clockwork.quiz:AddQuestion("What universe is this roleplaying game set in?", 1, "Real Life.", "Half-Life 2.");
 
 Clockwork.flag:Add("v", "Light Weapons", "Access to light, and largely legal weaponry and ammo, and other goods.");
 Clockwork.flag:Add("V", "Heavy Weapons / Black Market", "Access to heavy blackmarket weaponry and ammo.");

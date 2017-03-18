@@ -6,7 +6,7 @@
 local ITEM = Clockwork.item:New();
 ITEM.name = "Melon";
 ITEM.cost = 8;
-ITEM.model = "models/props_junk/watermelon01.mdl";
+ITEM.model = "models/foodnhouseholditems/watermelon_unbreakable.mdl";
 ITEM.weight = 1;
 ITEM.access = "v";
 ITEM.useText = "Eat";

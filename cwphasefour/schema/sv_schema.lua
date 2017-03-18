@@ -18,8 +18,8 @@ Clockwork.kernel:AddDirectory("models/deadbodies/");
 
 Clockwork.config:Add("server_whitelist_identity", "");
 Clockwork.config:Add("combine_lock_overrides", false);
-Clockwork.config:Add("intro_text_small", "It is safer here.", true);
-Clockwork.config:Add("intro_text_big", "CITY EIGHTEEN, 2016.", true);
+Clockwork.config:Add("intro_text_small", "A City of Trees.", true);
+Clockwork.config:Add("intro_text_big", "Atlanta, 2014.", true);
 Clockwork.config:Add("knockout_time", 60);
 Clockwork.config:Add("business_cost", 160, true);
 Clockwork.config:Add("cwu_props", true);

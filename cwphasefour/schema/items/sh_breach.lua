@@ -6,7 +6,7 @@
 local ITEM = Clockwork.item:New();
 ITEM.name = "Breach";
 ITEM.cost = 10;
-ITEM.model = "models/props_wasteland/prison_padlock001a.mdl";
+ITEM.model = "models/weapons/w_ied.mdl";
 ITEM.plural = "Breaches";
 ITEM.weight = 0.5;
 ITEM.access = "V";
