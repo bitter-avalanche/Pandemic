@@ -1,5 +1,5 @@
 --[[
-	© 2013 CloudSixteen.com do not share, re-distribute or modify
+	ï¿½ 2013 CloudSixteen.com do not share, re-distribute or modify
 	without permission of its author (kurozael@gmail.com).
 --]]
 
@@ -27,7 +27,7 @@ function ITEM:OnDrop(player, position) end;
 
 -- Called when a player uses the item.
 function ITEM:OnUse(player, itemEntity)
-	player:GiveItem(Clockwork.item:CreateInstance("empty_pillbottle"));
+	player:GiveItem(Clockwork.item:CreateInstance("junk_emptypillbottle"));
 end;
 
 -- Called when a player uses the item.
