@@ -17,7 +17,7 @@ ITEM.customFunctions = {"Give"};
 
 -- Called when a player uses the item.
 function ITEM:OnUse(player, itemEntity)
-	player:SetHealth( math.Clamp( player:Health() + Schema:GetHealAmount(player), 0, player:GetMaxHealth() ) );
+	player:SetHealth( math.Clamp( player:Health() + 10, 0, player:GetMaxHealth() ) );
 	
 	Clockwork.plugin:Call("PlayerHealed", player, player, self);
 end;

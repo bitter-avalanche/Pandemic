@@ -43,8 +43,9 @@ Clockwork.quiz:AddQuestion("You do not need items to roleplay, do you understand
 Clockwork.quiz:AddQuestion("What do you think serious roleplaying is about?", 2, "Collecting items and upgrades.", "Developing your character.");
 Clockwork.quiz:AddQuestion("What universe is this roleplaying game set in?", 2, "Real Life.", "Half-Life 2.");
 
-Clockwork.flag:Add("v", "Light Weapons", "Access to light, and largely legal weaponry and ammo, and other goods.");
-Clockwork.flag:Add("V", "Heavy Weapons / Black Market", "Access to heavy blackmarket weaponry and ammo.");
+Clockwork.flag:Add("f", "Light Weapons", "Access to light, and largely legal weaponry and ammo, and other goods.");
+Clockwork.flag:Add("F", "Heavy Weapons / Black Market", "Access to heavy blackmarket weaponry and ammo.");
+Clockwork.flag:Add("M", "Access to Military-grade equipment and weapons.");
 
 -- A function to add a custom permit.
 function Schema:AddCustomPermit(name, flag, model)
