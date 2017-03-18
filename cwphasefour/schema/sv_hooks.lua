@@ -5,6 +5,12 @@
 
 -- Called when Clockwork has loaded all of the entities.
 function Schema:ClockworkInitPostEntity()
+	self:LoadRationDispensers();
+	self:LoadVendingMachines();
+	self:LoadCombineLocks();
+	self:LoadObjectives();
+	self:LoadRadios();
+	self:LoadNPCs();
 end;
 
 -- Called when data should be saved.
@@ -12,7 +18,28 @@ function Schema:SaveData() end;
 
 -- Called just after data should be saved.
 function Schema:PostSaveData()
+	self:SaveRationDispensers();
+	self:SaveVendingMachines();
+	self:SaveCombineLocks();
+	self:SaveRadios();
 	self:SaveNPCs();
+end;
+
+-- Called when a player's default model is needed.
+function Schema:GetPlayerDefaultModel(player)
+	local faction = player:GetFaction();
+	
+	if (self:IsCombineFaction(faction)) then
+		if (self:IsPlayerCombineRank(player, "GHOST")) then
+			return "models/eliteghostcp.mdl";
+		elseif (self:IsPlayerCombineRank(player, "OfC")) then
+			return "models/policetrench.mdl";
+		elseif (self:IsPlayerCombineRank(player, "DvL")) then
+			return "models/eliteshockcp.mdl";
+		elseif (self:IsPlayerCombineRank(player, "SeC")) then
+			return "models/sect_police2.mdl";
+		end;
+	end;
 end;
 
 -- Called when an entity's menu option should be handled.
@@ -101,6 +128,34 @@ function Schema:EntityHandleMenuOption(player, entity, option, arguments)
 			else
 				entity:Remove();
 			end;
+		end;
+	end;
+end;
+
+-- Called when an NPC has been killed.
+function Schema:OnNPCKilled(npc, attacker, inflictor)
+	for k, v in pairs(self.scanners) do
+		local scanner = v[1];
+		local player = k;
+		
+		if (IsValid(player) and IsValid(scanner) and scanner == npc) then
+			Clockwork.kernel:CalculateSpawnTime(player, inflictor, attacker);
+			
+			npc:EmitSound("npc/scanner/scanner_explode_crash2.wav");
+			
+			self:PlayerDeath(player, inflictor, attacker, true);
+			self:ResetPlayerScanner(player);
+		end;
+	end;
+end;
+
+-- Called when a player's visibility should be set up.
+function Schema:SetupPlayerVisibility(player)
+	if (self.scanners[player]) then
+		local scanner = self.scanners[player][1];
+		
+		if (IsValid(scanner)) then
+			AddOriginToPVS( scanner:GetPos() );
 		end;
 	end;
 end;
@@ -416,6 +471,15 @@ function Schema:PlayerSpawnObject(player)
 	end;
 end;
 
+-- Called when a player's character data should be restored.
+function Schema:PlayerRestoreCharacterData(player, data)
+	if (!self:PlayerIsCombine(player) and player:GetFaction() != FACTION_ADMIN) then
+		if (!data["citizenid"] or string.len( tostring( data["citizenid"] ) ) == 4) then
+			data["citizenid"] = Clockwork.kernel:ZeroNumberToDigits(math.random(1, 99999), 5);
+		end;
+	end;
+end;
+
 -- Called when a player attempts to breach an entity.
 function Schema:PlayerCanBreachEntity(player, entity)
 	if (string.lower( entity:GetClass() ) == "func_door_rotating") then
@@ -426,6 +490,20 @@ function Schema:PlayerCanBreachEntity(player, entity)
 		if (!Clockwork.entity:IsDoorFalse(entity)) then
 			return true;
 		end;
+	end;
+end;
+
+-- Called when a player attempts to restore a recognised name.
+function Schema:PlayerCanRestoreRecognisedName(player, target)
+	if (self:PlayerIsCombine(target)) then
+		return false;
+	end;
+end;
+
+-- Called when a player attempts to save a recognised name.
+function Schema:PlayerCanSaveRecognisedName(player, target)
+	if (self:PlayerIsCombine(target)) then
+		return false;
 	end;
 end;
 
@@ -548,6 +626,16 @@ function Schema:KeyPress(player, key)
 				end;
 			end;
 		end;
+	elseif (key == IN_ATTACK or key == IN_ATTACK2) then
+		if (self.scanners[player]) then
+			local scanner = self.scanners[player][1];
+			
+			if (IsValid(scanner)) then
+				player.nextScannerSound = CurTime() + math.random(8, 48);
+				
+				scanner:EmitSound( self.scannerSounds[ math.random(1, #self.scannerSounds) ] );
+			end;
+		end;
 	elseif (key == IN_RELOAD) then
 		if (self.scanners[player]) then
 			local scanner = self.scanners[player][1];
@@ -592,6 +680,70 @@ function Schema:KeyPress(player, key)
 	end;
 end;
 
+-- Called each tick.
+function Schema:Tick()
+	for k, v in pairs(self.scanners) do
+		local scanner = v[1];
+		local marker = v[2];
+		
+		if (IsValid(k)) then
+			if (IsValid(scanner) and IsValid(marker)) then
+				if (k:KeyDown(IN_FORWARD)) then
+					local position = scanner:GetPos() + (scanner:GetForward() * 25) + (scanner:GetUp() * -64);
+					
+					if (k:KeyDown(IN_SPEED)) then
+						marker:SetPos( position + (k:GetAimVector() * 64) );
+					else
+						marker:SetPos( position + (k:GetAimVector() * 128) );
+					end;
+					
+					scanner.followTarget = nil;
+				end;
+				
+				if (IsValid(scanner.followTarget)) then
+					scanner:Input("SetFollowTarget", scanner.followTarget, scanner.followTarget, "!activator");
+				else
+					scanner:Fire("SetFollowTarget", "marker_"..k:UniqueID(), 0);
+				end;
+				
+				if (scannerClass == "npc_cscanner" and self:IsPlayerCombineRank(k, "SYNTH")) then
+					self:MakePlayerScanner(k, true);
+				elseif (scannerClass == "npc_clawscanner" and !self:IsPlayerCombineRank(k, "SYNTH")) then
+					self:MakePlayerScanner(k, true);
+				end;
+			else
+				self:ResetPlayerScanner(k);
+			end;
+		else
+			if (IsValid(scanner)) then
+				scanner:Remove();
+			end;
+			
+			if (IsValid(marker)) then
+				marker:Remove();
+			end;
+			
+			self.scanners[k] = nil;
+		end;
+	end;
+end;
+
+-- Called when a player's health is set.
+function Schema:PlayerHealthSet(player, newHealth, oldHealth)
+	if (self.scanners[player]) then
+		if (IsValid( self.scanners[player][1] )) then
+			self.scanners[player][1]:SetHealth(newHealth);
+		end;
+	end;
+end;
+
+-- Called when a player attempts to be given a weapon.
+function Schema:PlayerCanBeGivenWeapon(player, class, uniqueID, forceReturn)
+	if (self.scanners[player]) then
+		return false;
+	end;
+end;
+
 -- Called each frame that a player is dead.
 function Schema:PlayerDeathThink(player)
 	if (player:GetCharacterData("permakilled")) then
@@ -614,6 +766,43 @@ end;
 function Schema:PlayerAdjustDeathInfo(player, info)
 	if (player:GetCharacterData("permakilled")) then
 		info.spawnTime = 0;
+	end;
+end;
+
+-- Called when a player's character screen info should be adjusted.
+function Schema:PlayerAdjustCharacterScreenInfo(player, character, info)
+	if (character.data["permakilled"]) then
+		info.details = "This character is permanently killed.";
+	end;
+	
+	if (info.faction == FACTION_OTA) then
+		if (self:IsStringCombineRank(info.name, "EOW")) then
+			info.model = "models/combine_super_soldier.mdl";
+		end;
+	elseif (self:IsCombineFaction(info.faction)) then
+		if (self:IsStringCombineRank(info.name, "SCN")) then
+			if (self:IsStringCombineRank(info.name, "SYNTH")) then
+				info.model = "models/shield_scanner.mdl";
+			else
+				info.model = "models/combine_scanner.mdl";
+			end;
+		elseif (self:IsStringCombineRank(info.name, "SeC")) then
+			info.model = "models/sect_police2.mdl";
+		elseif (self:IsStringCombineRank(info.name, "DvL")) then
+			info.model = "models/eliteshockcp.mdl";
+		elseif (self:IsStringCombineRank(info.name, "EpU")) then
+			info.model = "models/leet_police2.mdl";
+		elseif (self:IsStringCombineRank(info.name, "OfC")) then
+			info.model = "models/policetrench.mdl";
+		end;
+		
+		if (self:IsStringCombineRank(info.name, "GHOST")) then
+			info.model = "models/eliteghostcp.mdl";
+		end;
+	end;
+	
+	if (character.data["customclass"]) then
+		info.customClass = character.data["customclass"];
 	end;
 end;
 
@@ -804,9 +993,17 @@ function Schema:PlayerThink(player, curTime, infoTable)
 		end;
 	end;
 	
+	if (self.scanners[player]) then
+		self:CalculateScannerThink(player, curTime);
+	end;
+	
 	local acrobatics = Clockwork.attributes:Fraction(player, ATB_ACROBATICS, 100, 50);
 	local strength = Clockwork.attributes:Fraction(player, ATB_STRENGTH, 8, 4);
 	local agility = Clockwork.attributes:Fraction(player, ATB_AGILITY, 50, 25);
+	
+	if (self:PlayerIsCombine(player)) then
+		infoTable.inventoryWeight = infoTable.inventoryWeight + 8;
+	end;
 	
 	if (clothes != "") then
 		local itemTable = Clockwork.item:FindByID(clothes);
@@ -891,6 +1088,20 @@ function Schema:PlayerDoesHaveFlag(player, flag)
 	end;
 end;
 
+-- Called when a player's attribute has been updated.
+function Schema:PlayerAttributeUpdated(player, attributeTable, amount)
+	if (self:PlayerIsCombine(player) and amount and amount > 0) then
+		self:AddCombineDisplayLine("Updating external "..Clockwork.option:GetKey("name_attributes", true).."...", Color(255, 125, 0, 255), player);
+	end;
+end;
+
+-- Called to check if a player does recognise another player.
+function Schema:PlayerDoesRecognisePlayer(player, target, status, isAccurate, realValue)
+	if (self:PlayerIsCombine(target) or target:GetFaction() == FACTION_ADMIN) then
+		return true;
+	end;
+end;
+
 -- Called when a player attempts to delete a character.
 function Schema:PlayerCanDeleteCharacter(player, character)
 	if (character.data["permakilled"]) then
@@ -965,10 +1176,50 @@ function Schema:PlayerCanUnlockEntity(player, entity)
 	end;
 end;
 
+-- Called when a player's character has unloaded.
+function Schema:PlayerCharacterUnloaded(player)
+	self:ResetPlayerScanner(player);
+end;
+
 -- Called when a player attempts to change class.
 function Schema:PlayerCanChangeClass(player, class)
-	Clockwork.player:Notify(player, "You don't have permission to do this!");
-	return false;
+	if (player:GetSharedVar("tied") != 0) then
+		Clockwork.player:Notify(player, "You cannot change classes when you are tied!");
+		
+		return false;
+	elseif (self:PlayerIsCombine(player)) then
+		if (class == CLASS_MPS and !self:IsPlayerCombineRank(player, "SCN")) then
+			Clockwork.player:Notify(player, "You are not ranked high enough for this class!");
+			
+			return false;
+		elseif (class == CLASS_MPR and !self:IsPlayerCombineRank(player, "RCT")) then
+			Clockwork.player:Notify(player, "You are not ranked high enough for this class!");
+			
+			return false;
+		elseif (class == CLASS_EMP and !self:IsPlayerCombineRank(player, "EpU")) then
+			Clockwork.player:Notify(player, "You are not ranked high enough for this class!");
+			
+			return false;
+		elseif (class == CLASS_OWS and !self:IsPlayerCombineRank(player, "OWS")) then
+			Clockwork.player:Notify(player, "You are not ranked high enough for this class!");
+			
+			return false;
+		elseif (class == CLASS_EOW and !self:IsPlayerCombineRank(player, "EOW")) then
+			Clockwork.player:Notify(player, "You are not ranked high enough for this class!");
+			
+			return false;
+		elseif (class == CLASS_MPU) then
+			if (self:IsPlayerCombineRank(player, "EpU")) then
+				Clockwork.player:Notify(player, "You are ranked too high for this class!");
+				
+				return false;
+			elseif (self:IsPlayerCombineRank(player, "RCT")) then
+				Clockwork.player:Notify(player, "You are not ranked high enough for this class!");
+				
+				return false;
+			end;
+		end;
+	end;
 end;
 
 -- Called when a player attempts to use an entity.
@@ -1351,6 +1602,17 @@ function Schema:PostPlayerSpawn(player, lightSpawn, changeClass, firstSpawn)
 		player.beingSearched = nil;
 		player.searching = nil;
 		
+		if (self:PlayerIsCombine(player) or player:GetFaction() == FACTION_ADMIN) then
+			if (player:GetFaction() == FACTION_OTA) then
+				player:SetMaxHealth(150);
+				player:SetMaxArmor(150);
+				player:SetHealth(150);
+				player:SetArmor(150);
+			elseif (!self:IsPlayerCombineRank(player, "RCT")) then
+				player:SetArmor(100);
+			else
+				player:SetArmor(50);
+			end;
 		end;
 		
 		if (self:PlayerIsCombine(player) and player:GetAmmoCount("pistol") == 0) then
