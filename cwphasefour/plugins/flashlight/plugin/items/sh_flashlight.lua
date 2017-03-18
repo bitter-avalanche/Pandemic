@@ -14,5 +14,5 @@ local ITEM = Clockwork.item:New("weapon_base");
 	ITEM.business = true;
 	ITEM.isFakeWeapon = true;
 	ITEM.isMeleeWeapon = true;
-	ITEM.description = "A ceiling light, a button has been wired on to it.";
+	ITEM.description = "An old, battered flashlight. Makes you wonder how it still works, with all that's gone on...";
 ITEM:Register();
