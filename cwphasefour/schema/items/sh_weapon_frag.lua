@@ -6,7 +6,7 @@
 local ITEM = Clockwork.item:New("grenade_base");
 	ITEM.name = "M61 Frag Grenade";
 	ITEM.cost = 50;
-	ITEM.model = "models/weapons/w_m61_fraggynade.mdl";
+	ITEM.model = "models/weapons/w_eq_fraggrenade_dropped.mdl";
 	ITEM.weight = 0.8;
 	ITEM.access = "V";
 	ITEM.classes = {CLASS_EOW};
