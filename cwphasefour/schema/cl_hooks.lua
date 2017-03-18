@@ -219,15 +219,14 @@ function Schema:RenderScreenspaceEffects()
 			end;
 		end;
 			
-			self.combineOverlay:SetFloat("$refractamount", 0.3);
-			self.combineOverlay:SetFloat("$envmaptint", 0);
-			self.combineOverlay:SetFloat("$envmap", 0);
-			self.combineOverlay:SetFloat("$alpha", 0.5);
-			self.combineOverlay:SetInt("$ignorez", 1);
+		self.combineOverlay:SetFloat("$refractamount", 0.3);
+		self.combineOverlay:SetFloat("$envmaptint", 0);
+		self.combineOverlay:SetFloat("$envmap", 0);
+		self.combineOverlay:SetFloat("$alpha", 0.5);
+		self.combineOverlay:SetInt("$ignorez", 1);
 			
-			render.SetMaterial(self.combineOverlay);
-			render.DrawScreenQuad();
-		end;
+		render.SetMaterial(self.combineOverlay);
+		render.DrawScreenQuad();
 	end;
 end;
 
