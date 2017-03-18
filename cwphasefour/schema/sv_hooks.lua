@@ -234,6 +234,7 @@ function Schema:GetPlayerDefaultInventory(player, character, inventory)
 			Clockwork.inventory:AddInstance(
 				inventory, Clockwork.item:CreateInstance("med_rags")
 			);
+		end;
 	elseif (character.faction == FACTION_GOVT) then
 		for i = 1, 2 do
 			Clockwork.inventory:AddInstance(

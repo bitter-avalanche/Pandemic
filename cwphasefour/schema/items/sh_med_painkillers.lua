@@ -14,12 +14,8 @@ ITEM.useText = "Consume";
 ITEM.factions = {FACTION_MPF};
 ITEM.category = "Medical";
 ITEM.business = true;
-<<<<<<< HEAD:cwphasefour/schema/items/sh_painkillers.lua
-ITEM.description = "A small, white plastic container filled with painkillers.";
-=======
 ITEM.description = "A small, white plastic container filled with tylenol painkillers.";
 ITEM.customFunctions = {"Empty", "Give"};
->>>>>>> refs/remotes/JakeDaBoss/Development:cwphasefour/schema/items/sh_med_painkillers.lua
 
 -- Called when a player uses the item.
 function ITEM:OnUse(player, itemEntity)
