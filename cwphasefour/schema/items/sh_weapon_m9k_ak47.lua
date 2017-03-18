@@ -1,18 +1,18 @@
 --[[
-	Â© 2013 CloudSixteen.com do not share, re-distribute or modify
+	© 2013 CloudSixteen.com do not share, re-distribute or modify
 	without permission of its author (kurozael@gmail.com).
 --]]
 
 local ITEM = Clockwork.item:New("weapon_base");
-	ITEM.name = "Mp5SD";
-	ITEM.cost = 700;
+	ITEM.name = "AK-47";
+	ITEM.cost = 1100;
+	ITEM.model = "models/weapons/w_ak47_m9k.mdl";
+	ITEM.weight = 3;
+	ITEM.access = "d";
 	ITEM.classes = {CLASS_EMP, CLASS_EOW};
-	ITEM.model = "models/weapons/w_hk_mp5sd.mdl";
-	ITEM.weight = 4;
 	ITEM.business = true;
-	ITEM.access = "f";
-	ITEM.uniqueID = "m9k_mp5sd";
-	ITEM.description = "A Navy SEAL sub-machine gun with a silencer attached.";
+	ITEM.uniqueID = "m9k_ak47";
+	ITEM.description = "An assault rifle with a wooden barrel.";
 	ITEM.isAttachment = true;
 	ITEM.hasFlashlight = true;
 	ITEM.loweredOrigin = Vector(3, 0, -4);

@@ -1,18 +1,18 @@
 --[[
-	Â© 2013 CloudSixteen.com do not share, re-distribute or modify
+	© 2013 CloudSixteen.com do not share, re-distribute or modify
 	without permission of its author (kurozael@gmail.com).
 --]]
 
 local ITEM = Clockwork.item:New("weapon_base");
-	ITEM.name = "Desert Eagle";
-	ITEM.cost = 400;
+	ITEM.name = "Colt 1911";
+	ITEM.cost = 350;
 	ITEM.classes = {CLASS_EMP, CLASS_EOW};
-	ITEM.model = "models/weapons/w_tcom_deagle.mdl";
-	ITEM.weight = 1.5;
+	ITEM.model = "models/weapons/s_dmgf_co1911.mdl";
+	ITEM.weight = 1;
 	ITEM.access = "f";
 	ITEM.business = true;
-	ITEM.uniqueID = "m9k_deagle";
-	ITEM.description = "Israeli made handgun, uses either the .357 or .44 magnum rounds, A.K.A 'The Hand Cannon'.";
+	ITEM.uniqueID = "m9k_colt1911";
+	ITEM.description = "A metal high power pistol.";
 	ITEM.isAttachment = true;
 	ITEM.hasFlashlight = true;
 	ITEM.loweredOrigin = Vector(3, 0, -4);

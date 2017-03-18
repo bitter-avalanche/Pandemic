@@ -4,15 +4,15 @@
 --]]
 
 local ITEM = Clockwork.item:New("weapon_base");
-	ITEM.name = "Mp5SD";
-	ITEM.cost = 700;
+	ITEM.name = "PP-19";
+	ITEM.cost = 975;
 	ITEM.classes = {CLASS_EMP, CLASS_EOW};
-	ITEM.model = "models/weapons/w_hk_mp5sd.mdl";
-	ITEM.weight = 4;
+	ITEM.model = "models/weapons/w_pp19_bizon.mdl";
+	ITEM.weight = 4.5;
 	ITEM.business = true;
 	ITEM.access = "f";
-	ITEM.uniqueID = "m9k_mp5sd";
-	ITEM.description = "A Navy SEAL sub-machine gun with a silencer attached.";
+	ITEM.uniqueID = "m9k_bizonp19";
+	ITEM.description = "A Russian made black sub-machine gun, it has a tactical light attached.";
 	ITEM.isAttachment = true;
 	ITEM.hasFlashlight = true;
 	ITEM.loweredOrigin = Vector(3, 0, -4);
