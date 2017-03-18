@@ -229,17 +229,22 @@ function Schema:GetPlayerDefaultInventory(player, character, inventory)
 			Clockwork.inventory:AddInstance(
 				inventory, Clockwork.item:CreateInstance("m9k_ammo_pistol")
 			);
+		end;
 	elseif (character.faction == FACTION_CIVILIAN) then
 		for i = 1, 2 do
 			Clockwork.inventory:AddInstance(
 				inventory, Clockwork.item:CreateInstance("med_rags")
 			);
+		end;
 	elseif (character.faction == FACTION_GOVT) then
 		for i = 1, 2 do
 			Clockwork.inventory:AddInstance(
 				inventory, Clockwork.item:CreateInstance("med_rags")
 			);
-		end;
+	else
+		Clockwork.inventory:AddInstance(
+			inventory, Clockwork.item:CreateInstance("med_rags")
+		);
 	end;
 end;
 
