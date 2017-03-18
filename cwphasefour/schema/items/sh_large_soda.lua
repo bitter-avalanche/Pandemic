@@ -6,7 +6,7 @@
 local ITEM = Clockwork.item:New();
 ITEM.name = "Large Soda";
 ITEM.cost = 12;
-ITEM.model = "models/props_junk/garbage_plasticbottle003a.mdl";
+ITEM.model = "models/foodnhouseholditems/colabig.mdl";
 ITEM.weight = 1.5;
 ITEM.access = "w";
 ITEM.useText = "Drink";

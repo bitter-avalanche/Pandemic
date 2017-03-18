@@ -6,7 +6,7 @@
 local ITEM = Clockwork.item:New("alcohol_base");
 	ITEM.name = "Beer";
 	ITEM.cost = 6;
-	ITEM.model = "models/props_junk/garbage_glassbottle003a.mdl";
+	ITEM.model = "models/foodnhouseholditems/beer_master.mdl";
 	ITEM.weight = 0.6;
 	ITEM.access = "w";
 	ITEM.business = true;
