@@ -15,6 +15,9 @@ We're always looking for developers, which can range from creating images in Pho
 
 You can also help us by donating to the community, which would be used for the schema and Bitter Avalanche's expansion projects.
 
+**For official support with this schema you're SOL. Bitter Avalanche, nor its founders, nor any of the developers listed below this list are obligated to assist you with this schema, its installation, its management, lore, and/or any other question you might have.
+If you can't install a schema, you might have to rethink what you're doing.**
+
 # Contributors
 
 [Songbird](http://steamcommunity.com/id/AlwaysANightmare) - Lead Developer.
