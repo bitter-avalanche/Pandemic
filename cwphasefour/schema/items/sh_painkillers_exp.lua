@@ -1,5 +1,5 @@
 --[[
-	ï¿½ 2013 CloudSixteen.com do not share, re-distribute or modify
+	© 2013 CloudSixteen.com do not share, re-distribute or modify
 	without permission of its author (kurozael@gmail.com).
 --]]
 
@@ -23,7 +23,7 @@ end;
 
 -- Called after consuming, to return our junk items.
 function ITEM:OnUse(player, itemEntity)
-	player:GiveItem(Clockwork.item:CreateInstance("junk_emptypillbottle_exp"));
+	player:GiveItem(Clockwork.item:CreateInstance("empty_pillbottle2"));
 end;
 
 -- Called when a player drops the item.
