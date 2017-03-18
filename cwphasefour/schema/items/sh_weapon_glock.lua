@@ -4,15 +4,15 @@
 --]]
 
 local ITEM = Clockwork.item:New("weapon_base");
-	ITEM.name = "Desert Eagle";
-	ITEM.cost = 400;
+	ITEM.name = "Glock 18";
+	ITEM.cost = 300;
 	ITEM.classes = {CLASS_EMP, CLASS_EOW};
-	ITEM.model = "models/weapons/w_tcom_deagle.mdl";
-	ITEM.weight = 1.5;
+	ITEM.model = "models/weapons/w_dmg_glock.mdl";
+	ITEM.weight = 1;
 	ITEM.access = "f";
 	ITEM.business = true;
-	ITEM.uniqueID = "m9k_deagle";
-	ITEM.description = "Israeli made handgun, uses either the .357 or .44 magnum rounds, A.K.A 'The Hand Cannon'.";
+	ITEM.uniqueID = "m9k_glock";
+	ITEM.description = "A black, full-auto hand gun, it has a extended magazine.";
 	ITEM.isAttachment = true;
 	ITEM.hasFlashlight = true;
 	ITEM.loweredOrigin = Vector(3, 0, -4);

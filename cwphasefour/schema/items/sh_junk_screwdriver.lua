@@ -13,7 +13,7 @@ ITEM.access = "v";
 ITEM.uniqueID = "junk_screwdriver";
 ITEM.business = true;
 ITEM.category = "Junk";
-ITEM.description = "An ordinary, everyday Screwdriver.";
+ITEM.description = "An ordinary, everyday screwdriver.";
 ITEM.spawnType = "junk";
 
 -- Called when a player drops the item.

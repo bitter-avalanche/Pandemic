@@ -1,17 +1,18 @@
 --[[
-	© 2013 CloudSixteen.com do not share, re-distribute or modify
+	Â© 2013 CloudSixteen.com do not share, re-distribute or modify
 	without permission of its author (kurozael@gmail.com).
 --]]
 
 local ITEM = Clockwork.item:New("weapon_base");
-	ITEM.name = "Benelli M3";
-	ITEM.cost = 200;
-	ITEM.model = "models/weapons/w_benelli_m3.mdl";
-	ITEM.weight = 2.5;
-	ITEM.access = "V";
-	ITEM.uniqueID = "m9k_m3";
+	ITEM.name = "Uzi";
+	ITEM.cost = 700;
+	ITEM.classes = {CLASS_EMP, CLASS_EOW};
+	ITEM.model = "models/weapons/w_uzi_imi.mdl";
+	ITEM.weight = 3;
 	ITEM.business = true;
-	ITEM.description = "The Benelli M3 pump-action Shotgun was majorly popular to gun enthusiasts and at-home protection for its effectivity in tight spaces.";
+	ITEM.access = "f";
+	ITEM.uniqueID = "m9k_uzi";
+	ITEM.description = "Israeli made sub-machine gun, it has a fold-able stock, large magazine, and silencer attached.";
 	ITEM.isAttachment = true;
 	ITEM.hasFlashlight = true;
 	ITEM.loweredOrigin = Vector(3, 0, -4);
