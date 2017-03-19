@@ -1,5 +1,9 @@
 --[[
+<<<<<<< HEAD
+	Â© 2013 CloudSixteen.com do not share, re-distribute or modify
+=======
 	© 2013 CloudSixteen.com do not share, re-distribute or modify
+>>>>>>> refs/remotes/JakeDaBoss/Development
 	without permission of its author (kurozael@gmail.com).
 --]]
 
@@ -15,8 +19,16 @@ ITEM.business = true;
 ITEM.category = "Gunparts";
 ITEM.description = "A tattered casing designed to manufacture pistols. It's not the best, but it'll do.";
 ITEM.spawnType = "gunparts";
+<<<<<<< HEAD
+ITEM.spawnValue = 35;
+=======
+>>>>>>> refs/remotes/JakeDaBoss/Development
 
 -- Called when a player drops the item.
 function ITEM:OnDrop(player, position) end;
 
+<<<<<<< HEAD
 ITEM:Register();
+=======
+ITEM:Register();
+>>>>>>> refs/remotes/JakeDaBoss/Development
