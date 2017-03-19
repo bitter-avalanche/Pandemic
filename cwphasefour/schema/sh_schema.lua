@@ -41,7 +41,7 @@ Clockwork.quiz:AddQuestion("Can you type properly, using capital letters and ful
 Clockwork.quiz:AddQuestion("You do not need weapons to roleplay, do you understand?", 1, "Yes.", "No.");
 Clockwork.quiz:AddQuestion("You do not need items to roleplay, do you understand?", 1, "Yes.", "No.");
 Clockwork.quiz:AddQuestion("What do you think serious roleplaying is about?", 2, "Collecting items and upgrades.", "Developing your character.");
-Clockwork.quiz:AddQuestion("What universe is this roleplaying game set in?", 1, "Real Life.", "Half-Life 2.");
+Clockwork.quiz:AddQuestion("What universe is this roleplaying game set in?", 2, "Real Life.", "Half-Life 2.");
 
 Clockwork.flag:Add("f", "Light Weapons", "Access to light, and largely legal weaponry and ammo, and other goods.");
 Clockwork.flag:Add("F", "Heavy Weapons / Black Market", "Access to heavy blackmarket weaponry and ammo.");
