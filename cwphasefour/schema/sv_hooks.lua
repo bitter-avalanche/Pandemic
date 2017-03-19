@@ -1,5 +1,5 @@
 --[[
-  © 2013 CloudSixteen.com do not share, re-distribute or modify
+	© 2013 CloudSixteen.com do not share, re-distribute or modify
 	without permission of its author (kurozael@gmail.com).
 --]]
 
@@ -28,7 +28,7 @@ end;
 -- Called when a player's default model is needed.
 function Schema:GetPlayerDefaultModel(player)
 	local faction = player:GetFaction();
-
+	
 	if (self:IsCombineFaction(faction)) then
 		if (self:IsPlayerCombineRank(player, "GHOST")) then
 			return "models/eliteghostcp.mdl";
@@ -47,12 +47,12 @@ function Schema:EntityHandleMenuOption(player, entity, option, arguments)
 	if (entity:GetClass() == "prop_ragdoll" and arguments == "cw_corpseLoot") then
 		if (!entity.cwInventory) then entity.cwInventory = {}; end;
 		if (!entity.cash) then entity.cash = 0; end;
-
+		
 		local entityPlayer = Clockwork.entity:GetPlayer(entity);
-
+		
 		if (!entityPlayer or !entityPlayer:Alive()) then
 			player:EmitSound("physics/body/body_medium_impact_soft"..math.random(1, 7)..".wav");
-
+			
 			Clockwork.storage:Open( player, {
 				name = "Corpse",
 				weight = 8,
@@ -70,7 +70,7 @@ function Schema:EntityHandleMenuOption(player, entity, option, arguments)
 		end;
 	elseif (entity:GetClass() == "cw_belongings" and arguments == "cw_belongingsOpen") then
 		player:EmitSound("physics/body/body_medium_impact_soft"..math.random(1, 7)..".wav");
-
+		
 		Clockwork.storage:Open( player, {
 			name = "Belongings",
 			weight = 100,
@@ -103,14 +103,14 @@ function Schema:EntityHandleMenuOption(player, entity, option, arguments)
 		if (option == "Set Frequency" and type(arguments) == "string") then
 			if (string.find(arguments, "^%d%d%d%.%d$")) then
 				local start, finish, decimal = string.match(arguments, "(%d)%d(%d)%.(%d)");
-
+				
 				start = tonumber(start);
 				finish = tonumber(finish);
 				decimal = tonumber(decimal);
-
+				
 				if (start == 1 and finish > 0 and finish < 10 and decimal > 0 and decimal < 10) then
 					entity:SetFrequency(arguments);
-
+					
 					Clockwork.player:Notify(player, "You have set this stationary radio's arguments to "..arguments..".");
 				else
 					Clockwork.player:Notify(player, "The radio arguments must be between 101.1 and 199.9!");
@@ -122,7 +122,7 @@ function Schema:EntityHandleMenuOption(player, entity, option, arguments)
 			entity:Toggle();
 		elseif (arguments == "cw_radioTake") then
 			local bSuccess, fault = player:GiveItem(Clockwork.item:CreateInstance("stationary_radio"));
-
+			
 			if (!bSuccess) then
 				Clockwork.player:Notify(player, fault);
 			else
@@ -137,12 +137,12 @@ function Schema:OnNPCKilled(npc, attacker, inflictor)
 	for k, v in pairs(self.scanners) do
 		local scanner = v[1];
 		local player = k;
-
+		
 		if (IsValid(player) and IsValid(scanner) and scanner == npc) then
 			Clockwork.kernel:CalculateSpawnTime(player, inflictor, attacker);
-
+			
 			npc:EmitSound("npc/scanner/scanner_explode_crash2.wav");
-
+			
 			self:PlayerDeath(player, inflictor, attacker, true);
 			self:ResetPlayerScanner(player);
 		end;
@@ -153,7 +153,7 @@ end;
 function Schema:SetupPlayerVisibility(player)
 	if (self.scanners[player]) then
 		local scanner = self.scanners[player][1];
-
+		
 		if (IsValid(scanner)) then
 			AddOriginToPVS( scanner:GetPos() );
 		end;
@@ -172,18 +172,18 @@ function Schema:PlayerAdjustDropWeaponInfo(player, info)
 			Clockwork.player:GetGear(player, "Primary"),
 			Clockwork.player:GetGear(player, "Melee")
 		};
-
+		
 		for k, v in pairs(gearTable) do
 			if (IsValid(v)) then
 				local gearItemTable = v:GetItemTable();
-
+				
 				if (gearItemTable and gearItemTable.weaponClass == info.itemTable.weaponClass) then
 					local position, angles = v:GetRealPosition();
-
+					
 					if (position and angles) then
 						info.position = position;
 						info.angles = angles;
-
+						
 						break;
 					end;
 				end;
@@ -196,11 +196,11 @@ end;
 function Schema:PlayerUseDoor(player, door)
 	if (string.lower( game.GetMap() ) == "rp_c18_v1") then
 		local name = string.lower( door:GetName() );
-
+		
 		if (name == "nxs_brnroom" or name == "nxs_brnroom2" or name == "Clockwork_al_door1"
 		or name == "Clockwork_al_door2" or name == "nxs_brnbcroom") then
 			local curTime = CurTime();
-
+			
 			if (!door.nextAutoClose or curTime >= door.nextAutoClose) then
 				door:Fire("Close", "", 10);
 				door.nextAutoClose = curTime + 10;
@@ -218,68 +218,49 @@ end;
 
 -- Called when a player's default inventory is needed.
 function Schema:GetPlayerDefaultInventory(player, character, inventory)
-	if (character.faction == FACTION_ADMIN) then
-		Clockwork.inventory:AddInstance(
-			inventory, Clockwork.item:CreateInstance("handheld_radio")
-		);
-	end
-	elseif (character.faction == FACTION_MPF) then
+	if (character.faction == FACTION_MILITARY) then
 		Clockwork.inventory:AddInstance(
 			inventory, Clockwork.item:CreateInstance("handheld_radio")
 		);
 		Clockwork.inventory:AddInstance(
-			inventory, Clockwork.item:CreateInstance("weapon_pistol")
+			inventory, Clockwork.item:CreateInstance("m9k_usp")
 		);
 		for i = 1, 2 do
 			Clockwork.inventory:AddInstance(
-				inventory, Clockwork.item:CreateInstance("ammo_pistol")
+				inventory, Clockwork.item:CreateInstance("m9k_ammo_pistol")
 			);
 		end;
- 
-	end
-	
-	elseif (character.faction == FACTION_OTA) then
-		Clockwork.inventory:AddInstance(
-			inventory, Clockwork.item:CreateInstance("handheld_radio")
-		);
-		Clockwork.inventory:AddInstance(
-			inventory, Clockwork.item:CreateInstance("weapon_pistol")
-		);
-		Clockwork.inventory:AddInstance(
-			inventory, Clockwork.item:CreateInstance("ammo_pistol")
-		);
-		Clockwork.inventory:AddInstance(
-			inventory, Clockwork.item:CreateInstance("weapon_ar2")
-		);
-		Clockwork.inventory:AddInstance(
-			inventory, Clockwork.item:CreateInstance("ammo_ar2")
-		);
-	end
+		for i = 1, 2 do
+			Clockwork.inventory:AddInstance(
+				inventory, Clockwork.item:CreateInstance("med_military_band")
+			);
+		end;
 	elseif (character.faction == FACTION_GOVT) then
+		Clockwork.inventory:AddInstance(
+			inventory, Clockwork.item:CreateInstance("handheld_radio")
+		);
 		for i = 1, 2 do
 			Clockwork.inventory:AddInstance(
 				inventory, Clockwork.item:CreateInstance("med_rags")
 			);
 		end;
-	elseif (character.faction == FACTION_CIVILIAN) then
-		for i = 1, 2 do
-			Clockwork.inventory:AddInstance(
-				inventory, Clockwork.item:CreateInstance("med_rags")
-			);
-		else
-			Clockwork.inventory:AddInstance(
-				inventory, Clockwork.item:CreateInstance("med_rags")
-			);
-		end;
+	else
+		Clockwork.inventory:AddInstance(
+			inventory, Clockwork.item:CreateInstance("med_rags")
+		);
+		Clockwork.inventory:AddInstance(
+			inventory, Clockwork.item:CreateInstance("med_rags")
+		);
 	end;
 end;
+
 -- Called when a player's typing display has started.
 function Schema:PlayerStartTypingDisplay(player, code)
 	if (Schema:PlayerIsCombine(player) and !player:IsNoClipping()) then
 		if (code == "n" or code == "y" or code == "w" or code == "r") then
 			if (!player.typingBeep) then
 				player.typingBeep = true;
-
+				
 				player:EmitSound("npc/overwatch/radiovoice/on1.wav");
 			end;
 		end;
@@ -293,7 +274,7 @@ function Schema:PlayerFinishTypingDisplay(player, textTyped)
 			player:EmitSound("npc/overwatch/radiovoice/off4.wav");
 		end;
 	end;
-
+	
 	player.typingBeep = nil;
 end;
 
@@ -301,25 +282,25 @@ end;
 function Schema:PlayerStunEntity(player, entity)
 	local target = Clockwork.entity:GetPlayer(entity);
 	local strength = Clockwork.attributes:Fraction(player, ATB_STRENGTH, 12, 6);
-
+	
 	player:ProgressAttribute(ATB_STRENGTH, 0.5, true);
-
+	
 	if (target and target:Alive()) then
 		local curTime = CurTime();
-
+		
 		if (target.nextStunInfo and curTime <= target.nextStunInfo[2]) then
 			target.nextStunInfo[1] = target.nextStunInfo[1] + 1;
 			target.nextStunInfo[2] = curTime + 2;
-
+			
 			if (target.nextStunInfo[1] == 3) then
 				Clockwork.player:SetRagdollState( target, RAGDOLL_KNOCKEDOUT, Clockwork.config:Get("knockout_time"):Get() );
 			end;
 		else
 			target.nextStunInfo = {0, curTime + 2};
 		end;
-
+		
 		target:ViewPunch( Angle(12 + strength, 0, 0) );
-
+		
 		Clockwork.datastream:Start(target, "Stunned", 0.5);
 	end;
 end;
@@ -334,11 +315,11 @@ end;
 -- Called when a player's inventory item has been updated.
 function Schema:PlayerInventoryItemUpdated(player, itemTable, amount, force)
 	local clothes = player:GetCharacterData("clothes");
-
+	
 	if (clothes == itemTable.index) then
 		if (!player:HasItemByID(itemTable.uniqueID)) then
 			itemTable:OnChangeClothes(player, false);
-
+			
 			player:SetCharacterData("clothes", nil);
 		end;
 	end;
@@ -354,7 +335,7 @@ end;
 -- Called when a player's storage should close.
 function Schema:PlayerStorageShouldClose(player, storage)
 	local entity = player:GetStorageEntity();
-
+	
 	if (player.searching and entity:IsPlayer() and entity:GetSharedVar("tied") == 0) then
 		return true;
 	end;
@@ -370,10 +351,10 @@ end;
 -- Called when a player presses F3.
 function Schema:ShowSpare1(player)
 	local itemTable = player:FindItemByID("zip_tie");
-
+	
 	if (!itemTable) then
 		Clockwork.player:Notify(player, "You do not own a zip tie!");
-
+		
 		return;
 	end;
 
@@ -390,10 +371,10 @@ function Schema:PlayerFootstep(player, position, foot, sound, volume, recipientF
 	local running = nil;
 	local clothes = player:GetCharacterData("clothes");
 	local model = string.lower( player:GetModel() );
-
+	
 	if (clothes) then
 		local itemTable = Clockwork.item:FindByID(clothes);
-
+		
 		if (itemTable) then
 			if (player:IsRunning() or player:IsJogging()) then
 				if (itemTable.runSound) then
@@ -412,41 +393,41 @@ function Schema:PlayerFootstep(player, position, foot, sound, volume, recipientF
 			end;
 		end;
 	end;
-
+	
 	if (player:IsRunning() or player:IsJogging()) then
 		running = true;
 	end;
-
+	
 	if (running) then
 		if (string.find(model, "metrocop") or string.find(model, "shockcp") or string.find(model, "ghostcp") or string.find(model, "police")) then
 			if (foot == 0) then
 				local randomSounds = {1, 3, 5};
 				local randomNumber = math.random(1, 3);
-
+				
 				sound = "npc/metropolice/gear"..randomSounds[randomNumber]..".wav";
 			else
 				local randomSounds = {2, 4, 6};
 				local randomNumber = math.random(1, 3);
-
+				
 				sound = "npc/metropolice/gear"..randomSounds[randomNumber]..".wav";
 			end;
 		elseif (string.find(model, "combine")) then
 			if (foot == 0) then
 				local randomSounds = {1, 3, 5};
 				local randomNumber = math.random(1, 3);
-
+				
 				sound = "npc/combine_soldier/gear"..randomSounds[randomNumber]..".wav";
 			else
 				local randomSounds = {2, 4, 6};
 				local randomNumber = math.random(1, 3);
-
+				
 				sound = "npc/combine_soldier/gear"..randomSounds[randomNumber]..".wav";
 			end;
 		end;
 	end;
-
+	
 	player:EmitSound(sound);
-
+	
 	return true;
 end;
 
@@ -454,22 +435,22 @@ end;
 function Schema:PlayerSpawnProp(player, model)
 	if (!player:IsAdmin() and Clockwork.config:Get("cwu_props"):Get()) then
 		if (player:GetFaction() == FACTION_CITIZEN) then
-
+			
 			if (player:GetCharacterData("customclass") != "Civil Worker's Union") then
 				model = string.Replace(model, "\\", "/");
 				model = string.Replace(model, "//", "/");
 				model = string.lower(model);
-
+				
 				if (string.find(model, "bed")) then
 					Clockwork.player:Notify(player, "You are not in the Civil Worker's Union!");
-
+					
 					return false;
 				end;
-
+				
 				for k, v in pairs(self.cwuProps) do
 					if (string.lower(v) == model) then
 						Clockwork.player:Notify(player, "You are not in the Civil Worker's Union!");
-
+						
 						return false;
 					end;
 				end;
@@ -482,7 +463,7 @@ end;
 function Schema:PlayerSpawnObject(player)
 	if (player:GetSharedVar("tied") != 0 or self.scanners[player]) then
 		Clockwork.player:Notify(player, "You don't have permission to do this right now!");
-
+		
 		return false;
 	end;
 end;
@@ -501,7 +482,7 @@ function Schema:PlayerCanBreachEntity(player, entity)
 	if (string.lower( entity:GetClass() ) == "func_door_rotating") then
 		return false;
 	end;
-
+	
 	if (Clockwork.entity:IsDoor(entity)) then
 		if (!Clockwork.entity:IsDoorFalse(entity)) then
 			return true;
@@ -528,12 +509,12 @@ function Schema:PlayerCanRadio(player, text, listeners, eavesdroppers)
 	if (player:HasItemByID("handheld_radio") or self.scanners[player]) then
 		if (!player:GetCharacterData("frequency")) then
 			Clockwork.player:Notify(player, "You need to set the radio frequency first!");
-
+			
 			return false;
 		end;
 	else
 		Clockwork.player:Notify(player, "You do not own a radio!");
-
+		
 		return false;
 	end;
 end;
@@ -541,9 +522,9 @@ end;
 -- Called when a player's character has initialized.
 function Schema:PlayerCharacterInitialized(player)
 	local faction = player:GetFaction();
-
+	
 	if (self:PlayerIsCombine(player)) then
-
+		
 		for k, v in pairs(Clockwork.class.stored) do
 			if (v.factions and table.HasValue(v.factions, faction)) then
 				if (#_team.GetPlayers(v.index) < Clockwork.class:GetLimit(v.name)) then
@@ -568,7 +549,7 @@ end;
 function Schema:PlayerNameChanged(player, previousName, newName)
 	if (self:PlayerIsCombine(player)) then
 		local faction = player:GetFaction();
-
+		
 		if (faction == FACTION_OTA) then
 			if (!self:IsStringCombineRank(previousName, "OWS") and self:IsStringCombineRank(newName, "OWS")) then
 				Clockwork.class:Set(player, CLASS_OWS);
@@ -578,7 +559,7 @@ function Schema:PlayerNameChanged(player, previousName, newName)
 		elseif (faction == FACTION_MPF) then
 			if (!self:IsStringCombineRank(previousName, "SCN") and self:IsStringCombineRank(newName, "SCN")) then
 				Clockwork.class:Set(player, CLASS_MPS, true);
-
+				
 				self:MakePlayerScanner(player, true);
 			elseif (!self:IsStringCombineRank(previousName, "RCT") and self:IsStringCombineRank(newName, "RCT")) then
 				Clockwork.class:Set(player, CLASS_MPR);
@@ -595,7 +576,7 @@ function Schema:PlayerNameChanged(player, previousName, newName)
 					Clockwork.class:Set(player, CLASS_MPU);
 				end;
 			end;
-
+			
 			if (!self:IsStringCombineRank(previousName, "GHOST") and self:IsStringCombineRank(newName, "GHOST")) then
 				player:SetModel("models/eliteghostcp.mdl");
 			end;
@@ -617,24 +598,24 @@ function Schema:KeyPress(player, key)
 			local untieTime = Schema:GetDexterityTime(player);
 			local target = player:GetEyeTraceNoCursor().Entity;
 			local entity = target;
-
+			
 			if (IsValid(target)) then
 				target = Clockwork.entity:GetPlayer(target);
-
+				
 				if (target and player:GetSharedVar("tied") == 0) then
 					if (target:GetShootPos():Distance( player:GetShootPos() ) <= 192) then
 						if (target:GetSharedVar("tied") != 0) then
 							Clockwork.player:SetAction(player, "untie", untieTime);
-
+							
 							Clockwork.player:EntityConditionTimer(player, target, entity, untieTime, 192, function()
 								return player:Alive() and !player:IsRagdolled() and player:GetSharedVar("tied") == 0;
 							end, function(success)
 								if (success) then
 									self:TiePlayer(target, false);
-
+									
 									player:ProgressAttribute(ATB_DEXTERITY, 15, true);
 								end;
-
+								
 								Clockwork.player:SetAction(player, "untie", false);
 							end);
 						end;
@@ -645,10 +626,10 @@ function Schema:KeyPress(player, key)
 	elseif (key == IN_ATTACK or key == IN_ATTACK2) then
 		if (self.scanners[player]) then
 			local scanner = self.scanners[player][1];
-
+			
 			if (IsValid(scanner)) then
 				player.nextScannerSound = CurTime() + math.random(8, 48);
-
+				
 				scanner:EmitSound( self.scannerSounds[ math.random(1, #self.scannerSounds) ] );
 			end;
 		end;
@@ -657,17 +638,17 @@ function Schema:KeyPress(player, key)
 			local scanner = self.scanners[player][1];
 			local curTime = CurTime();
 			local marker = self.scanners[player][2];
-
+			
 			if (IsValid(scanner)) then
 				local position = scanner:GetPos();
-
+				
 				for k, v in ipairs( ents.FindInSphere(position, 384) ) do
 					if (v:IsPlayer() and v:HasInitialized() and !self:PlayerIsCombine(v)) then
 						local playerPosition = v:GetPos();
 						local scannerDot = scanner:GetAimVector():Dot( (playerPosition - position):GetNormal() );
 						local playerDot = v:GetAimVector():Dot( (position - playerPosition):GetNormal() );
 						local threshold = 0.2 + math.Clamp( (0.6 / 384) * playerPosition:Distance(position), 0, 0.6 );
-
+						
 						if (Clockwork.player:CanSeeEntity( v, scanner, 0.9, {marker} ) and playerDot >= threshold and scannerDot >= threshold) then
 							if (player != v) then
 								if (v:GetFaction() == FACTION_CITIZEN) then
@@ -679,13 +660,13 @@ function Schema:KeyPress(player, key)
 										end);
 									end;
 								end;
-
+								
 								Clockwork.datastream:Start(v, "Stunned", 3);
 							end;
 						end;
 					end;
 				end;
-
+				
 				scanner:EmitSound("npc/scanner/scanner_photo1.wav");
 			end;
 		end;
@@ -701,27 +682,27 @@ function Schema:Tick()
 	for k, v in pairs(self.scanners) do
 		local scanner = v[1];
 		local marker = v[2];
-
+		
 		if (IsValid(k)) then
 			if (IsValid(scanner) and IsValid(marker)) then
 				if (k:KeyDown(IN_FORWARD)) then
 					local position = scanner:GetPos() + (scanner:GetForward() * 25) + (scanner:GetUp() * -64);
-
+					
 					if (k:KeyDown(IN_SPEED)) then
 						marker:SetPos( position + (k:GetAimVector() * 64) );
 					else
 						marker:SetPos( position + (k:GetAimVector() * 128) );
 					end;
-
+					
 					scanner.followTarget = nil;
 				end;
-
+				
 				if (IsValid(scanner.followTarget)) then
 					scanner:Input("SetFollowTarget", scanner.followTarget, scanner.followTarget, "!activator");
 				else
 					scanner:Fire("SetFollowTarget", "marker_"..k:UniqueID(), 0);
 				end;
-
+				
 				if (scannerClass == "npc_cscanner" and self:IsPlayerCombineRank(k, "SYNTH")) then
 					self:MakePlayerScanner(k, true);
 				elseif (scannerClass == "npc_clawscanner" and !self:IsPlayerCombineRank(k, "SYNTH")) then
@@ -734,11 +715,11 @@ function Schema:Tick()
 			if (IsValid(scanner)) then
 				scanner:Remove();
 			end;
-
+			
 			if (IsValid(marker)) then
 				marker:Remove();
 			end;
-
+			
 			self.scanners[k] = nil;
 		end;
 	end;
@@ -772,7 +753,7 @@ function Schema:PlayerCanSwitchCharacter(player, character)
 	if (player:GetCharacterData("permakilled")) then
 		return true;
 	end;
-
+	
 	if (player:GetSharedVar("tied") != 0) then
 		return false, "You cannot switch to this character while tied!";
 	end;
@@ -790,7 +771,7 @@ function Schema:PlayerAdjustCharacterScreenInfo(player, character, info)
 	if (character.data["permakilled"]) then
 		info.details = "This character is permanently killed.";
 	end;
-
+	
 	if (info.faction == FACTION_OTA) then
 		if (self:IsStringCombineRank(info.name, "EOW")) then
 			info.model = "models/combine_super_soldier.mdl";
@@ -811,12 +792,12 @@ function Schema:PlayerAdjustCharacterScreenInfo(player, character, info)
 		elseif (self:IsStringCombineRank(info.name, "OfC")) then
 			info.model = "models/policetrench.mdl";
 		end;
-
+		
 		if (self:IsStringCombineRank(info.name, "GHOST")) then
 			info.model = "models/eliteghostcp.mdl";
 		end;
 	end;
-
+	
 	if (character.data["customclass"]) then
 		info.customClass = character.data["customclass"];
 	end;
@@ -831,23 +812,23 @@ function Schema:ChatBoxMessageAdded(info)
 		local players = _player.GetAll();
 		local radios = ents.FindByClass("cw_radio");
 		local data = {};
-
+		
 		for k, v in ipairs(radios) do
 			if (!v:IsOff() and info.speaker:GetPos():Distance( v:GetPos() ) <= 80) then
 				local frequency = v:GetFrequency();
-
+				
 				if (frequency != 0) then
 					info.shouldSend = false;
 					info.listeners = {};
 					data.frequency = frequency;
 					data.position = v:GetPos();
 					data.entity = v;
-
+					
 					break;
 				end;
 			end;
 		end;
-
+		
 		if (IsValid(data.entity) and data.frequency != "") then
 			for k, v in ipairs(players) do
 				if (v:HasInitialized() and v:Alive() and !v:IsRagdolled(RAGDOLL_FALLENOVER)) then
@@ -859,11 +840,11 @@ function Schema:ChatBoxMessageAdded(info)
 					end;
 				end;
 			end;
-
+			
 			for k, v in ipairs(radios) do
 				local radioPosition = v:GetPos();
 				local radioFrequency = v:GetFrequency();
-
+				
 				if (!v:IsOff() and radioFrequency == data.frequency) then
 					for k2, v2 in ipairs(players) do
 						if (v2:HasInitialized() and !listeners[v2] and !eavesdroppers[v2]) then
@@ -871,30 +852,30 @@ function Schema:ChatBoxMessageAdded(info)
 								eavesdroppers[v2] = v2;
 							end;
 						end;
-
+						
 						break;
 					end;
 				end;
 			end;
-
+			
 			if (table.Count(listeners) > 0) then
 				Clockwork.chatBox:Add(listeners, info.speaker, "radio", info.text);
 			end;
-
+			
 			if (table.Count(eavesdroppers) > 0) then
 				Clockwork.chatBox:Add(eavesdroppers, info.speaker, "radio_eavesdrop", info.text);
 			end;
-
+			
 			table.Merge(info.listeners, listeners);
 			table.Merge(info.listeners, eavesdroppers);
 		end;
 	end;
-
+	
 	if (info.voice) then
 		if (IsValid(info.speaker) and info.speaker:HasInitialized()) then
 			info.speaker:EmitSound(info.voice.sound, info.voice.volume);
 		end;
-
+		
 		if (info.voice.global) then
 			for k, v in pairs(info.listeners) do
 				if (v != info.speaker) then
@@ -910,11 +891,11 @@ function Schema:PlayerRadioUsed(player, text, listeners, eavesdroppers)
 	local newEavesdroppers = {};
 	local talkRadius = Clockwork.config:Get("talk_radius"):Get() * 2;
 	local frequency = player:GetCharacterData("frequency");
-
+	
 	for k, v in ipairs( ents.FindByClass("cw_radio") ) do
 		local radioPosition = v:GetPos();
 		local radioFrequency = v:GetFrequency();
-
+		
 		if (!v:IsOff() and radioFrequency == frequency) then
 			for k2, v2 in ipairs( _player.GetAll() ) do
 				if (v2:HasInitialized() and !listeners[v2] and !eavesdroppers[v2]) then
@@ -922,12 +903,12 @@ function Schema:PlayerRadioUsed(player, text, listeners, eavesdroppers)
 						newEavesdroppers[v2] = v2;
 					end;
 				end;
-
+				
 				break;
 			end;
 		end;
 	end;
-
+	
 	if (table.Count(newEavesdroppers) > 0) then
 		Clockwork.chatBox:Add(newEavesdroppers, player, "radio_eavesdrop", text);
 	end;
@@ -951,7 +932,7 @@ function Schema:CanTool(player, trace, tool)
 	if (!Clockwork.player:HasFlags(player, "w")) then
 		if (string.sub(tool, 1, 5) == "wire_" or string.sub(tool, 1, 6) == "wire2_") then
 			player:RunCommand("gmod_toolmode \"\"");
-
+			
 			return false;
 		end;
 	end;
@@ -977,10 +958,10 @@ function Schema:PlayerSetSharedVars(player, curTime)
 	player:SetSharedVar( "citizenID", player:GetCharacterData("citizenid", "") );
 	player:SetSharedVar( "clothes", player:GetCharacterData("clothes", 0) );
 	player:SetSharedVar( "icon", player:GetCharacterData("icon", "") );
-
+	
 	if (player:Alive() and !player:IsRagdolled() and player:GetVelocity():Length() > 0) then
 		local inventoryWeight = player:GetInventoryWeight();
-
+		
 		if (inventoryWeight >= player:GetMaxWeight() / 4) then
 			player:ProgressAttribute(ATB_STRENGTH, inventoryWeight / 400, true);
 		end;
@@ -1002,33 +983,33 @@ function Schema:PlayerThink(player, curTime, infoTable)
 			end;
 		end;
 	end;
-
+	
 	if (Clockwork.player:HasAnyFlags(player, "vV")) then
 		if (infoTable.wages == 0) then
 			infoTable.wages = 20;
 		end;
 	end;
-
+	
 	if (self.scanners[player]) then
 		self:CalculateScannerThink(player, curTime);
 	end;
-
+	
 	local acrobatics = Clockwork.attributes:Fraction(player, ATB_ACROBATICS, 100, 50);
 	local strength = Clockwork.attributes:Fraction(player, ATB_STRENGTH, 8, 4);
 	local agility = Clockwork.attributes:Fraction(player, ATB_AGILITY, 50, 25);
-
+	
 	if (self:PlayerIsCombine(player)) then
 		infoTable.inventoryWeight = infoTable.inventoryWeight + 8;
 	end;
-
+	
 	if (clothes != "") then
 		local itemTable = Clockwork.item:FindByID(clothes);
-
+		
 		if (itemTable and itemTable.pocketSpace) then
 			infoTable.inventoryWeight = infoTable.inventoryWeight + itemTable.pocketSpace;
 		end;
 	end;
-
+	
 	infoTable.inventoryWeight = infoTable.inventoryWeight + strength;
 	infoTable.jumpPower = infoTable.jumpPower + acrobatics;
 	infoTable.runSpeed = infoTable.runSpeed + agility;
@@ -1040,12 +1021,12 @@ function Schema:EntityRemoved(entity)
 		if (entity.areBelongings and entity.cwInventory and entity.cash) then
 			if (table.Count(entity.inventory) > 0 or entity.cash > 0) then
 				local belongings = ents.Create("cw_belongings");
-
+				
 				belongings:SetAngles( Angle(0, 0, -90) );
 				belongings:SetData(entity.cwInventory, entity.cash);
 				belongings:SetPos( entity:GetPos() + Vector(0, 0, 32) );
 				belongings:Spawn();
-
+				
 				entity.cwInventory = nil;
 				entity.cash = nil;
 			end;
@@ -1079,9 +1060,9 @@ function Schema:PlayerRestoreData(player, data)
 	if (!data["serverwhitelist"]) then
 		data["serverwhitelist"] = {};
 	end;
-
+	
 	local serverWhitelistIdentity = Clockwork.config:Get("server_whitelist_identity"):Get();
-
+	
 	if (serverWhitelistIdentity != "") then
 		if (!data["serverwhitelist"][serverWhitelistIdentity]) then
 			player:Kick("You aren't whitelisted");
@@ -1095,7 +1076,7 @@ function Schema:PlayerDoesHaveFlag(player, flag)
 		if (flag == "x" or flag == "1") then
 			return false;
 		end;
-
+		
 		for k, v in pairs(self.customPermits) do
 			if (v.flag == flag) then
 				return false;
@@ -1132,7 +1113,7 @@ function Schema:PlayerCanUseCharacter(player, character)
 	elseif (character.faction == FACTION_MPF) then
 		if (self:IsStringCombineRank(character.name, "SCN")) then
 			local amount = 0;
-
+			
 			for k, v in ipairs( _player.GetAll() ) do
 				if (v:HasInitialized() and self:PlayerIsCombine(v)) then
 					if (self:IsPlayerCombineRank(v, "SCN")) then
@@ -1140,7 +1121,7 @@ function Schema:PlayerCanUseCharacter(player, character)
 					end;
 				end;
 			end;
-
+			
 			if (amount >= 3) then
 				return "There are too many scanners online!";
 			end;
@@ -1158,10 +1139,10 @@ function Schema:PlayerCanUseCommand(player, commandTable, arguments)
 			"Request",
 			"Radio"
 		};
-
+		
 		if (table.HasValue(blacklisted, commandTable.name)) then
 			Clockwork.player:Notify(player, "You cannot use this command when you are tied!");
-
+			
 			return false;
 		end;
 	end;
@@ -1201,37 +1182,37 @@ end;
 function Schema:PlayerCanChangeClass(player, class)
 	if (player:GetSharedVar("tied") != 0) then
 		Clockwork.player:Notify(player, "You cannot change classes when you are tied!");
-
+		
 		return false;
 	elseif (self:PlayerIsCombine(player)) then
 		if (class == CLASS_MPS and !self:IsPlayerCombineRank(player, "SCN")) then
 			Clockwork.player:Notify(player, "You are not ranked high enough for this class!");
-
+			
 			return false;
 		elseif (class == CLASS_MPR and !self:IsPlayerCombineRank(player, "RCT")) then
 			Clockwork.player:Notify(player, "You are not ranked high enough for this class!");
-
+			
 			return false;
 		elseif (class == CLASS_EMP and !self:IsPlayerCombineRank(player, "EpU")) then
 			Clockwork.player:Notify(player, "You are not ranked high enough for this class!");
-
+			
 			return false;
 		elseif (class == CLASS_OWS and !self:IsPlayerCombineRank(player, "OWS")) then
 			Clockwork.player:Notify(player, "You are not ranked high enough for this class!");
-
+			
 			return false;
 		elseif (class == CLASS_EOW and !self:IsPlayerCombineRank(player, "EOW")) then
 			Clockwork.player:Notify(player, "You are not ranked high enough for this class!");
-
+			
 			return false;
 		elseif (class == CLASS_MPU) then
 			if (self:IsPlayerCombineRank(player, "EpU")) then
 				Clockwork.player:Notify(player, "You are ranked too high for this class!");
-
+				
 				return false;
 			elseif (self:IsPlayerCombineRank(player, "RCT")) then
 				Clockwork.player:Notify(player, "You are not ranked high enough for this class!");
-
+				
 				return false;
 			end;
 		end;
@@ -1243,7 +1224,7 @@ function Schema:PlayerUse(player, entity)
 	local overlayText = entity:GetNetworkedString("GModOverlayText");
 	local curTime = CurTime();
 	local faction = player:GetFaction();
-
+	
 	if (string.find(overlayText, "CA")) then
 		if (faction != FACTION_ADMIN) then
 			return false;
@@ -1263,40 +1244,40 @@ function Schema:PlayerUse(player, entity)
 			end;
 		end;
 	end;
-
+	
 	if (self.scanners[player]) then
 		return false;
 	end;
-
+	
 	if (entity.bustedDown) then
 		return false;
 	end;
-
+	
 	if (player:KeyDown(IN_SPEED) and Clockwork.entity:IsDoor(entity)) then
 		if ((self:PlayerIsCombine(player) or player:GetFaction() == FACTION_ADMIN) and IsValid(entity.combineLock)) then
 			if (!player.nextCombineLock or curTime >= player.nextCombineLock) then
 				entity.combineLock:ToggleWithChecks(player);
-
+				
 				player.nextCombineLock = curTime + 3;
 			end;
-
+			
 			return false;
 		end;
 	end;
-
+	
 	if (player:GetSharedVar("tied") != 0) then
 		if (entity:IsVehicle()) then
 			if (Clockwork.entity:IsChairEntity(entity) or Clockwork.entity:IsPodEntity(entity)) then
 				return;
 			end;
 		end;
-
+		
 		if (!player.nextTieNotify or player.nextTieNotify < CurTime()) then
 			Clockwork.player:Notify(player, "You cannot use that when you are tied!");
-
+			
 			player.nextTieNotify = CurTime() + 2;
 		end;
-
+		
 		return false;
 	end;
 end;
@@ -1307,13 +1288,13 @@ function Schema:PlayerCanDestroyItem(player, itemTable, noMessage)
 		if (!noMessage) then
 			Clockwork.player:Notify(player, "You cannot destroy items when you are a scanner!");
 		end;
-
+		
 		return false;
 	elseif (player:GetSharedVar("tied") != 0) then
 		if (!noMessage) then
 			Clockwork.player:Notify(player, "You cannot destroy items when you are tied!");
 		end;
-
+		
 		return false;
 	end;
 end;
@@ -1324,13 +1305,13 @@ function Schema:PlayerCanDropItem(player, itemTable, noMessage)
 		if (!noMessage) then
 			Clockwork.player:Notify(player, "You cannot drop items when you are a scanner!");
 		end;
-
+		
 		return false;
 	elseif (player:GetSharedVar("tied") != 0) then
 		if (!noMessage) then
 			Clockwork.player:Notify(player, "You cannot drop items when you are tied!");
 		end;
-
+		
 		return false;
 	end;
 end;
@@ -1341,25 +1322,25 @@ function Schema:PlayerCanUseItem(player, itemTable, noMessage)
 		if (!noMessage) then
 			Clockwork.player:Notify(player, "You cannot use items when you are a scanner!");
 		end;
-
+		
 		return false;
 	elseif (player:GetSharedVar("tied") != 0) then
 		if (!noMessage) then
 			Clockwork.player:Notify(player, "You cannot use items when you are tied!");
 		end;
-
+		
 		return false;
 	end;
-
+	
 	if (Clockwork.item:IsWeapon(itemTable) and !itemTable:IsFakeWeapon()) then
 		local secondaryWeapon;
 		local primaryWeapon;
 		local sideWeapon;
 		local fault;
-
+		
 		for k, v in ipairs( player:GetWeapons() ) do
 			local weaponTable = Clockwork.item:GetByWeapon(v);
-
+			
 			if (weaponTable and !weaponTable:IsFakeWeapon()) then
 				if (weaponTable("weight") >= 1) then
 					if (weaponTable("weight") <= 2) then
@@ -1372,7 +1353,7 @@ function Schema:PlayerCanUseItem(player, itemTable, noMessage)
 				end;
 			end;
 		end;
-
+		
 		if (itemTable("weight") >= 1) then
 			if (itemTable("weight") <= 2) then
 				if (secondaryWeapon) then
@@ -1384,12 +1365,12 @@ function Schema:PlayerCanUseItem(player, itemTable, noMessage)
 		elseif (sideWeapon) then
 			fault = "You cannot use another melee weapon!";
 		end;
-
+		
 		if (fault) then
 			if (!noMessage) then
 				Clockwork.player:Notify(player, fault);
 			end;
-
+			
 			return false;
 		end;
 	end;
@@ -1406,7 +1387,7 @@ end;
 function Schema:PlayerPlayDeathSound(player, gender)
 	if (self:PlayerIsCombine(player)) then
 		local sound = "npc/metropolice/die"..math.random(1, 4)..".wav";
-
+		
 		for k, v in ipairs( _player.GetAll() ) do
 			if (v:HasInitialized()) then
 				if (self:PlayerIsCombine(v)) then
@@ -1414,7 +1395,7 @@ function Schema:PlayerPlayDeathSound(player, gender)
 				end;
 			end;
 		end;
-
+		
 		return sound;
 	end;
 end;
@@ -1435,11 +1416,11 @@ function Schema:ChatBoxAdjustInfo(info)
 			end;
 		end;
 	end;
-
+	
 	if (info.class == "ic" or info.class == "yell" or info.class == "radio" or info.class == "whisper" or info.class == "request") then
 		if (IsValid(info.speaker) and info.speaker:HasInitialized()) then
 			local playerIsCombine = self:PlayerIsCombine(info.speaker);
-
+			
 			if (playerIsCombine and self:IsPlayerCombineRank(info.speaker, "SCN")) then
 				for k, v in pairs(self.voices.stored.dispatchVoices) do
 					if (string.lower(info.text) == string.lower(v.command)) then
@@ -1448,7 +1429,7 @@ function Schema:ChatBoxAdjustInfo(info)
 							volume = 90,
 							sound = v.sound
 						};
-
+						
 						if (info.class == "request" or info.class == "radio") then
 							voice.global = true;
 						elseif (info.class == "whisper") then
@@ -1456,10 +1437,10 @@ function Schema:ChatBoxAdjustInfo(info)
 						elseif (info.class == "yell") then
 							voice.volume = 100;
 						end;
-
+						
 						info.text = "<:: "..v.phrase;
 						info.voice = voice;
-
+						
 						return true;
 					end;
 				end;
@@ -1472,11 +1453,11 @@ function Schema:ChatBoxAdjustInfo(info)
 								volume = 80,
 								sound = v.sound
 							};
-
+							
 							if (v.female and info.speaker:QueryCharacter("gender") == GENDER_FEMALE) then
 								voice.sound = string.Replace(voice.sound, "/male", "/female");
 							end;
-
+							
 							if (info.class == "request" or info.class == "radio") then
 								voice.global = true;
 							elseif (info.class == "whisper") then
@@ -1484,21 +1465,21 @@ function Schema:ChatBoxAdjustInfo(info)
 							elseif (info.class == "yell") then
 								voice.volume = 100;
 							end;
-
+							
 							if (playerIsCombine) then
 								info.text = "<:: "..v.phrase;
 							else
 								info.text = v.phrase;
 							end;
-
+							
 							info.voice = voice;
-
+							
 							return true;
 						end;
 					end;
 				end;
 			end;
-
+			
 			if (playerIsCombine) then
 				if (string.sub(info.text, 1, 4) != "<:: ") then
 					info.text = "<:: "..info.text;
@@ -1509,9 +1490,9 @@ function Schema:ChatBoxAdjustInfo(info)
 		for k, v in pairs(self.voices.stored.dispatchVoices) do
 			if (string.lower(info.text) == string.lower(v.command)) then
 				Clockwork.player:PlaySound(nil, v.sound);
-
+				
 				info.text = v.phrase;
-
+				
 				return true;
 			end;
 		end;
@@ -1522,7 +1503,7 @@ end;
 function Schema:PlayerDestroyGenerator(player, entity, generator)
 	if (self:PlayerIsCombine(player)) then
 		local players = {};
-
+		
 		for k, v in ipairs( _player.GetAll() ) do
 			if (v:HasInitialized()) then
 				if (self:PlayerIsCombine(v)) then
@@ -1530,7 +1511,7 @@ function Schema:PlayerDestroyGenerator(player, entity, generator)
 				end;
 			end;
 		end;
-
+		
 		for k, v in pairs(players) do
 			Clockwork.player:GiveCash( v, generator.cash / 4, "destroying a "..string.lower(generator.name) );
 		end;
@@ -1542,15 +1523,15 @@ end;
 -- Called just before a player dies.
 function Schema:DoPlayerDeath(player, attacker, damageInfo)
 	local clothes = player:GetCharacterData("clothes");
-
+	
 	if (clothes) then
 		player:GiveItem(Clockwork.item:CreateInstance(clothes));
 		player:SetCharacterData("clothes", nil);
 	end;
-
+	
 	player.beingSearched = nil;
 	player.searching = nil;
-
+	
 	self:TiePlayer(player, false, true);
 end;
 
@@ -1558,10 +1539,10 @@ end;
 function Schema:PlayerDeath(player, inflictor, attacker, damageInfo)
 	if (self:PlayerIsCombine(player)) then
 		local location = self:PlayerGetLocation(player);
-
+		
 		self:AddCombineDisplayLine("Downloading lost biosignal...", Color(255, 255, 255, 255), nil, player);
 		self:AddCombineDisplayLine("WARNING! Biosignal lost for protection team unit at "..location.."...", Color(255, 0, 0, 255), nil, player);
-
+		
 		if (self.scanners[player]) then
 			if (IsValid( self.scanners[player][1] )) then
 				if (damageInfo != true) then
@@ -1569,14 +1550,14 @@ function Schema:PlayerDeath(player, inflictor, attacker, damageInfo)
 				end;
 			end;
 		end;
-
+		
 		for k, v in ipairs( _player.GetAll() ) do
 			if (self:PlayerIsCombine(v)) then
 				v:EmitSound("npc/overwatch/radiovoice/on1.wav");
 				v:EmitSound("npc/overwatch/radiovoice/lostbiosignalforunit.wav");
 			end;
 		end;
-
+		
 		timer.Simple(1.5, function()
 			for k, v in ipairs( _player.GetAll() ) do
 				if (self:PlayerIsCombine(v)) then
@@ -1585,12 +1566,12 @@ function Schema:PlayerDeath(player, inflictor, attacker, damageInfo)
 			end;
 		end);
 	end;
-
+	
 	if (!player:GetCharacterData("permakilled")) then
 		if (( attacker:IsPlayer() or attacker:IsNPC() ) and damageInfo) then
 			local miscellaneousDamage = damageInfo:IsBulletDamage() or damageInfo:IsFallDamage() or damageInfo:IsExplosionDamage();
 			local meleeDamage = damageInfo:IsDamageType(DMG_CLUB) or damageInfo:IsDamageType(DMG_SLASH);
-
+			
 			if (miscellaneousDamage or meleeDamage) then
 				if (Clockwork.kernel:GetSharedVar("PKMode") == 1) then
 					self:PermaKillPlayer(player, player:GetRagdollEntity());
@@ -1609,37 +1590,49 @@ end;
 -- Called just after a player spawns.
 function Schema:PostPlayerSpawn(player, lightSpawn, changeClass, firstSpawn)
 	local clothes = player:GetCharacterData("clothes");
-
+	
 	if (!lightSpawn) then
 		player:SetSharedVar("antidepressants", 0);
-
+		
 		Clockwork.datastream:Start(player, "ClearEffects", true);
-
+		
 		player.beingSearched = nil;
 		player.searching = nil;
-
+		
 		if (self:PlayerIsCombine(player) or player:GetFaction() == FACTION_ADMIN) then
-			if (player:GetFaction() == FACTION_MILITARY) then
+			if (player:GetFaction() == FACTION_OTA) then
 				player:SetMaxHealth(150);
 				player:SetMaxArmor(150);
 				player:SetHealth(150);
 				player:SetArmor(150);
+			elseif (!self:IsPlayerCombineRank(player, "RCT")) then
+				player:SetArmor(100);
+			else
+				player:SetArmor(50);
 			end;
 		end;
-
+		
+		if (self:PlayerIsCombine(player) and player:GetAmmoCount("pistol") == 0) then
+			if (!player:HasItemByID("ammo_pistol")) then
+				player:GiveItem(Clockwork.item:CreateInstance("ammo_pistol"), true);
+				player:GiveItem(Clockwork.item:CreateInstance("ammo_pistol"), true);
+			end;
+		end;
+	end;
+	
 	if (self:IsPlayerCombineRank(player, "SCN")) then
 		self:MakePlayerScanner(player, true, lightSpawn);
 	else
 		self:ResetPlayerScanner(player);
 	end;
-
+	
 	if (player:GetSharedVar("tied") != 0) then
 		self:TiePlayer(player, true);
 	end;
-
+	
 	if (clothes) then
 		local itemTable = Clockwork.item:FindByID(clothes);
-
+		
 		if (itemTable and player:HasItemByID(itemTable.uniqueID)) then
 			self:PlayerWearClothes(player, itemTable);
 		else
@@ -1651,10 +1644,10 @@ end;
 -- Called when a player spawns lightly.
 function Schema:PostPlayerLightSpawn(player, weapons, ammo, special)
 	local clothes = player:GetCharacterData("clothes");
-
+	
 	if (clothes) then
 		local itemTable = Clockwork.item:FindByID(clothes);
-
+		
 		if (itemTable) then
 			itemTable:OnChangeClothes(player, true);
 		end;
@@ -1699,7 +1692,7 @@ end;
 -- Called when a player takes damage.
 function Schema:PlayerTakeDamage(player, inflictor, attacker, hitGroup, damageInfo)
 	local curTime = CurTime();
-
+	
 	if (player:Armor() <= 0) then
 		Clockwork.datastream:Start(player, "Stunned", 0.5);
 	else
@@ -1730,7 +1723,7 @@ end;
 -- Called when a player's limb takes damage.
 function Schema:PlayerLimbTakeDamage(player, hitGroup, damage)
 	local limbDamage = Clockwork.limb:GetDamage(player, hitGroup);
-
+	
 	if (hitGroup == HITGROUP_HEAD) then
 		player:BoostAttribute("Limb Damage", ATB_MEDICAL, -limbDamage);
 	elseif (hitGroup == HITGROUP_CHEST or hitGroup == HITGROUP_STOMACH) then
@@ -1748,13 +1741,13 @@ end;
 function Schema:PlayerScaleDamageByHitGroup(player, attacker, hitGroup, damageInfo, baseDamage)
 	local endurance = Clockwork.attributes:Fraction(player, ATB_ENDURANCE, 0.75, 0.75);
 	local clothes = player:GetCharacterData("clothes");
-
+	
 	damageInfo:ScaleDamage(1.5 - endurance);
-
+	
 	if (damageInfo:IsBulletDamage()) then
 		if (clothes and damageInfo:IsBulletDamage()) then
 			local itemTable = Clockwork.item:FindByID(clothes);
-
+			
 			if (itemTable and itemTable.protection) then
 				damageInfo:ScaleDamage(1 - itemTable.protection);
 			end;
@@ -1770,52 +1763,52 @@ function Schema:EntityTakeDamage(entity, damageInfo)
 	local damage = damageInfo:GetDamage();
 	local curTime = CurTime();
 	local doDoorDamage = nil;
-
+	
 	if (player) then
 		if (!player.nextEnduranceTime or CurTime() > player.nextEnduranceTime) then
 			player:ProgressAttribute(ATB_ENDURANCE, math.Clamp(damageInfo:GetDamage(), 0, 75) / 10, true);
 			player.nextEnduranceTime = CurTime() + 2;
 		end;
-
+		
 		if (self.scanners[player]) then
 			entity:EmitSound("npc/scanner/scanner_pain"..math.random(1, 2)..".wav");
-
+			
 			if (entity:Health() > 50 and entity:Health() - damageInfo:GetDamage() <= 50) then
 				entity:EmitSound("npc/scanner/scanner_siren1.wav");
 			elseif (entity:Health() > 25 and entity:Health() - damageInfo:GetDamage() <= 25) then
 				entity:EmitSound("npc/scanner/scanner_siren2.wav");
 			end;
 		end;
-
+		
 		if (attacker:IsPlayer() and self:PlayerIsCombine(player)) then
 			if (attacker != player) then
 				local location = Schema:PlayerGetLocation(player);
-
+				
 				if (!player.nextUnderFire or curTime >= player.nextUnderFire) then
 					player.nextUnderFire = curTime + 15;
-
+					
 					Schema:AddCombineDisplayLine("Downloading trauma packet...", Color(255, 255, 255, 255), nil, player);
 					Schema:AddCombineDisplayLine("WARNING! Protection team unit enduring physical bodily trauma at "..location.."...", Color(255, 0, 0, 255), nil, player);
 				end;
 			end;
 		end;
 	end;
-
+	
 	if (attacker:IsPlayer()) then
 		local strength = Clockwork.attributes:Fraction(attacker, ATB_STRENGTH, 1, 0.5);
 		local weapon = Clockwork.player:GetWeaponClass(attacker);
-
+		
 		if (damageInfo:IsDamageType(DMG_CLUB) or damageInfo:IsDamageType(DMG_SLASH)) then
 			damageInfo:ScaleDamage(1 + strength);
 		end;
-
+		
 		if (weapon == "weapon_357") then
 			damageInfo:ScaleDamage(0.25);
 		elseif (weapon == "weapon_crossbow") then
 			damageInfo:ScaleDamage(2);
 		elseif (weapon == "weapon_shotgun") then
 			damageInfo:ScaleDamage(3);
-
+			
 			doDoorDamage = true;
 		elseif (weapon == "weapon_crowbar") then
 			damageInfo:ScaleDamage(0.25);
@@ -1826,27 +1819,27 @@ function Schema:EntityTakeDamage(entity, damageInfo)
 				end;
 			end;
 		end;
-
+		
 		if (damageInfo:IsBulletDamage() and weapon != "weapon_shotgun") then
 			if (!IsValid(entity.combineLock) and !IsValid(entity.breach)) then
 				if (string.lower( entity:GetClass() ) == "prop_door_rotating") then
 					if (!Clockwork.entity:IsDoorFalse(entity)) then
 						local damagePosition = damageInfo:GetDamagePosition();
-
+						
 						if (entity:WorldToLocal(damagePosition):Distance( Vector(-1.0313, 41.8047, -8.1611) ) <= 8) then
 							entity.doorHealth = math.min( (entity.doorHealth or 50) - damageInfo:GetDamage(), 0 );
-
+							
 							local effectData = EffectData();
-
+							
 							effectData:SetStart(damagePosition);
 							effectData:SetOrigin(damagePosition);
 							effectData:SetScale(8);
-
+							
 							util.Effect("GlassImpact", effectData, true, true);
-
+							
 							if (entity.doorHealth <= 0) then
 								Clockwork.entity:OpenDoor( entity, 0, true, true, attacker:GetPos() );
-
+								
 								entity.doorHealth = 50;
 							else
 								Clockwork.kernel:CreateTimer("reset_door_health_"..entity:EntIndex(), 60, 1, function()
@@ -1860,33 +1853,33 @@ function Schema:EntityTakeDamage(entity, damageInfo)
 				end;
 			end;
 		end;
-
+		
 		if (damageInfo:IsExplosionDamage()) then
 			damageInfo:ScaleDamage(2);
 		end;
 	elseif (attacker:IsNPC()) then
 		damageInfo:ScaleDamage(0.5);
 	end;
-
+	
 	if (damageInfo:IsExplosionDamage() or doDoorDamage) then
 		if (!IsValid(entity.combineLock) and !IsValid(entity.breach)) then
 			if (string.lower( entity:GetClass() ) == "prop_door_rotating") then
 				if (!Clockwork.entity:IsDoorFalse(entity)) then
 					if (attacker:GetPos():Distance( entity:GetPos() ) <= 96) then
 						entity.doorHealth = math.min( (entity.doorHealth or 50) - damageInfo:GetDamage(), 0 );
-
+						
 						local damagePosition = damageInfo:GetDamagePosition();
 						local effectData = EffectData();
-
+						
 						effectData:SetStart(damagePosition);
 						effectData:SetOrigin(damagePosition);
 						effectData:SetScale(8);
-
+						
 						util.Effect("GlassImpact", effectData, true, true);
-
+						
 						if (entity.doorHealth <= 0) then
 							self:BustDownDoor(attacker, entity);
-
+							
 							entity.doorHealth = 50;
 						else
 							Clockwork.kernel:CreateTimer("reset_door_health_"..entity:EntIndex(), 60, 1, function()
