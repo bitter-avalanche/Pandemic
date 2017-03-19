@@ -235,9 +235,9 @@ function Schema:GetPlayerDefaultInventory(player, character, inventory)
 				inventory, Clockwork.item:CreateInstance("ammo_pistol")
 			);
 		end;
- 
-	end
-	
+	end;
+end;
+
 	elseif (character.faction == FACTION_OTA) then
 		Clockwork.inventory:AddInstance(
 			inventory, Clockwork.item:CreateInstance("handheld_radio")
