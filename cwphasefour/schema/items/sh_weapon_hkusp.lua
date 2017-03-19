@@ -20,21 +20,3 @@ local ITEM = Clockwork.item:New("weapon_base");
 	ITEM.attachmentBone = "ValveBiped.Bip01_Pelvis";
 	ITEM.attachmentOffsetAngles = Angle(0, 0, 180);
 	ITEM.attachmentOffsetVector = Vector(0, 0, -8);
-BLUEPRINT.itemRequirements = {
-    {"part_uspsight", 1},
-    {"part_uspslide", 1},
-    {"part_uspcasing", 1},
-    {"junk_screws", 4},
-    {"junk_screwdriver", 1}
-};
-
-BLUEPRINT.takeItems = {
-    {"part_uspsight", 1},
-    {"part_uspslide", 1},
-    {"part_uspcasing", 1}
-};
-
-BLUEPRINT.giveItems = {
-    {"m9k_usp", 1}
-};
-ITEM:Register();
