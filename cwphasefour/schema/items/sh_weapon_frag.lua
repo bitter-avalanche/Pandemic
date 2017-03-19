@@ -9,7 +9,6 @@ local ITEM = Clockwork.item:New("grenade_base");
 	ITEM.model = "models/weapons/w_eq_fraggrenade_dropped.mdl";
 	ITEM.weight = 0.8;
 	ITEM.access = "V";
-	ITEM.classes = {CLASS_EOW};
 	ITEM.uniqueID = "m9k_m61_frag";
 	ITEM.business = true;
 	ITEM.description = "A slightly dusty black grenade. A pin is secured in it, requiring you to pull it out before it blows up.";

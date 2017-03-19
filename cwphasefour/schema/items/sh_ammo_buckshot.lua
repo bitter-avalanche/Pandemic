@@ -6,7 +6,6 @@
 local ITEM = Clockwork.item:New("ammo_base");
 	ITEM.name = "Shotgun Shells";
 	ITEM.cost = 30;
-	ITEM.classes = {CLASS_EOW};
 	ITEM.model = "models/items/boxbuckshot.mdl";
 	ITEM.weight = 1;
 	ITEM.uniqueID = "m9k_ammo_buckshot";
