@@ -3,7 +3,7 @@
 	without permission of its author (kurozael@gmail.com).
 --]]
 
-local FACTION = Clockwork.faction:New("Govcrnment Official");
+local FACTION = Clockwork.faction:New("Government Official");
 
 FACTION.useFullName = true;
 FACTION.whitelist = true;
