@@ -219,6 +219,11 @@ end;
 -- Called when a player's default inventory is needed.
 function Schema:GetPlayerDefaultInventory(player, character, inventory)
 	if (character.faction == FACTION_MILITARY) then
+	if (character.faction == FACTION_ADMIN) then
+		Clockwork.inventory:AddInstance(
+			inventory, Clockwork.item:CreateInstance("handheld_radio")
+		);
+	elseif (character.faction == FACTION_MPF) then
 		Clockwork.inventory:AddInstance(
 			inventory, Clockwork.item:CreateInstance("handheld_radio")
 		);
@@ -233,6 +238,24 @@ function Schema:GetPlayerDefaultInventory(player, character, inventory)
 		Clockwork.inventory:AddInstance(
 			inventory, Clockwork.item:CreateInstance("handheld_radio")
 		);
+		end;
+	elseif (character.faction == FACTION_OTA) then
+		Clockwork.inventory:AddInstance(
+			inventory, Clockwork.item:CreateInstance("handheld_radio")
+		);
+		Clockwork.inventory:AddInstance(
+			inventory, Clockwork.item:CreateInstance("weapon_pistol")
+		);
+		Clockwork.inventory:AddInstance(
+			inventory, Clockwork.item:CreateInstance("ammo_pistol")
+		);
+		Clockwork.inventory:AddInstance(
+			inventory, Clockwork.item:CreateInstance("weapon_ar2")
+		);
+		Clockwork.inventory:AddInstance(
+			inventory, Clockwork.item:CreateInstance("ammo_ar2")
+		);
+	elseif (character.faction == FACTION_GOVT) then
 		for i = 1, 2 do
 			Clockwork.inventory:AddInstance(
 				inventory, Clockwork.item:CreateInstance("med_rags")
