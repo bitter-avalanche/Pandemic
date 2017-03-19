@@ -222,7 +222,6 @@ function Schema:GetPlayerDefaultInventory(player, character, inventory)
 		Clockwork.inventory:AddInstance(
 			inventory, Clockwork.item:CreateInstance("handheld_radio")
 		);
-	end
 	elseif (character.faction == FACTION_MPF) then
 		Clockwork.inventory:AddInstance(
 			inventory, Clockwork.item:CreateInstance("handheld_radio")
