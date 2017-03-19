@@ -6,7 +6,6 @@
 local ITEM = Clockwork.item:New("weapon_base");
 	ITEM.name = "KRISS Vector";
 	ITEM.cost = 800;
-	ITEM.classes = {CLASS_EMP, CLASS_EOW};
 	ITEM.model = "models/weapons/w_kriss_vector.mdl";
 	ITEM.weight = 4;
 	ITEM.business = true;
