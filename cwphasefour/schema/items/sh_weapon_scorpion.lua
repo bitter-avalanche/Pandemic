@@ -6,7 +6,6 @@
 local ITEM = Clockwork.item:New("weapon_base");
 	ITEM.name = "Scorpion";
 	ITEM.cost = 1000;
-	ITEM.classes = {CLASS_EMP, CLASS_EOW};
 	ITEM.model = "models/weapons/w_aac_honeybadger.mdl";
 	ITEM.weight = 5;
 	ITEM.business = true;

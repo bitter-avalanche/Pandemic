@@ -6,7 +6,6 @@
 local ITEM = Clockwork.item:New("weapon_base");
 	ITEM.name = "M92 Beretta";
 	ITEM.cost = 200;
-	ITEM.classes = {CLASS_EMP, CLASS_EOW};
 	ITEM.model = "models/weapons/w_beretta_m92.mdl";
 	ITEM.weight = 1;
 	ITEM.access = "f";

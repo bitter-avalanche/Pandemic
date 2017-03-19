@@ -9,7 +9,6 @@ local ITEM = Clockwork.item:New("weapon_base");
 	ITEM.model = "models/weapons/w_model_3_rus.mdl";
 	ITEM.weight = 2;
 	ITEM.access = "f";
-	ITEM.classes = {CLASS_EOW};
 	ITEM.uniqueID = "m9k_model3russian";
 	ITEM.business = true;
 	ITEM.description = "An S&W revolver produced between 1870-1915. It has a red plated grip.";

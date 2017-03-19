@@ -6,7 +6,6 @@
 local ITEM = Clockwork.item:New("weapon_base");
 	ITEM.name = "M14";
 	ITEM.cost = 1200;
-	ITEM.classes = {CLASS_EMP, CLASS_EOW};
 	ITEM.model = "models/weapons/w_snip_m14sp.mdl";
 	ITEM.weight = 4;
 	ITEM.access = "F";

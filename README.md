@@ -22,6 +22,8 @@ You can also help us by donating to the community, which would be used for the s
 
 [Zeus](http://steamcommunity.com/profiles/76561198095977098/) - Developer
 
+[WrongEnd](http://steamcommunity.com/profiles/76561198035603113) - Developer
+
 [Alucard](http://steamcommunity.com/profiles/76561198037209287/) - Developer
 
 [Gr4sS](http://steamcommunity.com/profiles/76561197997384060/) - Freelance Developer and Code Consultant

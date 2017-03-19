@@ -6,7 +6,6 @@
 local ITEM = Clockwork.item:New("weapon_base");
 	ITEM.name = "P08 Luger";
 	ITEM.cost = 175;
-	ITEM.classes = {CLASS_EMP, CLASS_EOW};
 	ITEM.model = "models/weapons/w_luger_p08.mdl";
 	ITEM.weight = 1;
 	ITEM.access = "f";

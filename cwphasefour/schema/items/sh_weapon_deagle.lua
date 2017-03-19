@@ -6,7 +6,6 @@
 local ITEM = Clockwork.item:New("weapon_base");
 	ITEM.name = "Desert Eagle";
 	ITEM.cost = 400;
-	ITEM.classes = {CLASS_EMP, CLASS_EOW};
 	ITEM.model = "models/weapons/w_tcom_deagle.mdl";
 	ITEM.weight = 1.5;
 	ITEM.access = "f";
