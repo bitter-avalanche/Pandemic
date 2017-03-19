@@ -6,7 +6,6 @@
 local ITEM = Clockwork.item:New("weapon_base");
 	ITEM.name = "UMP45";
 	ITEM.cost = 925;
-	ITEM.classes = {CLASS_EMP, CLASS_EOW};
 	ITEM.model = "models/weapons/w_hk_ump45.mdl";
 	ITEM.weight = 4;
 	ITEM.business = true;

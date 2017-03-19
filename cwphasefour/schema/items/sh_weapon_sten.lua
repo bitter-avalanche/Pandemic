@@ -6,7 +6,6 @@
 local ITEM = Clockwork.item:New("weapon_base");
 	ITEM.name = "STEN";
 	ITEM.cost = 900;
-	ITEM.classes = {CLASS_EMP, CLASS_EOW};
 	ITEM.model = "models/weapons/w_sten.mdl";
 	ITEM.weight = 3;
 	ITEM.business = true;

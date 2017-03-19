@@ -8,7 +8,6 @@ ITEM.name = "Combine Lock";
 ITEM.cost = 40;
 ITEM.model = "models/props_combine/combine_lock01.mdl";
 ITEM.weight = 4;
-ITEM.classes = {CLASS_EMP, CLASS_EOW};
 ITEM.useText = "Place";
 ITEM.business = true;
 ITEM.description = "A Combine device to effectively lock a door.";

@@ -6,7 +6,6 @@
 local ITEM = Clockwork.item:New("weapon_base");
 	ITEM.name = "Tec9";
 	ITEM.cost = 800;
-	ITEM.classes = {CLASS_EMP, CLASS_EOW};
 	ITEM.model = "models/weapons/w_intratec_tec9.mdl";
 	ITEM.weight = 3;
 	ITEM.business = true;

@@ -6,7 +6,6 @@
 local ITEM = Clockwork.item:New("weapon_base");
 	ITEM.name = "Colt 1911";
 	ITEM.cost = 350;
-	ITEM.classes = {CLASS_EMP, CLASS_EOW};
 	ITEM.model = "models/weapons/s_dmgf_co1911.mdl";
 	ITEM.weight = 1;
 	ITEM.access = "f";
