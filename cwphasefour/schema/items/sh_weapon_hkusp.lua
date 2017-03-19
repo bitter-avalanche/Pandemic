@@ -19,6 +19,6 @@ local ITEM = Clockwork.item:New("weapon_base");
 	ITEM.attachmentBone = "ValveBiped.Bip01_Pelvis";
 	ITEM.attachmentOffsetAngles = Angle(0, 0, 180);
 	ITEM.attachmentOffsetVector = Vector(0, 0, -8);
-	ITEM:AddRecipe("junk_screws", 4, "part_uspsight", 1, "part_uspcasing", 1, "part_uspslide", 1, "junk_screwdriver", 1);
+	ITEM:AddRecipe("junk_screws", 4, "part_pistolsight", 1, "part_pistolcasing", 1, "part_pistolslide", 1, "junk_screwdriver", 1);
 	
 ITEM:Register();
