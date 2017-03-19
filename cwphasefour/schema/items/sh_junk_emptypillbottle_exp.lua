@@ -16,6 +16,7 @@ ITEM.business = true;
 ITEM.category = "Junk";
 ITEM.description = "This used to contain pills at some time... Upon checking the expiration date, you feel sorry for the person who ingested them...";
 ITEM.spawnType = "junk";
+ITEM.spawnValue = 45;
 
 -- Called when a player drops the item.
 function ITEM:OnDrop(player, position) end;

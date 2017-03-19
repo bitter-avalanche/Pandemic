@@ -28,6 +28,7 @@ end;
 -- Called when a player drops the item.
 function ITEM:OnDrop(player, position) end;
 
+-- Requires fixing
 if (SERVER) then
 	function ITEM:OnCustomFunction(player, name)
 		if (name == "Give") then
