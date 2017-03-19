@@ -9,8 +9,24 @@ FACTION.useFullName = true;
 FACTION.whitelist = true;
 FACTION.material = "pandemicrp/factions/military";
 FACTION.models = {
-	female = {"models/player/sanic/marinew.mdl"},
-	male = {"models/player/sanic/marinew.mdl"}
+	female = {"models/models/army/female_01.mdl",
+	"models/models/army/female_02.mdl",
+	"models/models/army/female_03.mdl",
+	"models/models/army/female_04.mdl",
+	"models/models/army/female_05.mdl",
+	"models/models/army/female_06.mdl",
+	"models/models/army/female_07.mdl"
+	},
+	male = {"models/wichacks/artnovest.mdl"
+	"models/wichacks/erdimnovest.mdl",
+	"models/wichacks/ericnovest.mdl",
+	"models/wichacks/joenovest.mdl",
+	"models/wichacks/mikenovest.mdl",
+	"models/wichacks/sandronovest.mdl",
+	"models/wichacks/tednovest.mdl",
+	"models/wichacks/vannovest.mdl",
+	"models/wichacks/vancenovest.mdl",
+	};
 };
 
 -- Called when a player is transferred to the faction.

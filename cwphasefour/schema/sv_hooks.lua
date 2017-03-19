@@ -236,21 +236,17 @@ function Schema:GetPlayerDefaultInventory(player, character, inventory)
 			);
 		end;
 	elseif (character.faction == FACTION_GOVT) then
-		Clockwork.inventory:AddInstance(
-			inventory, Clockwork.item:CreateInstance("handheld_radio")
-		);
 		for i = 1, 2 do
 			Clockwork.inventory:AddInstance(
 				inventory, Clockwork.item:CreateInstance("med_rags")
 			);
 		end;
 	else
-		Clockwork.inventory:AddInstance(
-			inventory, Clockwork.item:CreateInstance("med_rags")
-		);
-		Clockwork.inventory:AddInstance(
-			inventory, Clockwork.item:CreateInstance("med_rags")
-		);
+		for i = 1, 2 do
+			Clockwork.inventory:AddInstance(
+				inventory, Clockwork.item:CreateInstance("med_rags")
+			);
+		end;
 	end;
 end;
 

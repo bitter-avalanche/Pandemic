@@ -6,7 +6,6 @@
 local ITEM = Clockwork.item:New("weapon_base");
 	ITEM.name = "HK USP";
 	ITEM.cost = 300;
-	ITEM.classes = {CLASS_EMP, CLASS_EOW};
 	ITEM.model = "models/weapons/w_pist_fokkususp.mdl";
 	ITEM.weight = 1;
 	ITEM.access = "f";
