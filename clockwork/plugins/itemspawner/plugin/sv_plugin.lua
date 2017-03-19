@@ -21,6 +21,7 @@ PLUGIN.typeValues = {
 	["gunparts"] = 12,
 	["consumable"] = 40,
 	["medical"] = 15,
+	["melee"] = 10,
 	["junk"] = 50
 };
 

@@ -19,6 +19,7 @@ local ITEM = Clockwork.item:New("custom_weapon");
 	ITEM.attachmentBone = "ValveBiped.Bip01_Spine";
 	ITEM.attachmentOffsetAngles = Angle(90, 180, 20);
 	ITEM.attachmentOffsetVector = Vector(0, 6, 0);
+	ITEM.spawnType = "melee";
 	ITEM.spawnValue = 3;
 	ITEM.isRareSpawn = true;
 ITEM:Register();
