@@ -9,7 +9,6 @@ local ITEM = Clockwork.item:New("weapon_base");
 	ITEM.model = "models/weapons/w_ak47_m9k.mdl";
 	ITEM.weight = 3;
 	ITEM.access = "d";
-	ITEM.classes = {CLASS_EMP, CLASS_EOW};
 	ITEM.business = true;
 	ITEM.uniqueID = "m9k_ak47";
 	ITEM.description = "An assault rifle with a wooden barrel.";

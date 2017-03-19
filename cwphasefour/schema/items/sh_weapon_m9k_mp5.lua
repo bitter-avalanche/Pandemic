@@ -6,7 +6,6 @@
 local ITEM = Clockwork.item:New("weapon_base");
 	ITEM.name = "MP5";
 	ITEM.cost = 750;
-	ITEM.classes = {CLASS_EMP, CLASS_EOW};
 	ITEM.model = "models/weapons/w_hk_mp5.mdl";
 	ITEM.weight = 3;
 	ITEM.business = true;

@@ -6,7 +6,6 @@
 local ITEM = Clockwork.item:New();
 ITEM.name = "Handheld Radio";
 ITEM.cost = 20;
-ITEM.classes = {CLASS_EMP, CLASS_EOW};
 ITEM.model = "models/deadbodies/dead_male_civilian_radio.mdl";
 ITEM.weight = 1;
 ITEM.access = "v";

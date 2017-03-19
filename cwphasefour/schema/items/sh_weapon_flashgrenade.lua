@@ -6,7 +6,6 @@
 local ITEM = Clockwork.item:New("grenade_base");
 	ITEM.name = "Flash grenade";
 	ITEM.cost = 25;
-	ITEM.classes = {CLASS_EMP, CLASS_EOW};
 	ITEM.model = "models/weapons/w_eq_flashbang_dropped.mdl";
 	ITEM.weight = 0.8;
 	ITEM.uniqueID = "cw_flashgrenade";

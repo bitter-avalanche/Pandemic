@@ -6,7 +6,6 @@
 local ITEM = Clockwork.item:New("weapon_base");
 	ITEM.name = "PDW";
 	ITEM.cost = 950;
-	ITEM.classes = {CLASS_EMP, CLASS_EOW};
 	ITEM.model = "models/weapons/w_kac_pdw.mdl";
 	ITEM.weight = 5;
 	ITEM.business = true;

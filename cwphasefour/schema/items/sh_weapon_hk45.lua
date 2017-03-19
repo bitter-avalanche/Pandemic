@@ -6,7 +6,6 @@
 local ITEM = Clockwork.item:New("weapon_base");
 	ITEM.name = "HK 45C";
 	ITEM.cost = 275;
-	ITEM.classes = {CLASS_EMP, CLASS_EOW};
 	ITEM.model = "models/weapons/w_hk45c.mdl";
 	ITEM.weight = 1;
 	ITEM.access = "f";

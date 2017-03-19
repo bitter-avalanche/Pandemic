@@ -6,7 +6,6 @@
 local ITEM = Clockwork.item:New("weapon_base");
 	ITEM.name = "Magpul PDR";
 	ITEM.cost = 900;
-	ITEM.classes = {CLASS_EMP, CLASS_EOW};
 	ITEM.model = "models/weapons/w_magpul_pdr.mdl";
 	ITEM.weight = 4;
 	ITEM.business = true;

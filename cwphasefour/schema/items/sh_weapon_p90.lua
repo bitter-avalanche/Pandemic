@@ -6,7 +6,6 @@
 local ITEM = Clockwork.item:New("weapon_base");
 	ITEM.name = "P90";
 	ITEM.cost = 950;
-	ITEM.classes = {CLASS_EMP, CLASS_EOW};
 	ITEM.model = "models/weapons/w_fn_p90.mdl";
 	ITEM.weight = 4;
 	ITEM.business = true;

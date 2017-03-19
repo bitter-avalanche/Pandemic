@@ -9,7 +9,6 @@ ITEM.cost = 30;
 ITEM.model = "models/clutter/hamradio.mdl";
 ITEM.weight = 5;
 ITEM.access = "v";
-ITEM.classes = {CLASS_EMP, CLASS_EOW};
 ITEM.category = "Communication";
 ITEM.business = true;
 ITEM.description = "An antique ham radio. Do you think this'll still work?";
