@@ -4,18 +4,17 @@
 --]]
 
 local ITEM = Clockwork.item:New();
-ITEM.name = "USP Casing";
+ITEM.name = "Pistol Slide";
 ITEM.cost = 6;
 ITEM.model = "models/gibs/metal_gib2.mdl";
-ITEM.plural = "USP Casings";
+ITEM.plural = "Pistol Slides";
+ITEM.uniqueID = "part_pistolslide";
 ITEM.weight = 0.5;
-ITEM.uniqueID = "part_uspcasing";
 ITEM.access = "v";
 ITEM.business = true;
-ITEM.category = "Gunparts";
-ITEM.description = "A usable Iron Sight for a Pistol. It can be used in gun crafting.";
+ITEM.category = "Gun parts";
+ITEM.description = "A usable pistol slide. It can be used in gun crafting.";
 ITEM.spawnType = "gunparts";
-ITEM.spawnValue = 35;
 
 -- Called when a player drops the item.
 function ITEM:OnDrop(player, position) end;

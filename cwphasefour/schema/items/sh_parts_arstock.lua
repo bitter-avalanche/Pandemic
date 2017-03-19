@@ -4,16 +4,16 @@
 --]]
 
 local ITEM = Clockwork.item:New();
-ITEM.name = "USP Iron Sight";
+ITEM.name = "Assault Rifle Stock";
 ITEM.cost = 6;
 ITEM.model = "models/gibs/metal_gib2.mdl";
-ITEM.plural = "Pistol Iron Sights";
+ITEM.plural = "Assault Rifle Stocks";
 ITEM.weight = 0.5;
-ITEM.uniqueID = "part_uspsight";
+ITEM.uniqueID = "part_arstock";
 ITEM.access = "v";
 ITEM.business = true;
 ITEM.category = "Gunparts";
-ITEM.description = "A usable Iron Sight for a Pistol. It can be used in gun crafting.";
+ITEM.description = "A standard but tattered stock used in the manufacturing of assault rifles.";
 ITEM.spawnType = "gunparts";
 
 -- Called when a player drops the item.

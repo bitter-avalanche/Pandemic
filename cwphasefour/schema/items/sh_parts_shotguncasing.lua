@@ -4,16 +4,16 @@
 --]]
 
 local ITEM = Clockwork.item:New();
-ITEM.name = "USP Slide";
+ITEM.name = "Shotgun Casing";
 ITEM.cost = 6;
 ITEM.model = "models/gibs/metal_gib2.mdl";
-ITEM.plural = "USP Slides";
-ITEM.uniqueID = "part_uspslide";
+ITEM.plural = "Shotgun Casings";
 ITEM.weight = 0.5;
+ITEM.uniqueID = "part_shotguncasing";
 ITEM.access = "v";
 ITEM.business = true;
-ITEM.category = "Gun parts";
-ITEM.description = "A usable pistol slide. It can be used in gun crafting.";
+ITEM.category = "Gunparts";
+ITEM.description = "A tattered casing designed to manufacture shotguns. It's not the best, but it'll do.";
 ITEM.spawnType = "gunparts";
 
 -- Called when a player drops the item.
