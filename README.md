@@ -36,6 +36,18 @@ You can also help us by donating to the community, which would be used for the s
 
 [Bitter Avalanche Discord](https://discord.gg/vTTehvz)
 
+# Error Reporting Guidelines
+
+**To ease the development process, when reporting errors on this codebase please use the following template.**
+
+Filepath of error \(If applicable\):
+
+Short description of error:
+
+Expected:
+
+Result:
+
 # Disclaimer
 
 This is our own schema with our own additions, altered to our needs. Don't like it? Nobody's forcing you to play it. The key is obviously not supported, you'd be best off checking in with Cloud Sixteen support. Support for the schema will *not* be provided by us.
