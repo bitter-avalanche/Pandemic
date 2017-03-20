@@ -15,7 +15,7 @@ ITEM.business = true;
 ITEM.category = "Gunparts";
 ITEM.description = "A usable Iron Sight for an assault rifle. It can be used in gun crafting.";
 ITEM.spawnType = "gunparts";
-ITEM.spawnValue = 20;
+ITEM.spawnValue = 15;
 
 -- Called when a player drops the item.
 function ITEM:OnDrop(player, position) end;

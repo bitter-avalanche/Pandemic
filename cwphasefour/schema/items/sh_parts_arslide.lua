@@ -15,7 +15,7 @@ ITEM.business = true;
 ITEM.category = "Gun parts";
 ITEM.description = "A usable assault rifle slide. It can be used in gun crafting.";
 ITEM.spawnType = "gunparts";
-ITEM.spawnValue = 18;
+ITEM.spawnValue = 14;
 
 -- Called when a player drops the item.
 function ITEM:OnDrop(player, position) end;

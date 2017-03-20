@@ -15,7 +15,7 @@ ITEM.business = true;
 ITEM.category = "Gunparts";
 ITEM.description = "A tattered casing designed to manufacture SMGs. It's not the best, but it'll do.";
 ITEM.spawnType = "gunparts";
-ITEM.spawnValue = 40;
+ITEM.spawnValue = 35;
 
 -- Called when a player drops the item.
 function ITEM:OnDrop(player, position) end;
