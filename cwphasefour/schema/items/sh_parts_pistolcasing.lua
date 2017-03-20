@@ -1,5 +1,5 @@
 --[[
-	© 2013 CloudSixteen.com do not share, re-distribute or modify
+	Â© 2013 CloudSixteen.com do not share, re-distribute or modify
 	without permission of its author (kurozael@gmail.com).
 --]]
 
@@ -17,7 +17,9 @@ ITEM.description = "A tattered casing designed to manufacture pistols. It's not 
 ITEM.spawnType = "gunparts";
 ITEM.spawnValue = 28;
 
+
 -- Called when a player drops the item.
 function ITEM:OnDrop(player, position) end;
 
 ITEM:Register();
+

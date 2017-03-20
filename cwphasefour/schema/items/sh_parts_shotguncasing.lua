@@ -1,5 +1,5 @@
 --[[
-	© 2013 CloudSixteen.com do not share, re-distribute or modify
+	Â© 2013 CloudSixteen.com do not share, re-distribute or modify
 	without permission of its author (kurozael@gmail.com).
 --]]
 
@@ -16,6 +16,7 @@ ITEM.category = "Gunparts";
 ITEM.description = "A tattered casing designed to manufacture shotguns. It's not the best, but it'll do.";
 ITEM.spawnType = "gunparts";
 ITEM.spawnValue = 34;
+
 
 -- Called when a player drops the item.
 function ITEM:OnDrop(player, position) end;
