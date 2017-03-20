@@ -15,6 +15,7 @@ ITEM.business = true;
 ITEM.category = "Gunparts";
 ITEM.description = "A standard but tattered stock used in the manufacturing of some SMGs.";
 ITEM.spawnType = "gunparts";
+ITEM.spawnValue = 29;
 
 -- Called when a player drops the item.
 function ITEM:OnDrop(player, position) end;

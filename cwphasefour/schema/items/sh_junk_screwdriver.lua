@@ -15,6 +15,7 @@ ITEM.business = true;
 ITEM.category = "Junk";
 ITEM.description = "An ordinary, everyday screwdriver.";
 ITEM.spawnType = "junk";
+ITEM.spawnValue = 35;
 
 -- Called when a player drops the item.
 function ITEM:OnDrop(player, position) end;
