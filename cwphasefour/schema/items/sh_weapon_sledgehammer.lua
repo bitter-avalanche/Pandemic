@@ -21,4 +21,5 @@ local ITEM = Clockwork.item:New("custom_weapon");
 	ITEM.attachmentOffsetVector = Vector(5, 5, -8);
 	ITEM.spawnValue = 7;
 	ITEM.isRareSpawn = true;
+	ITEM:AddRecipe("junk_screws", 6, "part_shotgunsight", 1, "part_shotguncasing", 3, "part_shotgunslide", 1, "part_shotgunstock", 1, "junk_screwdriver", 1);
 ITEM:Register();
