@@ -2,7 +2,7 @@
 
 **Pandemic is a schema similar to Severance, which was around in the OpenAura days, around 2011 and earlier. This schema was created to be a more fleshed out version of Severance, with our own features.**
 
-Pandemic was created by [Songbird](http://steamcommunity.com/profiles/76561198004520862/), explicitly for the needs of [Bitter Avalanche](http://bitter-avalanche.net/).
+Pandemic was created by [The Lion](http://steamcommunity.com/profiles/76561198004520862/), explicitly for the needs of [Bitter Avalanche](https://bitteravalanche.com/).
 
 # Support
 
@@ -14,27 +14,13 @@ You can also help us by donating to the community, which would be used for the s
 
 # Contributors
 
-[Songbird](http://steamcommunity.com/profiles/76561198004520862/) - Lead Developer
-
-[Ƶσяχαѕ](http://steamcommunity.com/profiles/76561198031105632/) - Developer
-
-[SharpOB](http://steamcommunity.com/profiles/76561198063123166/) - Developer
-
-[Zeus](http://steamcommunity.com/profiles/76561198095977098/) - Developer
-
-[WrongEnd](http://steamcommunity.com/profiles/76561198035603113) - Developer
-
-[Alucard](http://steamcommunity.com/profiles/76561198037209287/) - Developer
-
-[Gr4sS](http://steamcommunity.com/profiles/76561197997384060/) - Freelance Developer and Code Consultant
-
-[NightAngel](http://steamcommunity.com/profiles/76561198029934864/) - Code Consultant
+[The Lion](http://steamcommunity.com/profiles/76561198004520862/) - Lead Developer
 
 # Links
 
-[Bitter Avalanche](http://bitter-avalanche.net/)
+[Bitter Avalanche](https://bitteravalanche.com)
 
-[Bitter Avalanche Discord](https://discord.gg/vTTehvz)
+[Bitter Avalanche Discord](https://discord.gg/keEqx6F)
 
 # Error Reporting Guidelines
 
