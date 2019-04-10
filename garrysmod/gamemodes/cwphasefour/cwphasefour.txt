@@ -1,0 +1,10 @@
+"cwphasefour"
+{
+	"base"			"Clockwork"
+	"title"			"Phase Four"
+	"author"		"The Lion"
+	"version"		"0.0"
+	"description"	"A roleplaying schema developed by Bitter Avalanche set in a global pandemic crisis."
+	"menusystem"	"1"
+	"workshopid"	"138552031"
+}
