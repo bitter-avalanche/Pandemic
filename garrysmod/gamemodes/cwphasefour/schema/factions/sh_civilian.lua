@@ -3,10 +3,10 @@
 	without permission of its author (kurozael@gmail.com).
 --]]
 
-local FACTION = Clockwork.faction:New("Citizen");
+local FACTION = Clockwork.faction:New("Civilian");
 
 FACTION.useFullName = true;
-FACTION.material = "halfliferp/factions/citizen";
+--FACTION.material = "halfliferp/factions/citizen";
 
 -- Called when a player is transferred to the faction.
 function FACTION:OnTransferred(player, faction, name)
@@ -25,4 +25,4 @@ function FACTION:OnTransferred(player, faction, name)
 	end;
 end;
 
-FACTION_CITIZEN = FACTION:Register();
+FACTION_CIVILIAN = FACTION:Register();

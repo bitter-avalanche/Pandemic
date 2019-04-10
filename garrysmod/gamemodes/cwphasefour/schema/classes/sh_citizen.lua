@@ -3,11 +3,11 @@
 	without permission of its author (kurozael@gmail.com).
 --]]
 
-local CLASS = Clockwork.class:New("Citizen");
+local CLASS = Clockwork.class:New("Civilian");
 	CLASS.color = Color(150, 125, 100, 255);
-	CLASS.factions = {FACTION_CITIZEN};
+	CLASS.factions = {FACTION_CIVILIAN};
 	CLASS.isDefault = true;
 	CLASS.wagesName = "Supplies";
-	CLASS.description = "A regular human citizen enslaved by the Universal Union.";
+	CLASS.description = "A regular human survivor.";
 	CLASS.defaultPhysDesc = "Wearing dirty clothes.";
-CLASS_CITIZEN = CLASS:Register();
+CLASS_CIVILIAN = CLASS:Register();
