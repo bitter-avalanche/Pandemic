@@ -49,7 +49,7 @@ function THEME:CreateFonts()
 	});
 	surface.CreateFont("hl2_CinematicText", 
 	{
-		font		= "Mailart Rubberstamp",
+		font		= "ZombieStory",
 		size		= Clockwork.kernel:FontScreenScale(8),
 		weight		= 600,
 		antialiase	= true,
@@ -57,7 +57,7 @@ function THEME:CreateFonts()
 	});
 	surface.CreateFont("hl2_IntroTextBig", 
 	{
-		font		= "Mailart Rubberstamp",
+		font		= "ZombieStory",
 		size		= Clockwork.kernel:FontScreenScale(18),
 		weight		= 600,
 		antialiase	= true,
@@ -65,7 +65,7 @@ function THEME:CreateFonts()
 	});
 	surface.CreateFont("hl2_MainText", 
 	{
-		font		= "Mailart Rubberstamp",
+		font		= "ZombieStory",
 		size		= Clockwork.kernel:FontScreenScale(7),
 		weight		= 600,
 		antialiase	= true,
@@ -73,7 +73,7 @@ function THEME:CreateFonts()
 	});
 	surface.CreateFont("hl2_TargetIDText", 
 	{
-		font		= "Mailart Rubberstamp",
+		font		= "ZombieStory",
 		size		= Clockwork.kernel:FontScreenScale(7),
 		weight		= 600,
 		antialiase	= true,
@@ -81,7 +81,7 @@ function THEME:CreateFonts()
 	});
 	surface.CreateFont("hl2_MenuTextHuge", 
 	{
-		font		= "Mailart Rubberstamp",
+		font		= "ZombieStory",
 		size		= Clockwork.kernel:FontScreenScale(30),
 		weight		= 600,
 		antialiase	= true,
@@ -89,7 +89,7 @@ function THEME:CreateFonts()
 	});
 	surface.CreateFont("hl2_MenuTextBig", 
 	{
-		font		= "Mailart Rubberstamp",
+		font		= "ZombieStory",
 		size		= Clockwork.kernel:FontScreenScale(18),
 		weight		= 600,
 		antialiase	= true,
@@ -99,9 +99,9 @@ end;
 
 -- Called when to initialize the theme.
 function THEME:Initialize()
-	Clockwork.option:SetColor( "information", Color(241, 208, 94, 255) );
+	Clockwork.option:SetColor( "information", Color(242, 48, 54, 255) );
 	Clockwork.option:SetColor( "background", Color(0, 0, 0, 255) );
-	Clockwork.option:SetColor( "target_id", Color(241, 208, 94, 255) );
+	Clockwork.option:SetColor( "target_id", Color(242, 48, 54, 255) );
 	Clockwork.option:SetFont("bar_text", "hl2_TargetIDText");
 	Clockwork.option:SetFont("main_text", "hl2_MainText");
 	Clockwork.option:SetFont("hints_text", "hl2_IntroTextTiny");
