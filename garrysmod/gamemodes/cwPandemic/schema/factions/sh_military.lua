@@ -6,7 +6,7 @@
 local FACTION = Clockwork.faction:New("Military Personnel");
 
 FACTION.useFullName = true;
---FACTION.material = "halfliferp/factions/citizen";
+FACTION.material = "pandemicrp/factions/military";
 FACTION.models = {
 	female = {"models/kss/tsremastered/smod_tactical_soldier_npc_e.mdl"},
 	male = {"models/kss/tsremastered/smod_tactical_soldier_npc_e.mdl"}
