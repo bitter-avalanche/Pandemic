@@ -12,103 +12,103 @@ local THEME = Clockwork.theme:New("Clockwork");
 function THEME:CreateFonts()
 	Clockwork.fonts:Add("cwMainText", 
 	{
-		font		= "Arial",
+		font		= "ZombieStory",
 		size		= Clockwork.kernel:FontScreenScale(7),
 		weight		= 700
 	});
 	Clockwork.fonts:Add("cwESPText", 
 	{
-		font		= "Arial",
+		font		= "ZombieStory",
 		size		= Clockwork.kernel:FontScreenScale(5.5),
 		weight		= 700
 	});
 	Clockwork.fonts:Add("cwTooltip", 
 	{
-		font		= "Arial",
+		font		= "ZombieStory",
 		size		= Clockwork.kernel:FontScreenScale(5),
 		weight		= 700
 	});
 	Clockwork.fonts:Add("cwMenuTextBig",
 	{
-		font		= "Arial",
+		font		= "ZombieStory",
 		size		= Clockwork.kernel:FontScreenScale(18),
 		weight		= 700
 	});
 	Clockwork.fonts:Add("cwMenuTextTiny",
 	{
-		font		= "Arial",
+		font		= "ZombieStory",
 		size		= Clockwork.kernel:FontScreenScale(7),
 		weight		= 700
 	});
 	Clockwork.fonts:Add("cwInfoTextFont",
 	{
-		font		= "Arial",
+		font		= "ZombieStory",
 		size		= Clockwork.kernel:FontScreenScale(6),
 		weight		= 700
 	});
 	Clockwork.fonts:Add("cwMenuTextHuge",
 	{
-		font		= "Arial",
+		font		= "ZombieStory",
 		size		= Clockwork.kernel:FontScreenScale(30),
 		weight		= 700
 	});
 	Clockwork.fonts:Add("cwMenuTextSmall",
 	{
-		font		= "Arial",
+		font		= "ZombieStory",
 		size		= Clockwork.kernel:FontScreenScale(10),
 		weight		= 700
 	});
 	Clockwork.fonts:Add("cwIntroTextBig",
 	{
-		font		= "Arial",
+		font		= "ZombieStory",
 		size		= Clockwork.kernel:FontScreenScale(18),
 		weight		= 700
 	});
 	Clockwork.fonts:Add("cwIntroTextTiny",
 	{
-		font		= "Arial",
+		font		= "ZombieStory",
 		size		= Clockwork.kernel:FontScreenScale(9),
 		weight		= 700
 	});
 	Clockwork.fonts:Add("cwIntroTextSmall",
 	{
-		font		= "Arial",
+		font		= "ZombieStory",
 		size		= Clockwork.kernel:FontScreenScale(7),
 		weight		= 700
 	});
 	Clockwork.fonts:Add("cwLarge3D2D",
 	{
-		font		= "Arial",
+		font		= "ZombieStory",
 		size		= Clockwork.kernel:GetFontSize3D(),
 		weight		= 700
 	});
 	Clockwork.fonts:Add("cwScoreboardName",
 	{
-		font		= "Arial",
+		font		= "ZombieStory",
 		size		= 20,
 		weight		= 600
 	});
 	Clockwork.fonts:Add("cwScoreboardDesc",
 	{
-		font		= "Arial",
+		font		= "ZombieStory",
 		size		= 16,
 		weight		= 600
 	});
 	Clockwork.fonts:Add("cwScoreboardClass",
 	{
-		font		= "Arial",
+		font		= "ZombieStory",
 		size		= 25,
 		weight		= 700
 	});
 	Clockwork.fonts:Add("cwCinematicText",
 	{
-		font		= "Trebuchet",
+		font		= "ZombieStory",
 		size		= Clockwork.kernel:FontScreenScale(8),
 		weight		= 700
 	});
 	Clockwork.fonts:Add("cwChatSyntax",
 	{
-		font		= "Courier New",
+		font		= "ZombieStory",
 		size		= Clockwork.kernel:FontScreenScale(7),
 		weight		= 600
 	});
