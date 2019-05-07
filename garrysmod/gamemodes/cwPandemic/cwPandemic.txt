@@ -1,4 +1,4 @@
-"cwPandemic"
+"Pandemic"
 {
 	"base"			"Clockwork"
 	"title"			"Pandemic"
