@@ -6,7 +6,7 @@
 local FACTION = Clockwork.faction:New("Civilian");
 
 FACTION.useFullName = true;
---FACTION.material = "halfliferp/factions/citizen";
+FACTION.material = "pandemicrp/factions/civilian";
 
 -- Called when a player is transferred to the faction.
 function FACTION:OnTransferred(player, faction, name)
