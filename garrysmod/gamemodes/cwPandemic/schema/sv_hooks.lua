@@ -5,10 +5,6 @@
 
 -- Called when Clockwork has loaded all of the entities.
 function Schema:ClockworkInitPostEntity()
-	self:LoadRationDispensers();
-	self:LoadVendingMachines();
-	self:LoadCombineLocks();
-	self:LoadObjectives();
 	self:LoadRadios();
 	self:LoadNPCs();
 end;
@@ -18,28 +14,8 @@ function Schema:SaveData() end;
 
 -- Called just after data should be saved.
 function Schema:PostSaveData()
-	self:SaveRationDispensers();
-	self:SaveVendingMachines();
-	self:SaveCombineLocks();
 	self:SaveRadios();
 	self:SaveNPCs();
-end;
-
--- Called when a player's default model is needed.
-function Schema:GetPlayerDefaultModel(player)
-	local faction = player:GetFaction();
-	
-	if (self:IsCombineFaction(faction)) then
-		if (self:IsPlayerCombineRank(player, "GHOST")) then
-			return "models/eliteghostcp.mdl";
-		elseif (self:IsPlayerCombineRank(player, "OfC")) then
-			return "models/policetrench.mdl";
-		elseif (self:IsPlayerCombineRank(player, "DvL")) then
-			return "models/eliteshockcp.mdl";
-		elseif (self:IsPlayerCombineRank(player, "SeC")) then
-			return "models/sect_police2.mdl";
-		end;
-	end;
 end;
 
 -- Called when an entity's menu option should be handled.
@@ -137,25 +113,9 @@ function Schema:OnNPCKilled(npc, attacker, inflictor)
 	for k, v in pairs(self.scanners) do
 		local scanner = v[1];
 		local player = k;
-		
-		if (IsValid(player) and IsValid(scanner) and scanner == npc) then
-			Clockwork.kernel:CalculateSpawnTime(player, inflictor, attacker);
-			
-			npc:EmitSound("npc/scanner/scanner_explode_crash2.wav");
 			
 			self:PlayerDeath(player, inflictor, attacker, true);
 			self:ResetPlayerScanner(player);
-		end;
-	end;
-end;
-
--- Called when a player's visibility should be set up.
-function Schema:SetupPlayerVisibility(player)
-	if (self.scanners[player]) then
-		local scanner = self.scanners[player][1];
-		
-		if (IsValid(scanner)) then
-			AddOriginToPVS( scanner:GetPos() );
 		end;
 	end;
 end;
@@ -192,30 +152,13 @@ function Schema:PlayerAdjustDropWeaponInfo(player, info)
 	end;
 end;
 
--- Called when a player uses a door.
-function Schema:PlayerUseDoor(player, door)
-	if (string.lower( game.GetMap() ) == "rp_c18_v1") then
-		local name = string.lower( door:GetName() );
-		
-		if (name == "nxs_brnroom" or name == "nxs_brnroom2" or name == "Clockwork_al_door1"
-		or name == "Clockwork_al_door2" or name == "nxs_brnbcroom") then
-			local curTime = CurTime();
-			
-			if (!door.nextAutoClose or curTime >= door.nextAutoClose) then
-				door:Fire("Close", "", 10);
-				door.nextAutoClose = curTime + 10;
-			end;
-		end;
-	end;
-end;
-
 -- Called when a player has an unknown inventory item.
 function Schema:PlayerHasUnknownInventoryItem(player, inventory, item, amount)
 	if (item == "radio") then
 		inventory["handheld_radio"] = amount;
 	end;
 end;
-
+--[[
 -- Called when a player's default inventory is needed.
 function Schema:GetPlayerDefaultInventory(player, character, inventory)
 	if (character.faction == FACTION_ADMIN) then
@@ -256,64 +199,7 @@ function Schema:GetPlayerDefaultInventory(player, character, inventory)
 		);
 	end;
 end;
-
--- Called when a player's typing display has started.
-function Schema:PlayerStartTypingDisplay(player, code)
-	if (Schema:PlayerIsCombine(player) and !player:IsNoClipping()) then
-		if (code == "n" or code == "y" or code == "w" or code == "r") then
-			if (!player.typingBeep) then
-				player.typingBeep = true;
-				
-				player:EmitSound("npc/overwatch/radiovoice/on1.wav");
-			end;
-		end;
-	end;
-end;
-
--- Called when a player's typing display has finished.
-function Schema:PlayerFinishTypingDisplay(player, textTyped)
-	if (Schema:PlayerIsCombine(player) and textTyped) then
-		if (player.typingBeep) then
-			player:EmitSound("npc/overwatch/radiovoice/off4.wav");
-		end;
-	end;
-	
-	player.typingBeep = nil;
-end;
-
--- Called when a player stuns an entity.
-function Schema:PlayerStunEntity(player, entity)
-	local target = Clockwork.entity:GetPlayer(entity);
-	local strength = Clockwork.attributes:Fraction(player, ATB_STRENGTH, 12, 6);
-	
-	player:ProgressAttribute(ATB_STRENGTH, 0.5, true);
-	
-	if (target and target:Alive()) then
-		local curTime = CurTime();
-		
-		if (target.nextStunInfo and curTime <= target.nextStunInfo[2]) then
-			target.nextStunInfo[1] = target.nextStunInfo[1] + 1;
-			target.nextStunInfo[2] = curTime + 2;
-			
-			if (target.nextStunInfo[1] == 3) then
-				Clockwork.player:SetRagdollState( target, RAGDOLL_KNOCKEDOUT, Clockwork.config:Get("knockout_time"):Get() );
-			end;
-		else
-			target.nextStunInfo = {0, curTime + 2};
-		end;
-		
-		target:ViewPunch( Angle(12 + strength, 0, 0) );
-		
-		Clockwork.datastream:Start(target, "Stunned", 0.5);
-	end;
-end;
-
--- Called when a player's weapons should be given.
-function Schema:PlayerGiveWeapons(player)
-	if (player:GetFaction() == FACTION_MPF) then
-		Clockwork.player:GiveSpawnWeapon(player, "cw_stunstick");
-	end;
-end;
+--]]
 
 -- Called when a player's inventory item has been updated.
 function Schema:PlayerInventoryItemUpdated(player, itemTable, amount, force)
@@ -434,49 +320,12 @@ function Schema:PlayerFootstep(player, position, foot, sound, volume, recipientF
 	return true;
 end;
 
--- Called when a player attempts to spawn a prop.
-function Schema:PlayerSpawnProp(player, model)
-	if (!player:IsAdmin() and Clockwork.config:Get("cwu_props"):Get()) then
-		if (player:GetFaction() == FACTION_CITIZEN) then
-			
-			if (player:GetCharacterData("customclass") != "Civil Worker's Union") then
-				model = string.Replace(model, "\\", "/");
-				model = string.Replace(model, "//", "/");
-				model = string.lower(model);
-				
-				if (string.find(model, "bed")) then
-					Clockwork.player:Notify(player, "You are not in the Civil Worker's Union!");
-					
-					return false;
-				end;
-				
-				for k, v in pairs(self.cwuProps) do
-					if (string.lower(v) == model) then
-						Clockwork.player:Notify(player, "You are not in the Civil Worker's Union!");
-						
-						return false;
-					end;
-				end;
-			end;
-		end;
-	end;
-end;
-
 -- Called when a player spawns an object.
 function Schema:PlayerSpawnObject(player)
 	if (player:GetSharedVar("tied") != 0 or self.scanners[player]) then
 		Clockwork.player:Notify(player, "You don't have permission to do this right now!");
 		
 		return false;
-	end;
-end;
-
--- Called when a player's character data should be restored.
-function Schema:PlayerRestoreCharacterData(player, data)
-	if (!self:PlayerIsCombine(player) and player:GetFaction() != FACTION_ADMIN) then
-		if (!data["citizenid"] or string.len( tostring( data["citizenid"] ) ) == 4) then
-			data["citizenid"] = Clockwork.kernel:ZeroNumberToDigits(math.random(1, 99999), 5);
-		end;
 	end;
 end;
 
@@ -543,10 +392,6 @@ function Schema:PlayerCharacterInitialized(player)
 				end;
 			end;
 		end;
-	elseif (faction == FACTION_CITIZEN) then
-		self:AddCombineDisplayLine( "Rebuilding citizen manifest...", Color(255, 100, 255, 255) );
-	end;
-end;
 
 -- Called when a player's name has changed.
 function Schema:PlayerNameChanged(player, previousName, newName)
@@ -958,7 +803,6 @@ end;
 -- Called when a player's shared variables should be set.
 function Schema:PlayerSetSharedVars(player, curTime)
 	player:SetSharedVar( "customClass", player:GetCharacterData("customclass", "") );
-	player:SetSharedVar( "citizenID", player:GetCharacterData("citizenid", "") );
 	player:SetSharedVar( "clothes", player:GetCharacterData("clothes", 0) );
 	player:SetSharedVar( "icon", player:GetCharacterData("icon", "") );
 	
@@ -1088,13 +932,6 @@ function Schema:PlayerDoesHaveFlag(player, flag)
 	end;
 end;
 
--- Called when a player's attribute has been updated.
-function Schema:PlayerAttributeUpdated(player, attributeTable, amount)
-	if (self:PlayerIsCombine(player) and amount and amount > 0) then
-		self:AddCombineDisplayLine("Updating external "..Clockwork.option:GetKey("name_attributes", true).."...", Color(255, 125, 0, 255), player);
-	end;
-end;
-
 -- Called to check if a player does recognise another player.
 function Schema:PlayerDoesRecognisePlayer(player, target, status, isAccurate, realValue)
 	if (self:PlayerIsCombine(target) or target:GetFaction() == FACTION_ADMIN) then
@@ -1137,9 +974,6 @@ function Schema:PlayerCanUseCommand(player, commandTable, arguments)
 	if (player:GetSharedVar("tied") != 0) then
 		local blacklisted = {
 			"OrderShipment",
-			"Broadcast",
-			"Dispatch",
-			"Request",
 			"Radio"
 		};
 		
@@ -1386,29 +1220,6 @@ function Schema:PlayerCanEarnGeneratorCash(player, info, cash)
 	end;
 end;
 
--- Called when a player's death sound should be played.
-function Schema:PlayerPlayDeathSound(player, gender)
-	if (self:PlayerIsCombine(player)) then
-		local sound = "npc/metropolice/die"..math.random(1, 4)..".wav";
-		
-		for k, v in ipairs( _player.GetAll() ) do
-			if (v:HasInitialized()) then
-				if (self:PlayerIsCombine(v)) then
-					v:EmitSound(sound);
-				end;
-			end;
-		end;
-		
-		return sound;
-	end;
-end;
-
--- Called when a player's pain sound should be played.
-function Schema:PlayerPlayPainSound(player, gender, damageInfo, hitGroup)
-	if (self:PlayerIsCombine(player)) then
-		return "npc/metropolice/pain"..math.random(1, 4)..".wav";
-	end;
-end;
 -- Called when chat box info should be adjusted.
 function Schema:ChatBoxAdjustInfo(info)
 	if (info.class != "ooc" and info.class != "looc") then

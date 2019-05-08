@@ -63,12 +63,10 @@ Clockwork.kernel:AddDirectory("models/lagmite/");
 Clockwork.kernel:AddDirectory("models/deadbodies/");
 
 Clockwork.config:Add("server_whitelist_identity", "");
-Clockwork.config:Add("combine_lock_overrides", false);
 Clockwork.config:Add("intro_text_small", "It is safer here.", true);
 Clockwork.config:Add("intro_text_big", "CITY EIGHTEEN, 2016.", true);
 Clockwork.config:Add("knockout_time", 60);
 Clockwork.config:Add("business_cost", 160, true);
-Clockwork.config:Add("cwu_props", true);
 Clockwork.config:Add("permits", true, true);
 
 Clockwork.config:Get("enable_gravgun_punt"):Set(false);
@@ -119,21 +117,6 @@ Clockwork.hint:Add("Passive RP", "If you're bored and there's no action, try som
 Clockwork.hint:Add("Development", "Develop your character, give them a story to tell.");
 Clockwork.hint:Add("Powergaming", "Powergaming is when you force your actions on others.");
 
-Clockwork.datastream:Hook("EditObjectives", function(player, data)
-	if (player.editObjectivesAuthorised and type(data) == "string") then
-		if (Schema.combineObjectives != data) then
-			Schema:AddCombineDisplayLine("Downloading recent objectives...", Color(255, 100, 255, 255));
-			Schema.combineObjectives = string.sub(data, 0, 500);
-			
-			Clockwork.kernel:SaveSchemaData("objectives", {
-				text = Schema.combineObjectives
-			});
-		end;
-		
-		player.editObjectivesAuthorised = nil;
-	end;
-end);
-
 Clockwork.datastream:Hook("ObjectPhysDesc", function(player, data)
 	if (type(data) == "table" and type( data[1] ) == "string") then
 		if (player.objectPhysDesc == data[2]) then
@@ -155,144 +138,6 @@ Clockwork.datastream:Hook("EditData", function(player, data)
 		player.editDataAuthorised = nil;
 	end;
 end);
-
--- A function to calculate a player's scanner think.
-function Schema:CalculateScannerThink(player, curTime)
-	if (!self.scanners[player]) then return; end;
-	
-	local scanner = self.scanners[player][1];
-	local marker = self.scanners[player][2];
-	
-	if (IsValid(scanner) and IsValid(marker)) then
-		scanner:SetMaxHealth( player:GetMaxHealth() );
-		
-		player:SetMoveType(MOVETYPE_OBSERVER);
-		player:SetHealth( math.max(scanner:Health(), 0) );
-		
-		if (!player.nextScannerSound or curTime >= player.nextScannerSound) then
-			player.nextScannerSound = curTime + math.random(8, 48);
-			
-			scanner:EmitSound( self.scannerSounds[ math.random(1, #self.scannerSounds) ] );
-		end;
-	end;
-end;
-
--- A function to reset a player's scanner.
-function Schema:ResetPlayerScanner(player, noMessage)
-	if (self.scanners[player]) then
-		local scanner = self.scanners[player][1];
-		local marker = self.scanners[player][2];
-		
-		if (IsValid(scanner)) then
-			scanner:Remove();
-		end;
-		
-		if (IsValid(marker)) then
-			marker:Remove();
-		end;
-		
-		self.scanners[player] = nil;
-		
-		if (!noMessage) then
-			player:SetMoveType(MOVETYPE_WALK);
-			player:UnSpectate();
-			player:KillSilent();
-		end;
-	end;
-end;
-
--- A function to make a player a scanner.
-function Schema:MakePlayerScanner(player, noMessage, lightSpawn)
-	self:ResetPlayerScanner(player, noMessage);
-	
-	local scannerClass = "npc_cscanner";
-	
-	if (self:IsPlayerCombineRank(player, "SYNTH")) then
-		scannerClass = "npc_clawscanner";
-	end;
-	
-	local position = player:GetShootPos();
-	local uniqueID = player:UniqueID();
-	local scanner = ents.Create(scannerClass);
-	local marker = ents.Create("path_corner");
-	
-	Clockwork.entity:SetPlayer(scanner, player);
-	
-	scanner:SetPos( position + Vector(0, 0, 16) );
-	scanner:SetAngles( player:GetAimVector():Angle() );
-	scanner:SetKeyValue("targetname", "scanner_"..uniqueID);
-	scanner:SetKeyValue("spawnflags", 8592);
-	scanner:SetKeyValue("renderfx", 0);
-	scanner:Spawn(); scanner:Activate();
-	
-	marker:SetKeyValue("targetname", "marker_"..uniqueID);
-	marker:SetPos(position);
-	marker:Spawn(); marker:Activate();
-	
-	if (!lightSpawn) then
-		player:Flashlight(false);
-		player:RunCommand("-duck");
-		
-		if (scannerClass == "npc_clawscanner") then
-			player:SetHealth(200);
-		end;
-	end;
-	
-	player:SetArmor(0);
-	player:Spectate(OBS_MODE_CHASE);
-	player:StripWeapons();
-	player:SetSharedVar("scanner", scanner:EntIndex());
-	player:SetMoveType(MOVETYPE_OBSERVER);
-	player:SpectateEntity(scanner);
-	
-	scanner:SetMaxHealth( player:GetMaxHealth() );
-	scanner:SetHealth( player:Health() );
-	scanner:Fire("SetDistanceOverride", 64, 0);
-	scanner:Fire("SetFollowTarget", "marker_"..uniqueID, 0);
-	
-	self.scanners[player] = {scanner, marker};
-	
-	Clockwork.kernel:CreateTimer("scanner_sound_"..uniqueID, 0.01, 1, function()
-		if (IsValid(scanner)) then
-			scanner.flyLoop = CreateSound(scanner, "npc/scanner/cbot_fly_loop.wav");
-			scanner.flyLoop:Play();
-		end;
-	end);
-	
-	scanner:CallOnRemove("Scanner Sound", function(scanner)
-		if (scanner.flyLoop) then
-			scanner.flyLoop:Stop();
-		end;
-	end);
-end;
-
--- A function to add a Combine display line.
-function Schema:AddCombineDisplayLine(text, color, player, exclude)
-	if (player) then
-		Clockwork.datastream:Start( player, "CombineDisplayLine", {text, color} );
-	else
-		local players = {};
-		
-		for k, v in ipairs( _player.GetAll() ) do
-			if (self:PlayerIsCombine(v) and v != exclude) then
-				players[#players + 1] = v;
-			end;
-		end;
-		
-		Clockwork.datastream:Start(players, "CombineDisplayLine", {text, color});
-	end;
-end;
-
--- A function to load the objectives.
-function Schema:LoadObjectives()
-	local combineObjectives = Clockwork.kernel:RestoreSchemaData("objectives");
-	
-	if (combineObjectives and combineObjectives.text) then
-		self.combineObjectives = combineObjectives.text;
-	else
-		self.combineObjectives = "";
-	end;
-end;
 
 -- A function to load the NPCs.
 function Schema:LoadNPCs()
@@ -346,52 +191,6 @@ function Schema:SaveNPCs()
 	Clockwork.kernel:SaveSchemaData("plugins/npcs/"..game.GetMap(), npcs);
 end;
 
--- A function to load the Combine locks.
-function Schema:LoadCombineLocks()
-	local combineLocks = Clockwork.kernel:RestoreSchemaData( "plugins/locks/"..game.GetMap() );
-	
-	for k, v in pairs(combineLocks) do
-		local entity = ents.FindInSphere(v.doorPosition, 16)[1];
-		
-		if (IsValid(entity)) then
-			local combineLock = self:ApplyCombineLock(entity);
-			
-			if (combineLock) then
-				Clockwork.player:GivePropertyOffline(v.key, v.uniqueID, entity);
-				
-				combineLock:SetLocalAngles(v.angles);
-				combineLock:SetLocalPos(v.position);
-				
-				if (!v.locked) then
-					combineLock:Unlock();
-				else
-					combineLock:Lock();
-				end;
-			end;
-		end;
-	end;
-end;
-
--- A function to save the Combine locks.
-function Schema:SaveCombineLocks()
-	local combineLocks = {};
-	
-	for k, v in pairs( ents.FindByClass("cw_combinelock") ) do
-		if (IsValid(v.entity)) then
-			combineLocks[#combineLocks + 1] = {
-				key = Clockwork.entity:QueryProperty(v, "key"),
-				locked = v:IsLocked(),
-				angles = v:GetLocalAngles(),
-				position = v:GetLocalPos(),
-				uniqueID = Clockwork.entity:QueryProperty(v, "uniqueID"),
-				doorPosition = v.entity:GetPos()
-			};
-		end;
-	end;
-	
-	Clockwork.kernel:SaveSchemaData("plugins/locks/"..game.GetMap(), combineLocks);
-end;
-
 -- A function to load the radios.
 function Schema:LoadRadios()
 	local radios = Clockwork.kernel:RestoreSchemaData( "plugins/radios/"..game.GetMap() );
@@ -420,76 +219,6 @@ function Schema:LoadRadios()
 	end;
 end;
 
--- A function to load the ration dispensers.
-function Schema:LoadRationDispensers()
-	local dispensers = Clockwork.kernel:RestoreSchemaData( "plugins/dispensers/"..game.GetMap() );
-	
-	for k, v in pairs(dispensers) do
-		local entity = ents.Create("cw_rationdispenser");
-		
-		entity:SetPos(v.position);
-		entity:Spawn();
-		
-		if (IsValid(entity)) then
-			entity:SetAngles(v.angles);
-			
-			if (!v.locked) then
-				entity:Unlock();
-			else
-				entity:Lock();
-			end;
-		end;
-	end;
-end;
-
--- A function to save the ration dispensers.
-function Schema:SaveRationDispensers()
-	local dispensers = {};
-	
-	for k, v in pairs(ents.FindByClass("cw_rationdispenser")) do
-		dispensers[#dispensers + 1] = {
-			locked = v:IsLocked(),
-			angles = v:GetAngles(),
-			position = v:GetPos()
-		};
-	end;
-	
-	Clockwork.kernel:SaveSchemaData("plugins/dispensers/"..game.GetMap(), dispensers);
-end;
-
--- A function to load the ration machines.
-function Schema:LoadVendingMachines()
-	local machines = Clockwork.kernel:RestoreSchemaData("plugins/machines/"..game.GetMap());
-	
-	for k, v in pairs(machines) do
-		local entity = ents.Create("cw_vendingmachine");
-		
-		entity:SetPos(v.position);
-		entity:Spawn();
-		
-		if ( IsValid(entity) ) then
-			entity:SetAngles(v.angles);
-			entity:SetStock(v.stock, v.defaultStock);
-		end;
-	end;
-end;
-
--- A function to save the ration machines.
-function Schema:SaveVendingMachines()
-	local machines = {};
-	
-	for k, v in pairs(ents.FindByClass("cw_vendingmachine")) do
-		machines[#machines + 1] = {
-			stock = v:GetStock(),
-			angles = v:GetAngles(),
-			position = v:GetPos(),
-			defaultStock = v:GetDefaultStock()
-		};
-	end;
-	
-	Clockwork.kernel:SaveSchemaData("plugins/machines/"..game.GetMap(), machines);
-end;
-
 -- A function to save the radios.
 function Schema:SaveRadios()
 	local radios = {};
@@ -514,39 +243,6 @@ function Schema:SaveRadios()
 	end;
 	
 	Clockwork.kernel:SaveSchemaData("plugins/radios/"..game.GetMap(), radios);
-end;
-
--- A function to say a message as a request.
-function Schema:SayRequest(player, text)
-	local isCitizen = (player:GetFaction() == FACTION_CITIZEN);
-	local listeners = { request = {}, eavesdrop = {} };
-	
-	for k, v in ipairs( _player.GetAll() ) do
-		if (v:HasInitialized()) then
-			if (v:GetFaction() == FACTION_CITIZEN and isCitizen and player != v) then
-				if (v:GetShootPos():Distance( player:GetShootPos() ) <= Clockwork.config:Get("talk_radius"):Get()) then
-					listeners.eavesdrop[v] = v;
-				end;
-			else
-				local isCityAdmin = (v:GetFaction() == FACTION_ADMIN);
-				local isCombine = self:PlayerIsCombine(v);
-				
-				if (v:HasItemByID("request_device") or isCombine or isCityAdmin) then
-					listeners.request[v] = v;
-				end;
-			end;
-		end;
-	end;
-	
-
-	self:AddCombineDisplayLine("Downloading request packet...");
-	
-
-	local info = Clockwork.chatBox:Add(listeners.request, player, "request", text);
-	
-	if (info and IsValid(info.speaker)) then
-		Clockwork.chatBox:Add(listeners.eavesdrop, info.speaker, "request_eavesdrop", info.text);
-	end;
 end;
 
 -- A function to get a player's location.
@@ -583,66 +279,6 @@ function Schema:PlayerGetLocation(player)
 	end;
 	
 	return "unknown location";
-end;
-
--- A function to say a message as a broadcast.
-function Schema:SayBroadcast(player, text)
-	Clockwork.chatBox:Add(nil, player, "broadcast", text);
-end;
-
--- A function to say a message as a dispatch.
-function Schema:SayDispatch(player, text)
-	Clockwork.chatBox:Add(nil, player, "dispatch", text);
-end;
-
--- A function to check if a player is Combine.
-function Schema:PlayerIsCombine(player, bHuman)
-	if (IsValid(player) and player:GetCharacter()) then
-		local faction = player:GetFaction();
-		
-		if (self:IsCombineFaction(faction)) then
-			if (bHuman) then
-				if (faction == FACTION_MPF) then
-					return true;
-				end;
-			elseif (bHuman == false) then
-				if (faction == FACTION_MPF) then
-					return false;
-				else
-					return true;
-				end;
-			else
-				return true;
-			end;
-		end;
-	end;
-end;
-
--- A function to apply a Combine lock.
-function Schema:ApplyCombineLock(entity, position, angles)
-	local combineLock = ents.Create("cw_combinelock");
-	
-	combineLock:SetParent(entity);
-	combineLock:SetDoor(entity);
-	
-	if (position) then
-		if (type(position) == "table") then
-			combineLock:SetLocalPos( Vector(-1.0313, 43.7188, -1.2258) );
-			combineLock:SetPos( combineLock:GetPos() + (position.HitNormal * 4) );
-		else
-			combineLock:SetPos(position);
-		end;
-	end;
-	
-	if (angles) then
-		combineLock:SetAngles(angles);
-	end;
-	
-	combineLock:Spawn();
-	
-	if (IsValid(combineLock)) then
-		return combineLock;
-	end;
 end;
 
 -- A function to make a player wear clothes.
