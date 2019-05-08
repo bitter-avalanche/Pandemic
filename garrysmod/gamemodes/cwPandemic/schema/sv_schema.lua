@@ -19,8 +19,8 @@ Clockwork.kernel:AddDirectory("models/lagmite/");
 Clockwork.kernel:AddDirectory("models/deadbodies/");
 
 Clockwork.config:Add("server_whitelist_identity", "");
-Clockwork.config:Add("intro_text_small", "It is safer here.", true);
-Clockwork.config:Add("intro_text_big", "CITY EIGHTEEN, 2016.", true);
+Clockwork.config:Add("intro_text_small", "90 kilometers from Atlanta.", true);
+Clockwork.config:Add("intro_text_big", "COUNTRYSIDE ATLANTA, 2016.", true);
 Clockwork.config:Add("knockout_time", 60);
 Clockwork.config:Add("business_cost", 160, true);
 Clockwork.config:Add("permits", true, true);
@@ -31,33 +31,6 @@ Clockwork.config:Get("enable_crosshair"):Set(false);
 Clockwork.config:Get("disable_sprays"):Set(false);
 Clockwork.config:Get("prop_cost"):Set(false);
 Clockwork.config:Get("door_cost"):Set(0);
-
--- A function to add a human hint.
-function Clockwork.hint:AddHumanHint(name, text, combine)
-	Clockwork.hint:Add(name, text, function(player)
-		if (player) then
-			return !Schema:PlayerIsCombine(player, combine);
-		end;
-	end);
-end;
-
-Clockwork.hint:AddHumanHint("Life", "Your character is only human, refrain from jumping off high ledges.", false);
-Clockwork.hint:AddHumanHint("Sleep", "Don't forget to sleep, your character does get tired.", false);
-Clockwork.hint:AddHumanHint("Eating", "Just because you don't have to eat, it doesn't mean your character isn't hungry.", false);
-Clockwork.hint:AddHumanHint("Friends", "Try to make some friends, misery loves company.", false);
-
-Clockwork.hint:AddHumanHint("Curfew", "Curfew? Bored? Ask to be assigned a roommate.");
-Clockwork.hint:AddHumanHint("Prison", "Don't do the crime if you're not prepared to do the time.");
-Clockwork.hint:AddHumanHint("Rebels", "Don't chase the resistance, the Combine may group you together.");
-Clockwork.hint:AddHumanHint("Talking", "The Combine don't like it when you talk, so whisper.");
-Clockwork.hint:AddHumanHint("Rations", "Rations, they're bags filled with goodies. Behave.");
-Clockwork.hint:AddHumanHint("Combine", "Don't mess with the Combine, they took over Earth in 7 hours.");
-Clockwork.hint:AddHumanHint("Jumping", "Bunny hopping is uncivilized, and the Combine will remind you with their stunsticks.");
-Clockwork.hint:AddHumanHint("Punching", "Got that feeling you just wanna punch somebody? Don't.");
-Clockwork.hint:AddHumanHint("Compliance", "Obey the Combine, you'll be glad that you did.");
-Clockwork.hint:AddHumanHint("Combine Raids", "When the Combine come knocking, get your ass on the floor.");
-Clockwork.hint:AddHumanHint("Request Device", "Need to reach Civil Protection? Invest in a request device.");
-Clockwork.hint:AddHumanHint("Civil Protection", "Civil Protection, protecting civilized society, not you.");
 
 Clockwork.hint:Add("Admins", "The admins are here to help you, please respect them.");
 Clockwork.hint:Add("Action", "Action. Stop looking for it, wait until it comes to you.");
@@ -75,6 +48,9 @@ Clockwork.hint:Add("Powergaming", "Powergaming is when you force your actions on
 Clockwork.hint:Add("Survival", "Survival comes at a cost.");
 Clockwork.hint:Add("Guns", "Find guns, scavenge for them, or see if you can't buy them off a sympathetic survivor.");
 Clockwork.hint:Add("Choices", "Weigh your choices carefully. People will remember things.");
+
+--Temp hotfix for military models.
+Clockwork.animation:AddCivilProtectionModel("models/kss/tsremastered/smod_tactical_soldier_npc_e.mdl");
 
 Clockwork.datastream:Hook("ObjectPhysDesc", function(player, data)
 	if (type(data) == "table" and type( data[1] ) == "string") then

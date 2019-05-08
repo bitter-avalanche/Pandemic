@@ -16,23 +16,17 @@ for k, v in pairs(_file.Find("models/humans/group17/*.mdl", "GAME")) do
 	Clockwork.animation:AddMaleHumanModel("models/humans/group17/"..v);
 end;
 
-Clockwork.animation:AddCivilProtectionModel("models/eliteghostcp.mdl");
-Clockwork.animation:AddCivilProtectionModel("models/eliteshockcp.mdl");
-Clockwork.animation:AddCivilProtectionModel("models/leet_police2.mdl");
-Clockwork.animation:AddCivilProtectionModel("models/sect_police2.mdl");
-Clockwork.animation:AddCivilProtectionModel("models/policetrench.mdl");
-
 Clockwork.option:SetKey("default_date", {month = 1, year = 2016, day = 1});
 Clockwork.option:SetKey("default_time", {minute = 0, hour = 0, day = 1});
 Clockwork.option:SetKey("format_singular_cash", "%a");
 Clockwork.option:SetKey("model_shipment", "models/items/item_item_crate.mdl");
-Clockwork.option:SetKey("intro_image", "halfliferp/hl2rp_logo");
-Clockwork.option:SetKey("schema_logo", "halfliferp/hl2rp_logo");
+Clockwork.option:SetKey("intro_image", "pandemicrp/pandemic_logo_new");
+Clockwork.option:SetKey("schema_logo", "pandemicrp/pandemic_logo_new");
 Clockwork.option:SetKey("format_cash", "%a %n");
-Clockwork.option:SetKey("menu_music", "music/hl2_song19.mp3");
-Clockwork.option:SetKey("name_cash", "Tokens");
+Clockwork.option:SetKey("menu_music", "music/pand_intro.mp3");
+Clockwork.option:SetKey("name_cash", "Dollars");
 Clockwork.option:SetKey("model_cash", "models/props_lab/box01a.mdl");
-Clockwork.option:SetKey("gradient", "halfliferp/bg_gradient");
+Clockwork.option:SetKey("gradient", "pandemicrp/bg_gradient");
 
 Clockwork.config:ShareKey("intro_text_small");
 Clockwork.config:ShareKey("intro_text_big");

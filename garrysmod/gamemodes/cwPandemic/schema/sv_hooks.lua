@@ -116,7 +116,6 @@ function Schema:OnNPCKilled(npc, attacker, inflictor)
 			
 			self:PlayerDeath(player, inflictor, attacker, true);
 			self:ResetPlayerScanner(player);
-		end;
 	end;
 end;
 
@@ -370,13 +369,12 @@ function Schema:PlayerCanRadio(player, text, listeners, eavesdroppers)
 		return false;
 	end;
 end;
-
+--[[
 -- Called when a player's character has initialized.
 function Schema:PlayerCharacterInitialized(player)
 	local faction = player:GetFaction();
 	
-	if (self:PlayerIsCombine(player)) then
-		
+	if (self:PlayerIsCombine(player)) then		
 		for k, v in pairs(Clockwork.class.stored) do
 			if (v.factions and table.HasValue(v.factions, faction)) then
 				if (#_team.GetPlayers(v.index) < Clockwork.class:GetLimit(v.name)) then
@@ -392,7 +390,7 @@ function Schema:PlayerCharacterInitialized(player)
 				end;
 			end;
 		end;
-
+--]]
 -- Called when a player's name has changed.
 function Schema:PlayerNameChanged(player, previousName, newName)
 	if (self:PlayerIsCombine(player)) then
@@ -521,54 +519,6 @@ function Schema:KeyPress(player, key)
 	elseif (key == IN_WALK) then
 		if (self.scanners[player]) then
 			Clockwork.player:RunClockworkCommand(player, "CharFollow");
-		end;
-	end;
-end;
-
--- Called each tick.
-function Schema:Tick()
-	for k, v in pairs(self.scanners) do
-		local scanner = v[1];
-		local marker = v[2];
-		
-		if (IsValid(k)) then
-			if (IsValid(scanner) and IsValid(marker)) then
-				if (k:KeyDown(IN_FORWARD)) then
-					local position = scanner:GetPos() + (scanner:GetForward() * 25) + (scanner:GetUp() * -64);
-					
-					if (k:KeyDown(IN_SPEED)) then
-						marker:SetPos( position + (k:GetAimVector() * 64) );
-					else
-						marker:SetPos( position + (k:GetAimVector() * 128) );
-					end;
-					
-					scanner.followTarget = nil;
-				end;
-				
-				if (IsValid(scanner.followTarget)) then
-					scanner:Input("SetFollowTarget", scanner.followTarget, scanner.followTarget, "!activator");
-				else
-					scanner:Fire("SetFollowTarget", "marker_"..k:UniqueID(), 0);
-				end;
-				
-				if (scannerClass == "npc_cscanner" and self:IsPlayerCombineRank(k, "SYNTH")) then
-					self:MakePlayerScanner(k, true);
-				elseif (scannerClass == "npc_clawscanner" and !self:IsPlayerCombineRank(k, "SYNTH")) then
-					self:MakePlayerScanner(k, true);
-				end;
-			else
-				self:ResetPlayerScanner(k);
-			end;
-		else
-			if (IsValid(scanner)) then
-				scanner:Remove();
-			end;
-			
-			if (IsValid(marker)) then
-				marker:Remove();
-			end;
-			
-			self.scanners[k] = nil;
 		end;
 	end;
 end;
@@ -829,16 +779,6 @@ function Schema:PlayerThink(player, curTime, infoTable)
 				end;
 			end;
 		end;
-	end;
-	
-	if (Clockwork.player:HasAnyFlags(player, "vV")) then
-		if (infoTable.wages == 0) then
-			infoTable.wages = 20;
-		end;
-	end;
-	
-	if (self.scanners[player]) then
-		self:CalculateScannerThink(player, curTime);
 	end;
 	
 	local acrobatics = Clockwork.attributes:Fraction(player, ATB_ACROBATICS, 100, 50);

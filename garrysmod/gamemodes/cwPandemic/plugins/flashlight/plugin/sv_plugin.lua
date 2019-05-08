@@ -5,7 +5,7 @@
 
 local PLUGIN = PLUGIN;
 
-Clockwork.hint:AddHumanHint("Flashlight", "If it's dark outside and you can't see, invest in a flashlight.");
+Clockwork.hint:Add("Flashlight", "If it's dark outside and you can't see, try to find a flashlight.");
 
 -- A function to get whether a player has a flashlight.
 function PLUGIN:PlayerHasFlashlight(player)

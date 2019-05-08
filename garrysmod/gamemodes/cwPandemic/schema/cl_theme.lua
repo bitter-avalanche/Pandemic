@@ -49,7 +49,7 @@ function THEME:CreateFonts()
 	});
 	surface.CreateFont("hl2_CinematicText", 
 	{
-		font		= "ZombieStory",
+		font		= "Arial",
 		size		= Clockwork.kernel:FontScreenScale(8),
 		weight		= 600,
 		antialiase	= true,
@@ -58,14 +58,14 @@ function THEME:CreateFonts()
 	surface.CreateFont("hl2_IntroTextBig", 
 	{
 		font		= "ZombieStory",
-		size		= Clockwork.kernel:FontScreenScale(18),
+		size		= Clockwork.kernel:FontScreenScale(14),
 		weight		= 600,
 		antialiase	= true,
 		additive 	= false
 	});
 	surface.CreateFont("hl2_MainText", 
 	{
-		font		= "ZombieStory",
+		font		= "Arial",
 		size		= Clockwork.kernel:FontScreenScale(7),
 		weight		= 600,
 		antialiase	= true,
@@ -73,7 +73,7 @@ function THEME:CreateFonts()
 	});
 	surface.CreateFont("hl2_TargetIDText", 
 	{
-		font		= "ZombieStory",
+		font		= "Arial",
 		size		= Clockwork.kernel:FontScreenScale(7),
 		weight		= 600,
 		antialiase	= true,
@@ -81,7 +81,7 @@ function THEME:CreateFonts()
 	});
 	surface.CreateFont("hl2_MenuTextHuge", 
 	{
-		font		= "ZombieStory",
+		font		= "Arial",
 		size		= Clockwork.kernel:FontScreenScale(30),
 		weight		= 600,
 		antialiase	= true,
@@ -89,7 +89,7 @@ function THEME:CreateFonts()
 	});
 	surface.CreateFont("hl2_MenuTextBig", 
 	{
-		font		= "ZombieStory",
+		font		= "Arial",
 		size		= Clockwork.kernel:FontScreenScale(18),
 		weight		= 600,
 		antialiase	= true,
