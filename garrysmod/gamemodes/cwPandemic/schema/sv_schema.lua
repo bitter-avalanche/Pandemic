@@ -3,53 +3,8 @@
 	without permission of its author (kurozael@gmail.com).
 --]]
 
-Schema.scannerSounds = {
-	"npc/scanner/cbot_servochatter.wav",
-	"npc/scanner/cbot_servoscared.wav",
-	"npc/scanner/scanner_blip1.wav",
-	"npc/scanner/scanner_scan1.wav",
-	"npc/scanner/scanner_scan2.wav",
-	"npc/scanner/scanner_scan4.wav",
-	"npc/scanner/scanner_scan5.wav",
-	"npc/scanner/combat_scan1.wav",
-	"npc/scanner/combat_scan2.wav",
-	"npc/scanner/combat_scan3.wav",
-	"npc/scanner/combat_scan4.wav",
-	"npc/scanner/combat_scan5.wav"
-};
-Schema.scanners = {};
-Schema.cwuProps = {
-	"models/props_c17/furniturewashingmachine001a.mdl",
-	"models/props_interiors/furniture_vanity01a.mdl",
-	"models/props_interiors/furniture_couch02a.mdl",
-	"models/props_interiors/furniture_shelf01a.mdl",
-	"models/props_interiors/furniture_chair01a.mdl",
-	"models/props_interiors/furniture_desk01a.mdl",
-	"models/props_interiors/furniture_lamp01a.mdl",
-	"models/props_c17/furniturecupboard001a.mdl",
-	"models/props_c17/furnituredresser001a.mdl",
-	"props/props_c17/furniturefridge001a.mdl",
-	"models/props_c17/furniturestove001a.mdl",
-	"models/props_interiors/radiator01a.mdl",
-	"props/props_c17/furniturecouch001a.mdl",
-	"models/props_combine/breenclock.mdl",
-	"props/props_combine/breenchair.mdl",
-	"models/props_c17/shelfunit01a.mdl",
-	"props/props_combine/breendesk.mdl",
-	"models/props_lab/monitor01b.mdl",
-	"models/props_lab/monitor01a.mdl",
-	"models/props_lab/monitor02.mdl",
-	"models/props_c17/frame002a.mdl",
-	"models/props_c17/bench01a.mdl"
-};
-
 Clockwork.kernel:AddFile("resource/fonts/mailartrubberstamp.ttf");
 Clockwork.kernel:AddFile("resource/fonts/ZombieStory.ttf");
-Clockwork.kernel:AddFile("models/eliteghostcp.mdl");
-Clockwork.kernel:AddFile("models/eliteshockcp.mdl");
-Clockwork.kernel:AddFile("models/policetrench.mdl");
-Clockwork.kernel:AddFile("models/leet_police2.mdl");
-Clockwork.kernel:AddFile("models/sect_police2.mdl");
 
 Clockwork.kernel:AddDirectory("materials/models/humans/female/group01/cityadm_sheet.*");
 Clockwork.kernel:AddDirectory("materials/models/humans/male/group01/cityadm_sheet.*");
@@ -59,7 +14,7 @@ Clockwork.kernel:AddDirectory("materials/models/deadbodies/");
 Clockwork.kernel:AddDirectory("materials/models/spraycan3.*");
 Clockwork.kernel:AddDirectory("materials/models/police/*.*");
 Clockwork.kernel:AddDirectory("materials/models/lagmite/");
-Clockwork.kernel:AddDirectory("materials/halfliferp/");
+Clockwork.kernel:AddDirectory("materials/pandemicrp/");
 Clockwork.kernel:AddDirectory("models/lagmite/");
 Clockwork.kernel:AddDirectory("models/deadbodies/");
 
@@ -117,6 +72,9 @@ Clockwork.hint:Add("Metagaming", "Metagaming is when you use OOC information in-
 Clockwork.hint:Add("Passive RP", "If you're bored and there's no action, try some passive roleplay.");
 Clockwork.hint:Add("Development", "Develop your character, give them a story to tell.");
 Clockwork.hint:Add("Powergaming", "Powergaming is when you force your actions on others.");
+Clockwork.hint:Add("Survival", "Survival comes at a cost.");
+Clockwork.hint:Add("Guns", "Find guns, scavenge for them, or see if you can't buy them off a sympathetic survivor.");
+Clockwork.hint:Add("Choices", "Weigh your choices carefully. People will remember things.");
 
 Clockwork.datastream:Hook("ObjectPhysDesc", function(player, data)
 	if (type(data) == "table" and type( data[1] ) == "string") then
