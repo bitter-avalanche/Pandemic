@@ -785,10 +785,6 @@ function Schema:PlayerThink(player, curTime, infoTable)
 	local strength = Clockwork.attributes:Fraction(player, ATB_STRENGTH, 8, 4);
 	local agility = Clockwork.attributes:Fraction(player, ATB_AGILITY, 50, 25);
 	
-	if (self:PlayerIsCombine(player)) then
-		infoTable.inventoryWeight = infoTable.inventoryWeight + 8;
-	end;
-	
 	if (clothes != "") then
 		local itemTable = Clockwork.item:FindByID(clothes);
 		
@@ -952,7 +948,6 @@ end;
 
 -- Called when a player's character has unloaded.
 function Schema:PlayerCharacterUnloaded(player)
-	self:ResetPlayerScanner(player);
 end;
 
 -- Called when a player attempts to change class.
