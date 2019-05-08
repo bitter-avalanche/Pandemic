@@ -44,6 +44,7 @@ Schema.cwuProps = {
 };
 
 Clockwork.kernel:AddFile("resource/fonts/mailartrubberstamp.ttf");
+Clockwork.kernel:AddFile("resource/fonts/ZombieStory.ttf");
 Clockwork.kernel:AddFile("models/eliteghostcp.mdl");
 Clockwork.kernel:AddFile("models/eliteshockcp.mdl");
 Clockwork.kernel:AddFile("models/policetrench.mdl");
