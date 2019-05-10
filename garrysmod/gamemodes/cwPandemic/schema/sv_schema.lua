@@ -49,9 +49,6 @@ Clockwork.hint:Add("Survival", "Survival comes at a cost.");
 Clockwork.hint:Add("Guns", "Find guns, scavenge for them, or see if you can't buy them off a sympathetic survivor.");
 Clockwork.hint:Add("Choices", "Weigh your choices carefully. People will remember things.");
 
---Temp hotfix for military models.
-Clockwork.animation:AddCivilProtectionModel("models/kss/tsremastered/smod_tactical_soldier_npc_e.mdl");
-
 Clockwork.datastream:Hook("ObjectPhysDesc", function(player, data)
 	if (type(data) == "table" and type( data[1] ) == "string") then
 		if (player.objectPhysDesc == data[2]) then
@@ -63,14 +60,6 @@ Clockwork.datastream:Hook("ObjectPhysDesc", function(player, data)
 			
 			data[2]:SetNetworkedString("physDesc", physDesc);
 		end;
-	end;
-end);
-
-Clockwork.datastream:Hook("EditData", function(player, data)
-	if (player.editDataAuthorised == data[1] and type( data[2] ) == "string") then
-		data[1]:SetCharacterData( "combinedata", string.sub(data[2], 0, 500) );
-		
-		player.editDataAuthorised = nil;
 	end;
 end);
 
@@ -263,11 +252,6 @@ function Schema:BustDownDoor(player, door, force)
 	door:SetNoDraw(true);
 	door:EmitSound("physics/wood/wood_box_impact_hard3.wav");
 	door:Fire("Unlock", "", 0);
-	
-	if (IsValid(door.combineLock)) then
-		door.combineLock:Explode();
-		door.combineLock:Remove();
-	end;
 	
 	if (IsValid(door.breach)) then
 		door.breach:BreachEntity();

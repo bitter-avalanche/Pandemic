@@ -215,7 +215,7 @@ end;
 
 -- Called when a player switches their flashlight on or off.
 function Schema:PlayerSwitchFlashlight(player, on)
-	if (on and (self.scanners[player] or player:GetSharedVar("tied") != 0)) then
+	if (on or player:GetSharedVar("tied") != 0) then
 		return false;
 	end;
 end;
